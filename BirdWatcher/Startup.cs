@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BirdWatcherBackend.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
-namespace BirdWatcher
+namespace BirdWatcherBackend
 {
     public class Startup
     {
@@ -26,6 +21,10 @@ namespace BirdWatcher
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddDbContext<BirdWatcherContext>(options =>
+                options.UseMySQL(Configuration.GetSection("ConnectionStrings:devMySQLConnection").Value
+            ));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
