@@ -8,5 +8,6 @@ namespace BirdWatcherBackend.Models
 
         public DbSet<Bird> Birds { get; set; }
         public DbSet<BirdLog> BirdLog { get; set; }
+        public DbSet<devTempLight> devTempLight { get; set; }
     }
 }

@@ -23,7 +23,9 @@ namespace BirdWatcherBackend
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<BirdWatcherContext>(options =>
-                options.UseMySQL(Configuration.GetSection("ConnectionStrings:devMySQLConnection").Value
+                //options.UseMySQL(Configuration.GetSection("ConnectionStrings:devMySQLConnection").Value
+                //Using Postgre instead of MySQL
+                options.UseNpgsql(Configuration.GetSection("ConnectionStrings:devPostgreConnection").Value
             ));
         }
 

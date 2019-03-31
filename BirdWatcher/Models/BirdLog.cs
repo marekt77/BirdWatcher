@@ -6,8 +6,7 @@ namespace BirdWatcherBackend.Models
     {
         public long BirdLogId { get; set; }
         public DateTime Timestamp { get; set; }
-        public int Tempurature { get; set; }
-        public int PhotoresistorValue { get; set; }
+        public int Temperature { get; set; }
         public Bird Bird { get; set; }
     }
 }

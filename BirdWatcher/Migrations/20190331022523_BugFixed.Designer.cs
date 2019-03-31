@@ -3,21 +3,20 @@ using System;
 using BirdWatcherBackend.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BirdWatcherBackend.Migrations
 {
     [DbContext(typeof(BirdWatcherContext))]
-    partial class BirdWatcherContextModelSnapshot : ModelSnapshot
+    [Migration("20190331022523_BugFixed")]
+    partial class BugFixed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
-                .HasAnnotation("ProductVersion", "2.2.3-servicing-35854")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .HasAnnotation("ProductVersion", "2.2.3-servicing-35854");
 
             modelBuilder.Entity("BirdWatcherBackend.Models.Bird", b =>
                 {
@@ -40,6 +39,8 @@ namespace BirdWatcherBackend.Migrations
 
                     b.Property<long?>("BirdId");
 
+                    b.Property<int>("PhotoresistorValue");
+
                     b.Property<int>("Temperature");
 
                     b.Property<DateTime>("Timestamp");
@@ -49,22 +50,6 @@ namespace BirdWatcherBackend.Migrations
                     b.HasIndex("BirdId");
 
                     b.ToTable("BirdLog");
-                });
-
-            modelBuilder.Entity("BirdWatcherBackend.Models.devTempLight", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("PhotoresistorValue");
-
-                    b.Property<int>("Temperature");
-
-                    b.Property<DateTime>("Timestamp");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("devTempLight");
                 });
 
             modelBuilder.Entity("BirdWatcherBackend.Models.BirdLog", b =>

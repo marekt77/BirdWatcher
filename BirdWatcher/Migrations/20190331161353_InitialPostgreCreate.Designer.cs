@@ -3,15 +3,17 @@ using System;
 using BirdWatcherBackend.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BirdWatcherBackend.Migrations
 {
     [DbContext(typeof(BirdWatcherContext))]
-    partial class BirdWatcherContextModelSnapshot : ModelSnapshot
+    [Migration("20190331161353_InitialPostgreCreate")]
+    partial class InitialPostgreCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,6 +42,8 @@ namespace BirdWatcherBackend.Migrations
 
                     b.Property<long?>("BirdId");
 
+                    b.Property<int>("PhotoresistorValue");
+
                     b.Property<int>("Temperature");
 
                     b.Property<DateTime>("Timestamp");
@@ -49,22 +53,6 @@ namespace BirdWatcherBackend.Migrations
                     b.HasIndex("BirdId");
 
                     b.ToTable("BirdLog");
-                });
-
-            modelBuilder.Entity("BirdWatcherBackend.Models.devTempLight", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("PhotoresistorValue");
-
-                    b.Property<int>("Temperature");
-
-                    b.Property<DateTime>("Timestamp");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("devTempLight");
                 });
 
             modelBuilder.Entity("BirdWatcherBackend.Models.BirdLog", b =>
