@@ -4,4 +4,4 @@ class Temperature:
     sensor = W1ThermSensor()
 
     def getTemperature(self):
-        return sensor.get_temperature()
+        return self.sensor.get_temperature()

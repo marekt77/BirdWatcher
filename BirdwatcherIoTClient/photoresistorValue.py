@@ -18,4 +18,4 @@ class photoresistorValue:
     chan = AnalogIn(mcp, MCP.P0)
 
     def get_Voltage(self):
-        return chan.voltage
+        return self.chan.voltage
