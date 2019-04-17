@@ -2,31 +2,33 @@ import json
 import jsonpickle
 import requests
 import datetime
+import ssl
 
 from devTempLight import devTempLight
-#from Temperature import Temperature
-#from photoresistorValue import photoresistorValue
+from Temperature import Temperature
+from photoresistorValue import photoresistorValue
 
 def main():
         print("Starting BirdWatcher IoT Client...")
 
-        #light = photoresistorValue()
-        #temp = Temperature()
+        light = photoresistorValue()
+        temp = Temperature()
 
-        #data = devTempLight(temp.getTemperature(), light.get_Voltage(), datetime.datetime.now())
-
-        data = devTempLight(23, 345, datetime.datetime.now())
+        data = devTempLight(temp.getTemperature(), light.get_Voltage(), datetime.datetime.now())
         
-        #jsonData = jsonpickle.encode(data, unpicklable=False)
-        #print(jsonData)
-        #sendDevData(data)
+        jsonData = jsonpickle.encode(data, unpicklable=False)
+        print(jsonData)
+        sendDevData(jsonData)
 
-def sendDevData(tmpObject):
-        #req = requests.post('http://api/user', data=None, json=None)
-        req = requests.get('https://192.168.1.21',verify=False, cert=('testCerts/marek.crt', 'testCerts/marek.key'))
-        print("HTTP Status Code: " + str(req.status_code))
-        print(req.headers)
-        print(req.text)
+def sendDevData(jsonData):
+        #working URL
+        url = 'https://192.168.1.21/api/devTempLight'
+
+        headers = {'Content-type': 'application/json'}
+        req = requests.post(url, headers = headers, json=jsonData, verify=False, cert=('testCerts/marek.crt', 'testCerts/marek.key'))
+
+        print(req.status_code)
+        
 
 
 if __name__ == "__main__":

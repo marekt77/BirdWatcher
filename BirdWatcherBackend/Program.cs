@@ -18,6 +18,7 @@ namespace BirdWatcherBackend
                     config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                         .AddJsonFile("secretConfig.json", optional: false, reloadOnChange: true);
                 })
+                .UseUrls("http://*:5000")
                 .UseStartup<Startup>();
     }
 }
