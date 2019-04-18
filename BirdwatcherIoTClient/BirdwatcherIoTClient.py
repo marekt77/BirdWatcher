@@ -26,7 +26,7 @@ def sendDevData(data):
         url = 'https://192.168.1.21/api/devTempLights'
 
         headers = {'Content-type': 'application/json'}
-        req = requests.post(url, headers = headers, data=data, cert=('testCerts/marek.crt', 'testCerts/marek.key'), verify=False)
+        req = requests.post(url, headers = headers, data=data, cert=('/home/marekt/BirdWatcherIoT/testCerts/marek.crt', '/home/marekt/BirdWatcherIoT/testCerts/marek.key'), verify=False)
 
         print(req.status_code)
 
