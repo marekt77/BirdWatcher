@@ -3,7 +3,6 @@
 import jsonpickle
 import requests
 import datetime
-import threading
 
 from devTempLight import devTempLight
 from Temperature import Temperature
@@ -14,8 +13,6 @@ def main():
         ProcessData()
 
 def ProcessData():
-        threading.Timer(600.0, ProcessData).start()
-
         light = photoresistorValue()
         temp = Temperature()
 
@@ -39,6 +36,6 @@ def checkConnection():
         print("HTTP Status Code: " + str(req.status_code))
         print(req.headers)
         print(req.content)
-        
+
 if __name__ == "__main__":
         main()
