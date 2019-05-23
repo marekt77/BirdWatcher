@@ -21,9 +21,30 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BirdWatcherIoTClient-tf.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="BirdwatcherIoTClient.py" />
     <Compile Include="devTempLight.py" />
     <Compile Include="photoresistorValue.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="faster_rcnn_inception_v2_coco_2018_01_28\" />
+    <Folder Include="faster_rcnn_inception_v2_coco_2018_01_28\saved_model\" />
+    <Folder Include="faster_rcnn_inception_v2_coco_2018_01_28\saved_model\variables\" />
+    <Folder Include="model\" />
+    <Folder Include="labelmap\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="faster_rcnn_inception_v2_coco_2018_01_28\checkpoint" />
+    <Content Include="faster_rcnn_inception_v2_coco_2018_01_28\frozen_inference_graph.pb" />
+    <Content Include="faster_rcnn_inception_v2_coco_2018_01_28\model.ckpt.data-00000-of-00001" />
+    <Content Include="faster_rcnn_inception_v2_coco_2018_01_28\model.ckpt.index" />
+    <Content Include="faster_rcnn_inception_v2_coco_2018_01_28\model.ckpt.meta" />
+    <Content Include="faster_rcnn_inception_v2_coco_2018_01_28\pipeline.config" />
+    <Content Include="faster_rcnn_inception_v2_coco_2018_01_28\saved_model\saved_model.pb" />
+    <Content Include="labelmap\birds_labelmap.pbtxt" />
+    <Content Include="model\frozen_inference_graph.pb" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
