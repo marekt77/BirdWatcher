@@ -4,8 +4,8 @@ namespace BirdWatcherBackend.Models
 {
     public class Bird
     {
-        public long Id { get; set; }
-        public string BirdType { get; set; }
-        public string ImageFile { get; set; }
+        public long BirdID { get; set; }
+        public string Name { get; set; }
+        public string ExamplePicture { get; set; }
     }
 }

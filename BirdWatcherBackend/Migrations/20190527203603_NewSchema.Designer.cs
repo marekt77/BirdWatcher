@@ -3,15 +3,17 @@ using System;
 using BirdWatcherBackend.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BirdWatcherBackend.Migrations
 {
     [DbContext(typeof(BirdWatcherContext))]
-    partial class BirdWatcherContextModelSnapshot : ModelSnapshot
+    [Migration("20190527203603_NewSchema")]
+    partial class NewSchema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,25 +23,25 @@ namespace BirdWatcherBackend.Migrations
 
             modelBuilder.Entity("BirdWatcherBackend.Models.Bird", b =>
                 {
-                    b.Property<long>("BirdID")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long?>("BirdLogID");
+                    b.Property<long?>("BirdLogId");
 
                     b.Property<string>("ExamplePicture");
 
                     b.Property<string>("Name");
 
-                    b.HasKey("BirdID");
+                    b.HasKey("Id");
 
-                    b.HasIndex("BirdLogID");
+                    b.HasIndex("BirdLogId");
 
                     b.ToTable("Birds");
                 });
 
             modelBuilder.Entity("BirdWatcherBackend.Models.BirdLog", b =>
                 {
-                    b.Property<long>("BirdLogID")
+                    b.Property<long>("BirdLogId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Picture");
@@ -48,7 +50,7 @@ namespace BirdWatcherBackend.Migrations
 
                     b.Property<DateTime>("Timestamp");
 
-                    b.HasKey("BirdLogID");
+                    b.HasKey("BirdLogId");
 
                     b.ToTable("BirdLog");
                 });
@@ -73,7 +75,7 @@ namespace BirdWatcherBackend.Migrations
                 {
                     b.HasOne("BirdWatcherBackend.Models.BirdLog")
                         .WithMany("Birds")
-                        .HasForeignKey("BirdLogID");
+                        .HasForeignKey("BirdLogId");
                 });
 #pragma warning restore 612, 618
         }

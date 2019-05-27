@@ -43,7 +43,7 @@ namespace BirdWatcherBackend.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBird(long id, Bird bird)
         {
-            if (id != bird.Id)
+            if (id != bird.BirdID)
             {
                 return BadRequest();
             }
@@ -76,7 +76,7 @@ namespace BirdWatcherBackend.Controllers
             _context.Birds.Add(bird);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBird", new { id = bird.Id }, bird);
+            return CreatedAtAction("GetBird", new { id = bird.BirdID }, bird);
         }
 
         // DELETE: api/Birds/5
@@ -97,7 +97,7 @@ namespace BirdWatcherBackend.Controllers
 
         private bool BirdExists(long id)
         {
-            return _context.Birds.Any(e => e.Id == id);
+            return _context.Birds.Any(e => e.BirdID == id);
         }
     }
 }
