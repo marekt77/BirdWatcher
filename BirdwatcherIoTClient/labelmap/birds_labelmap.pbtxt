@@ -1,29 +1,59 @@
 item {
   id: 1
-  name: 'nine'
+  name: 'bluejay'
 }
 
 item {
   id: 2
-  name: 'ten'
+  name: 'cardinal'
 }
 
 item {
   id: 3
-  name: 'jack'
+  name: 'chickadee'
 }
 
 item {
   id: 4
-  name: 'queen'
+  name: 'goldfinch'
 }
 
 item {
   id: 5
-  name: 'king'
+  name: 'hummingbird'
 }
 
 item {
   id: 6
-  name: 'ace'
+  name: 'mourningdove'
+}
+
+item {
+  id: 7
+  name: 'northernflicker'
+}
+
+item {
+  id: 8
+  name: 'nuthatch'
+}
+
+item {
+  id: 9
+  name: 'sparrow'
+}
+
+item {
+  id: 10
+  name: 'titmouse'
+}
+
+item {
+  id: 11
+  name: 'towhee'
+}
+
+item {
+  id: 12
+  name: 'woodpecker'
 }
