@@ -16,6 +16,8 @@
 # Import packages
 import os
 import cv2
+import string
+import random
 import numpy as np
 from picamera.array import PiRGBArray
 from picamera import PiCamera
@@ -28,6 +30,9 @@ IM_WIDTH = 1280
 IM_HEIGHT = 720
 #IM_WIDTH = 640    Use smaller resolution for
 #IM_HEIGHT = 480   slightly faster framerate
+
+#Initialize variable to count # of frames a bird was detected
+bird_identified = 0
 
 # This is needed since the working directory is the object_detection folder.
 sys.path.append('..')
@@ -117,21 +122,7 @@ for frame1 in camera.capture_continuous(rawCapture, format="bgr",use_video_port=
     frame.setflags(write=1)
     frame_expanded = np.expand_dims(frame, axis=0)
 
-    # Perform the actual detection by running the model with the image as input
-    (boxes, scores, classes, num) = sess.run(
-        [detection_boxes, detection_scores, detection_classes, num_detections],
-        feed_dict={image_tensor: frame_expanded})
-
-    # Draw the results of the detection (aka 'visulaize the results')
-    vis_util.visualize_boxes_and_labels_on_image_array(
-        frame,
-        np.squeeze(boxes),
-        np.squeeze(classes).astype(np.int32),
-        np.squeeze(scores),
-        category_index,
-        use_normalized_coordinates=True,
-        line_thickness=8,
-        min_score_thresh=0.40)
+    frame = bird_logger(frame)
 
     cv2.putText(frame,"FPS: {0:.2f}".format(frame_rate_calc),(30,50),font,1,(255,255,0),2,cv2.LINE_AA)
 
@@ -151,3 +142,40 @@ for frame1 in camera.capture_continuous(rawCapture, format="bgr",use_video_port=
 camera.close()
 
 cv2.destroyAllWindows()
+
+
+def bird_logger(frame):
+
+    global bird_identified
+
+    # Perform the actual detection by running the model with the image as input
+    (boxes, scores, classes, num) = sess.run(
+        [detection_boxes, detection_scores, detection_classes, num_detections],
+        feed_dict={image_tensor: frame_expanded})
+
+    # Draw the results of the detection (aka 'visulaize the results')
+    vis_util.visualize_boxes_and_labels_on_image_array(
+        frame,
+        np.squeeze(boxes),
+        np.squeeze(classes).astype(np.int32),
+        np.squeeze(scores),
+        category_index,
+        use_normalized_coordinates=True,
+        line_thickness=8,
+        min_score_thresh=0.40)
+
+    if (((int(classes[0][0]) >= 1) or (int(classes[0][0]) <= 12 ))):
+        bird_identified = bird_identified + 1
+    
+    #If bird is present for 10 frames or more, log the entry
+    if(bird_identified > 10):
+        print("Bird Found! Bird Type: " + classes[0][1])
+        #save image:
+        tmpFilename = id_generator()
+        cv2.imwrite('/home/pi/images/' + tmpFilename + '.png', frame)
+
+    return frame
+
+
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
