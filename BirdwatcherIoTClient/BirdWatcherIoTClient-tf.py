@@ -169,7 +169,8 @@ def bird_logger(frame):
     
     #If bird is present for 10 frames or more, log the entry
     if(bird_identified > 10):
-        print("Bird Found! Bird Type: " + classes[0][1])
+        print("Number of Detections: " + num_detections)
+        print("Bird Found! Bird Type: " + classes[0][0])
         #save image:
         tmpFilename = id_generator()
         cv2.imwrite('/home/pi/images/' + tmpFilename + '.png', frame)
