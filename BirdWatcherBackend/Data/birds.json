@@ -1,0 +1,52 @@
+{
+  "birds": [
+    {
+      "name": "bluejay",
+      "image": "Bluejay.jpg" 
+    },
+    {
+      "name": "cardinal",
+      "image": "Northern_Cardinal.jpg"
+    },
+    {
+      "name": "chickadee",
+      "image": ""
+    },
+    {
+      "name": "goldfinch",
+      "image": "American_Goldfinch.jpg"
+    },
+    {
+      "name": "hummingbird",
+      "image": "hummingbird.jpg"
+    },
+    {
+      "name": "mourningdove",
+      "image": "Mourning_Dove.jpg"
+    },
+    {
+      "name": "northernflicker",
+      "image": "Mourning_Dove.jpg"
+    },
+    {
+      "name": "nuthatch",
+      "image": "Nuthatch.jpg"
+    },
+    {
+      "name": "sparrow",
+      "image": "Sparrow.jpg"
+    },
+    {
+      "name": "titmouse",
+      "image": "Titmouse.jpg"
+    },
+    {
+      "name": "towhee",
+      "image": "Towhee.jpg"
+    },
+    {
+      "name": "woodpecker",
+      "image": "Downy_Woodpecker.jpg"
+    }
+  ]
+}

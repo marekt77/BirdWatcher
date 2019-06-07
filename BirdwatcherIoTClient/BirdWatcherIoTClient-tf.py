@@ -102,6 +102,47 @@ frame_rate_calc = 1
 freq = cv2.getTickFrequency()
 font = cv2.FONT_HERSHEY_SIMPLEX
 
+def getBirdByID(ID, birds):
+    return [element for element in birds if element['id'] == ID]
+
+def bird_logger(frame):
+
+    global bird_identified
+
+    # Perform the actual detection by running the model with the image as input
+    (boxes, scores, classes, num) = sess.run(
+        [detection_boxes, detection_scores, detection_classes, num_detections],
+        feed_dict={image_tensor: frame_expanded})
+
+    # Draw the results of the detection (aka 'visulaize the results')
+    vis_util.visualize_boxes_and_labels_on_image_array(
+        frame,
+        np.squeeze(boxes),
+        np.squeeze(classes).astype(np.int32),
+        np.squeeze(scores),
+        category_index,
+        use_normalized_coordinates=True,
+        line_thickness=8,
+        min_score_thresh=0.40)
+
+    if (((int(classes[0][0]) >= 1) or (int(classes[0][0]) <= 12 ))):
+        bird_identified = bird_identified + 1
+    
+    #If bird is present for 10 frames or more, log the entry
+    if(bird_identified > 10):
+        print("Image ID: " + str(int(classes[0][0])))
+        
+        print("Bird Found! Bird Type: " + getBirdByID(int(classes[0][0]), category_index)['name'])
+        #save image:
+        tmpFilename = id_generator()
+        cv2.imwrite('/home/pi/images/' + tmpFilename + '.png', frame)
+        bird_identified = 0
+
+    return frame
+
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
+
 # Initialize camera and perform object detection.
 
 ### Picamera ###
@@ -144,39 +185,3 @@ camera.close()
 cv2.destroyAllWindows()
 
 
-def bird_logger(frame):
-
-    global bird_identified
-
-    # Perform the actual detection by running the model with the image as input
-    (boxes, scores, classes, num) = sess.run(
-        [detection_boxes, detection_scores, detection_classes, num_detections],
-        feed_dict={image_tensor: frame_expanded})
-
-    # Draw the results of the detection (aka 'visulaize the results')
-    vis_util.visualize_boxes_and_labels_on_image_array(
-        frame,
-        np.squeeze(boxes),
-        np.squeeze(classes).astype(np.int32),
-        np.squeeze(scores),
-        category_index,
-        use_normalized_coordinates=True,
-        line_thickness=8,
-        min_score_thresh=0.40)
-
-    if (((int(classes[0][0]) >= 1) or (int(classes[0][0]) <= 12 ))):
-        bird_identified = bird_identified + 1
-    
-    #If bird is present for 10 frames or more, log the entry
-    if(bird_identified > 10):
-        print("Number of Detections: " + num_detections)
-        print("Bird Found! Bird Type: " + classes[0][0])
-        #save image:
-        tmpFilename = id_generator()
-        cv2.imwrite('/home/pi/images/' + tmpFilename + '.png', frame)
-
-    return frame
-
-
-def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
-    return ''.join(random.choice(chars) for _ in range(size))
