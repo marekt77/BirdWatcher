@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BirdWatcherBackend.Models;
 using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace BirdWatcherBackend.Controllers
 {
@@ -15,10 +16,12 @@ namespace BirdWatcherBackend.Controllers
     public class BirdLogsController : ControllerBase
     {
         private readonly BirdWatcherContext _context;
+        private readonly IHostingEnvironment _env;
 
-        public BirdLogsController(BirdWatcherContext context)
+        public BirdLogsController(BirdWatcherContext context, IHostingEnvironment env)
         {
             _context = context;
+            _env = env;
         }
 
         // GET: api/BirdLogs
@@ -87,7 +90,7 @@ namespace BirdWatcherBackend.Controllers
         public async Task<IActionResult> PostLogPicture()
         {
             string fileName = Guid.NewGuid().ToString() + ".jpg";
-            string filePath = Path.Combine(@"\\192.168.1.20\BirdwatcherShare", fileName);
+            string filePath = Path.Combine(_env.WebRootPath, "images", "captured", fileName);
 
             try
             {
