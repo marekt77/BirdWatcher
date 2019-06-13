@@ -1,21 +1,20 @@
-﻿FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build-env
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim AS base
 WORKDIR /app
-EXPOSE 5000/tcp
+EXPOSE 5000
+EXPOSE 443
 
-# copy csproj and restore as distinct layer
-COPY BirdWatcherBackend.csproj ./
-RUN dotnet restore
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
+WORKDIR /src
+COPY ["BirdWatcherBackend/BirdWatcherBackend.csproj", "BirdWatcherBackend/"]
+RUN dotnet restore "BirdWatcherBackend/BirdWatcherBackend.csproj"
+COPY . .
+WORKDIR "/src/BirdWatcherBackend"
+RUN dotnet build "BirdWatcherBackend.csproj" -c Release -o /app
 
-#Copy everything else and build
-COPY . ./
-RUN dotnet publish "BirdWatcherBackend.csproj" -c Release -r linux-arm -o out
+FROM build AS publish
+RUN dotnet publish "BirdWatcherBackend.csproj" -c Release -o /app
 
-#Build runtime image
-FROM microsoft/dotnet:2.2-aspnetcore-runtime-stretch-slim-arm32v7
+FROM base AS final
 WORKDIR /app
-COPY --from=build-env /app/out .
-
-ENV ASPNETCORE_URLS http://*:5000
-ENV ASPNETCORE_ENVIRONMENT docker
-
+COPY --from=publish /app .
 ENTRYPOINT ["dotnet", "BirdWatcherBackend.dll"]

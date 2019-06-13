@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BirdWatcherBackend.Models;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using BirdWatcherBackend.ViewModels;
 
 namespace BirdWatcherBackend.Controllers
 {
@@ -26,23 +26,73 @@ namespace BirdWatcherBackend.Controllers
 
         // GET: api/BirdLogs
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<BirdLog>>> GetBirdLog()
+        public async Task<ActionResult<IEnumerable<BirdLogVM>>> GetBirdLog()
         {
-            return await _context.BirdLog.ToListAsync();
+            List<BirdLogVM> tmpBirgLogsVM = new List<BirdLogVM>();
+            
+            var tmpBirdLog = await _context.BirdLog
+                .Include(e => e.BirdLogBird)
+                .ThenInclude(e => e.Bird)
+                .ToListAsync();
+
+            foreach(BirdLog tmpBL in tmpBirdLog)
+            {
+                BirdLogVM tmpBLvm = new BirdLogVM();
+
+                tmpBLvm.BirdLogID = tmpBL.BirdLogID;
+                tmpBLvm.Location_latitude = tmpBL.Location_latitude;
+                tmpBLvm.location_longitude = tmpBL.location_longitude;
+                tmpBLvm.Picture = tmpBL.Picture;
+                tmpBLvm.Temperature = tmpBL.Temperature;
+                tmpBLvm.Timestamp = tmpBL.Timestamp;
+                tmpBLvm.UserGUID = tmpBL.UserGUID;
+
+                tmpBLvm.Birds = new List<long>();
+                
+                foreach(BirdLogBird tmpBLB in tmpBL.BirdLogBird)
+                {
+                    tmpBLvm.Birds.Add(tmpBLB.BirdID);
+                }
+
+                tmpBirgLogsVM.Add(tmpBLvm);
+            }
+
+            return tmpBirgLogsVM;
         }
 
         // GET: api/BirdLogs/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<BirdLog>> GetBirdLog(long id)
+        public async Task<ActionResult<BirdLogVM>> GetBirdLog(long id)
         {
-            var birdLog = await _context.BirdLog.FindAsync(id);
+            var tmpBirdLog = await _context.BirdLog
+                .Where(x => x.BirdLogID == id)
+                .Include(e => e.BirdLogBird)
+                .ThenInclude(e => e.Bird)
+                .FirstAsync();
 
-            if (birdLog == null)
+            if(tmpBirdLog == null)
             {
                 return NotFound();
             }
 
-            return birdLog;
+            BirdLogVM tmpBirgLogsVM = new BirdLogVM();
+
+            tmpBirgLogsVM.BirdLogID = tmpBirdLog.BirdLogID;
+            tmpBirgLogsVM.Location_latitude = tmpBirdLog.Location_latitude;
+            tmpBirgLogsVM.location_longitude = tmpBirdLog.location_longitude;
+            tmpBirgLogsVM.Picture = tmpBirdLog.Picture;
+            tmpBirgLogsVM.Temperature = tmpBirdLog.Temperature;
+            tmpBirgLogsVM.Timestamp = tmpBirdLog.Timestamp;
+            tmpBirgLogsVM.UserGUID = tmpBirdLog.UserGUID;
+
+            tmpBirgLogsVM.Birds = new List<long>();
+
+            foreach (BirdLogBird tmpBLB in tmpBirdLog.BirdLogBird)
+            {
+                tmpBirgLogsVM.Birds.Add(tmpBLB.BirdID);
+            }
+
+            return tmpBirgLogsVM;
         }
 
         // PUT: api/BirdLogs/5
@@ -77,10 +127,41 @@ namespace BirdWatcherBackend.Controllers
 
         // POST: api/BirdLogs
         [HttpPost]
-        public async Task<ActionResult<BirdLog>> PostBirdLog(BirdLog birdLog)
+        public async Task<ActionResult<BirdLog>> PostBirdLog(BirdLogVM birdLog)
         {
-            _context.BirdLog.Add(birdLog);
+            BirdLog tmpBirdLog = new BirdLog();
+
+            tmpBirdLog.Location_latitude = birdLog.Location_latitude;
+            tmpBirdLog.location_longitude = birdLog.location_longitude;
+            tmpBirdLog.Picture = birdLog.Picture;
+            tmpBirdLog.Temperature = birdLog.Temperature;
+            tmpBirdLog.Timestamp = birdLog.Timestamp;
+            tmpBirdLog.UserGUID = birdLog.UserGUID;
+            
+            foreach(long x in birdLog.Birds)
+            {
+                var tmpBird = _context.Birds.Find(x);
+
+                var tmpBLB = new BirdLogBird();
+
+                tmpBLB.Bird = tmpBird;
+                tmpBLB.BirdLog = tmpBirdLog;
+
+                
+                if(tmpBird.BirdLogBird == null)
+                {
+                    tmpBird.BirdLogBird = new List<BirdLogBird>();
+                }
+
+                tmpBird.BirdLogBird.Add(tmpBLB);
+            }
+
+
+            _context.BirdLog.Add(tmpBirdLog);
+
             await _context.SaveChangesAsync();
+
+            birdLog.BirdLogID = tmpBirdLog.BirdLogID;
 
             return CreatedAtAction("GetBirdLog", new { id = birdLog.BirdLogID }, birdLog);
         }

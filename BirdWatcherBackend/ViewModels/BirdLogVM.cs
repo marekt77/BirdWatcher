@@ -1,12 +1,13 @@
-﻿using System;
+﻿using BirdWatcherBackend.Models;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace BirdWatcherBackend.Models
+namespace BirdWatcherBackend.ViewModels
 {
-    public class BirdLog
+    public class BirdLogVM
     {
-        [Key]
         public long BirdLogID { get; set; }
         public DateTime Timestamp { get; set; }
         public float Temperature { get; set; }
@@ -14,6 +15,6 @@ namespace BirdWatcherBackend.Models
         public float location_longitude { get; set; }
         public string UserGUID { get; set; }
         public string Picture { get; set; }
-        public ICollection<BirdLogBird> BirdLogBird { get; set; }
+        public List<long> Birds { get; set; }
     }
 }
