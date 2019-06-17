@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BirdWatcherBackend.Models;
+using System;
 
 namespace BirdWatcherBackend.Controllers
 {
@@ -20,9 +21,22 @@ namespace BirdWatcherBackend.Controllers
 
         // GET: api/devTempLights
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<devTempLight>>> GetdevTempLight()
+        public async Task<ActionResult<IEnumerable<devTempLight>>> GetdevTempLight(int? page = null, int? pageSize = null)
         {
-            return await _context.devTempLight.ToListAsync();
+            if (!page.HasValue)
+            {
+                return await _context.devTempLight.ToListAsync();
+            }
+            else
+            {
+                var query = _context.devTempLight;
+                var entires = await query.Skip((page.Value - 1) * pageSize.Value).Take(pageSize.Value).ToListAsync();
+                var count = await query.CountAsync();
+
+                var totalPages = (int)Math.Ceiling(count / (float)pageSize.Value);
+
+                return entires;
+            }   
         }
 
         // GET: api/devTempLights/5

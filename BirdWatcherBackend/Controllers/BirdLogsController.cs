@@ -26,14 +26,29 @@ namespace BirdWatcherBackend.Controllers
 
         // GET: api/BirdLogs
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<BirdLogVM>>> GetBirdLog()
+        public async Task<ActionResult<IEnumerable<BirdLogVM>>> GetBirdLog(int? page = null, int? pageSize = 10)
         {
             List<BirdLogVM> tmpBirgLogsVM = new List<BirdLogVM>();
-            
-            var tmpBirdLog = await _context.BirdLog
-                .Include(e => e.BirdLogBird)
-                .ThenInclude(e => e.Bird)
-                .ToListAsync();
+            List<BirdLog> tmpBirdLog = null;
+
+            if (!page.HasValue)
+            {
+                tmpBirdLog = await _context.BirdLog
+                    .Include(e => e.BirdLogBird)
+                    .ThenInclude(e => e.Bird)
+                    .ToListAsync();
+            }
+            else
+            {
+                var query = _context.BirdLog
+                    .Include(e => e.BirdLogBird)
+                    .ThenInclude(e => e.Bird);
+
+                var entries = await query.Skip((page.Value - 1) * pageSize.Value).Take(pageSize.Value).ToListAsync();
+                var count = await query.CountAsync();
+
+                var totalPages = (int)Math.Ceiling(count / (float)pageSize.Value);
+            }
 
             foreach(BirdLog tmpBL in tmpBirdLog)
             {
