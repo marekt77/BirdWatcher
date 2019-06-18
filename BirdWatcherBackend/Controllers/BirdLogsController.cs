@@ -26,29 +26,23 @@ namespace BirdWatcherBackend.Controllers
 
         // GET: api/BirdLogs
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<BirdLogVM>>> GetBirdLog(int? page = null, int? pageSize = 10)
+        public async Task<ActionResult<PagedBirdLogVM>> GetBirdLog(int page = 1, int pageSize = 100)
         {
             List<BirdLogVM> tmpBirgLogsVM = new List<BirdLogVM>();
             List<BirdLog> tmpBirdLog = null;
 
-            if (!page.HasValue)
-            {
-                tmpBirdLog = await _context.BirdLog
-                    .Include(e => e.BirdLogBird)
-                    .ThenInclude(e => e.Bird)
-                    .ToListAsync();
-            }
-            else
-            {
-                var query = _context.BirdLog
-                    .Include(e => e.BirdLogBird)
-                    .ThenInclude(e => e.Bird);
+            PagedBirdLogVM tmpPagedBirdLogVM = new PagedBirdLogVM();
+           
+            var query = _context.BirdLog
+                .Include(e => e.BirdLogBird)
+                .ThenInclude(e => e.Bird);
 
-                var entries = await query.Skip((page.Value - 1) * pageSize.Value).Take(pageSize.Value).ToListAsync();
-                var count = await query.CountAsync();
+            var entries = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+            var count = await query.CountAsync();
 
-                var totalPages = (int)Math.Ceiling(count / (float)pageSize.Value);
-            }
+            var totalPages = (int)Math.Ceiling(count / (float)pageSize);
+
+            tmpPagedBirdLogVM.PagingHeader = new PagingHeader(count, page, pageSize, totalPages);
 
             foreach(BirdLog tmpBL in tmpBirdLog)
             {
@@ -72,7 +66,9 @@ namespace BirdWatcherBackend.Controllers
                 tmpBirgLogsVM.Add(tmpBLvm);
             }
 
-            return tmpBirgLogsVM;
+            tmpPagedBirdLogVM.Items = tmpBirgLogsVM;
+
+            return tmpPagedBirdLogVM;
         }
 
         // GET: api/BirdLogs/5
