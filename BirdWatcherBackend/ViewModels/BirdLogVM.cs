@@ -9,7 +9,6 @@ namespace BirdWatcherBackend.ViewModels
     public class PagedBirdLogVM
     {
         public PagingHeader PagingHeader { get; set; }
-        public List<PageLink> Links { get; set; }
         public List<BirdLogVM> Items { get; set; }
     }
     public class BirdLogVM

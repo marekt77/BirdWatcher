@@ -3,13 +3,6 @@ using Newtonsoft.Json.Serialization;
 
 namespace BirdWatcherBackend.ViewModels
 { 
-    public class PageLink
-    {
-        public string Href { get; set; }
-        public string Relation { get; set; }
-        public string Method { get; set; }
-    }
-
     public class PagingHeader
     {
         public PagingHeader(

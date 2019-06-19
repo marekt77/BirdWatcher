@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BirdWatcherBackend.Models;
 using System;
+using BirdWatcherBackend.ViewModels;
 
 namespace BirdWatcherBackend.Controllers
 {
@@ -21,22 +22,21 @@ namespace BirdWatcherBackend.Controllers
 
         // GET: api/devTempLights
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<devTempLight>>> GetdevTempLight(int? page = null, int? pageSize = null)
+        public async Task<ActionResult<devTempLightVM>> GetdevTempLight(int page = 1, int pageSize = 100)
         {
-            if (!page.HasValue)
-            {
-                return await _context.devTempLight.ToListAsync();
-            }
-            else
-            {
-                var query = _context.devTempLight;
-                var entires = await query.Skip((page.Value - 1) * pageSize.Value).Take(pageSize.Value).ToListAsync();
-                var count = await query.CountAsync();
+            var query = _context.devTempLight;
+            var entires = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+            var count = await query.CountAsync();
 
-                var totalPages = (int)Math.Ceiling(count / (float)pageSize.Value);
+            var totalPages = (int)Math.Ceiling(count / (float)pageSize);
 
-                return entires;
-            }   
+            devTempLightVM tmpdevTempLightVM = new devTempLightVM();
+
+            tmpdevTempLightVM.PagingHeader = new PagingHeader(count, page, pageSize, totalPages);
+
+            tmpdevTempLightVM.Items = entires;
+
+            return tmpdevTempLightVM;
         }
 
         // GET: api/devTempLights/5
