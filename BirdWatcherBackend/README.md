@@ -150,13 +150,14 @@ RaspSQL is now configured and ready to for use in this project.
 
 #### Configure NGINX
 
-Allow larger uploads:
+##### Allow larger uploads
 
 Edit nginx.conf file located at: /etc/nginx/nginx.conf
 
 Add the following line to the http section:
 
-```set client body size to 10M
+```
+# set client body size to 10M#
 client_max_body_size 10M;
 ```
 
