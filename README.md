@@ -14,16 +14,17 @@ All three modules are running on the Raspian, and the document contains the inst
 
 ### Install Raspian
 
-Download the latest image of Raspian from the Raspberry Pi website: [https://www.raspberrypi.org/downloads/raspbian/]
-
+Download the latest image of Raspian from the [https://www.raspberrypi.org/downloads/raspbian/](Raspberry Pi website).
 We are looking to use Raspbian Stretch Lite
 
 Once the iso file has downloaded, you will need to transfer it onto an SD card for use in the Raspberry Pi.
 
-If you are using Windows, the quickest and easiest way to do this is to use Rufus, which can be downloaded from here: [https://rufus.ie/] If you are on Linux or are using a Mac, you can find instructions on how to install the iso on to the SD card here:[https://www.raspberrypi.org/documentation/installation/installing-images/README.md]
+If you are using Windows, the quickest and easiest way to do this is to use Rufus, which can be downloaded from [https://rufus.ie/] (here).
+If you are on Linux or are using a Mac, you can find instructions on how to install the iso on to the SD card [https://www.raspberrypi.org/documentation/installation/installing-images/README.md](here).
 
 I recommend using a decent and fast SD card, with the following sizes based on the role:
-|Role|SD Size
+
+Role|SD Size
 ---|---
 RaspCompute|32GB
 RaspClient|32GB
@@ -141,4 +142,3 @@ If you are able to login everything is working ok.
 The general setup of Raspbian is now complete, you can now move on to the individual sections to configure either the RaspComp, RaspSQL, or RaspClient nodes.
 
 RaspCompute and RaspSQL instructions are found in the README.md file under the BridwatcherBackend directory, and RaspClient instructions are found in the BirdwatcherIoTClient directory.
- 
