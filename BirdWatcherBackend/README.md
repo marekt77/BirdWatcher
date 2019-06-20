@@ -1,4 +1,4 @@
-# Setting up Raspberry Pi to run the backend API Service
+# Setup RaspCompute Node
 
 ## NGINX
 
@@ -8,9 +8,9 @@
 
 ### Configure NGINX:
 
-### Allow larger uploads:
+Allow larger uploads:
 
-#### Edit nginx.conf file located at: /etc/nginx/nginx.conf
+Edit nginx.conf file located at: /etc/nginx/nginx.conf
 
 Add the following line to the http section:
 
