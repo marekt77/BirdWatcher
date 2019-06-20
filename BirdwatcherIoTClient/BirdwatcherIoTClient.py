@@ -149,12 +149,14 @@ def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
 def logData(data):
-        #working URL
+        # working URL
+        # Change IP address to your local PiCompute Client
         url = 'https://192.168.1.21/api/devTempLights'
 
         headers = {'Content-type': 'application/json'}
         req = requests.post(url, headers = headers, data=data, cert=('/home/marekt/BirdWatcherIoT/testCerts/marek.crt', '/home/marekt/BirdWatcherIoT/testCerts/marek.key'), verify=False)
 
+        # Log if cannot send data...
         #print(req.status_code)
 
 class RunCamera(threading.Thread):
