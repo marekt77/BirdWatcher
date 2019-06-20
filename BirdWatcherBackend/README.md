@@ -98,7 +98,8 @@ Edit the /etc/samba/smb.conf file:
 
 Add the following to the bottom of the file:
 
-```[BirdwatcherShare]
+```
+[BirdwatcherShare]
     comment=Birdwatcher App Share
     path=/srv/data/BirdWatcher/LogImages
     available=yes
