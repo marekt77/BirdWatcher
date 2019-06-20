@@ -14,12 +14,17 @@
 
 Add the following line to the http section:
 
-```# set client body size to 10M #
+```set client body size to 10M
 client_max_body_size 10M;
 ```
 
 Restart NGINX:
+
 `sudo service nginx reload`
+
+---
+
+## Setup File Share
 
 ### Create directory for captured images:
 
