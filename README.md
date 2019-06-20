@@ -14,13 +14,13 @@ All three modules are running on the Raspian, and the document contains the inst
 
 ### Install Raspian
 
-Download the latest image of Raspian from the [https://www.raspberrypi.org/downloads/raspbian/](Raspberry Pi website).
+Download the latest image of Raspian from the [Raspberry Pi website](https://www.raspberrypi.org/downloads/raspbian/).
 We are looking to use Raspbian Stretch Lite
 
 Once the iso file has downloaded, you will need to transfer it onto an SD card for use in the Raspberry Pi.
 
-If you are using Windows, the quickest and easiest way to do this is to use Rufus, which can be downloaded from [https://rufus.ie/] (here).
-If you are on Linux or are using a Mac, you can find instructions on how to install the iso on to the SD card [https://www.raspberrypi.org/documentation/installation/installing-images/README.md](here).
+If you are using Windows, the quickest and easiest way to do this is to use Rufus, which can be downloaded from [here] (https://rufus.ie/).
+If you are on Linux or are using a Mac, you can find instructions on how to install the iso on to the SD card [here](https://www.raspberrypi.org/documentation/installation/installing-images/README.md).
 
 I recommend using a decent and fast SD card, with the following sizes based on the role:
 
