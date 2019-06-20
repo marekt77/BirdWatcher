@@ -13,8 +13,10 @@
 #### Edit nginx.conf file located at: /etc/nginx/nginx.conf
 
 Add the following line to the http section:
+
 ```# set client body size to 10M #
-client_max_body_size 10M;```
+client_max_body_size 10M;
+```
 
 Restart NGINX:
 `sudo service nginx reload`
