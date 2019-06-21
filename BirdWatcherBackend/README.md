@@ -161,7 +161,7 @@ If Docker is installed properly, you will see a "Hello from Docker!" message.
 
 #### Login to Docker Hub
 
-In this project I assume you have a Docker Hub account for storing your container images.  You are free to use your no repo, but this guide will assume you are using Docker Hub.  If you do not have a Docker Hub account you can sign up for free [here.](https://www.docker.com/products/docker-hub)
+In this project I assume you have a Docker Hub account for storing your container images.  You are free to use your own repo, but this guide will assume you are using Docker Hub.  If you do not have a Docker Hub account you can sign up for free [here.](https://www.docker.com/products/docker-hub)
 
 `docker login --username=<YourDockerHubAccount>`
 
