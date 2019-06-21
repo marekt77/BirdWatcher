@@ -142,6 +142,33 @@ RaspSQL is now configured and ready to for use in this project.
 
 ## RaspCompute
 
+### Docker
+
+#### Install Docker
+
+`sudo apt-get install docker-engine`
+
+Now we are going to add our user to the *docker* group, so we can run the docker command without *sudo*
+
+`sudo usermod -aG docker $USER`
+
+This will add the currently logged in user to the docker group.
+Now let us test that Docker correctly installed and we can run it witout *sudo*
+
+`docker run hello-world`
+
+If Docker is installed properly, you will see a "Hello from Docker!" message.
+
+#### Login to Docker Hub
+
+In this project I assume you have a Docker Hub account for storing your container images.  You are free to use your no repo, but this guide will assume you are using Docker Hub.  If you do not have a Docker Hub account you can sign up for free [here.](https://www.docker.com/products/docker-hub)
+
+`docker login --username=<YourDockerHubAccount>`
+
+Next you will be prompted for your Docker Hub Password.  If you have logged in successfuly you will see a `Login Succeeded` message, and you are ready to pull images from your repository on Docker Hub.
+
+---
+
 ### NGINX
 
 #### Install NGINX
@@ -184,18 +211,18 @@ Add this line to file:
 
 Note: You cannot compile .net on arm yet, so you need to do this on your local machine
 
-`docker build -t mtyrpa/birdwatcherbackend:latest .`
+`docker build -t <YourDockerHubAccount>/birdwatcherbackend:latest .`
 
 #### Push the container to your docker repo
 
-`docker push mtyrpa/birdwatcherbackend:latest`
+`docker push <YourDockerHubAccount>/birdwatcherbackend:latest`
 
 ### On the RaspCompute System
 
 #### Pull the Container
 
-`docker pull mtyrpa/birdwatcherbackend:latest`
+`docker pull <YourDockerHubAccount>/birdwatcherbackend:latest`
 
 #### Run the Container
 
-`docker run --restart=always -d -v /mnt/birdwatcher/images:/app/wwwroot/images/captured -p 5000:5000 mtyrpa/birdwatcherbackend:latest`
+`docker run --restart=always -d -v /mnt/birdwatcher/images:/app/wwwroot/images/captured -p 5000:5000 <YourDockerHubAccount>/birdwatcherbackend:latest`
