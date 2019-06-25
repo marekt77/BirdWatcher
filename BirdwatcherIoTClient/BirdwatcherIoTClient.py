@@ -224,7 +224,7 @@ def main():
 
         # check if it there is still daylight based on the light sensor  If it is too dark, pause the camera detection else
         # start it back up.
-        if light.get_Voltage() <= 1.0:
+        if light.get_Voltage() <= 2.0:
             VideoFeedThread.pause()
         else:
             if VideoFeedThread.is_alive() is False:
