@@ -177,11 +177,12 @@ namespace BirdWatcherBackend.Controllers
             return CreatedAtAction("GetBirdLog", new { id = birdLog.BirdLogID }, birdLog);
         }
 
+        // Post: api/PostLogPicture
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> PostLogPicture()
         {
-            string fileName = Guid.NewGuid().ToString() + ".jpg";
+            string fileName = Guid.NewGuid().ToString() + ".png";
             string filePath = Path.Combine(_env.WebRootPath, "images", "captured", fileName);
 
             try
