@@ -44,6 +44,9 @@ bird_identified = 0
 #set URL of API Server:
 url = 'https://192.168.1.21/'
 
+#set global variable to hold bird ids from database
+dbBirds = ''
+
 # This is needed since the working directory is the object_detection folder.
 sys.path.append('..')
 
@@ -134,6 +137,9 @@ def bird_logger(frame):
         line_thickness=8,
         min_score_thresh=0.40)
 
+    final_score = np.squeeze(scores)
+    myClasses = np.squeeze(classes).astype(np.int32)
+
     if (((int(classes[0][0]) >= 1) or (int(classes[0][0]) <= 12 ))):
         bird_identified = bird_identified + 1
     
@@ -155,12 +161,25 @@ def bird_logger(frame):
         #remove temp image.
         os.remove(tmpFilePath)
 
+        birdList = []
+        #iterate through birds found in image
+        for i in range(100):
+            if scores is None or final_score[i] > 0.5:
+                if myClasses[i] in category_index.keys():
+                    #create list of found birds
+                    birdList.append(getBirdID(category_index[myClasses[i]]['name']))
+                    
         #now post the bird log.
         temp = Temperature()
+
+        #def __init__(self, Timestamp, Temperature, Picture, Location_Latitude, Location_Longitude, UserGUID, Birds):
+        data = BirdLog(datetime.datetime.now(), temp.getTemperature(), serverFileName, 0.0,0.0,'', birdList)
         
-        data = BirdLog(Timestamp = datetime.datetime.now(), Temperature = temp.getTemperature(), serverFileName, 0.0,0,0,'', Birds)
-        jsonData = jsonpickle.encode(data, unpickable=False)
-        sendBirdLog(jsonData)
+        jsonData = jsonpickle.encode(data, unpicklable=False)
+        
+        print(jsonData)
+        
+        #sendBirdLog(jsonData)
 
 
         bird_identified = 0
@@ -193,6 +212,22 @@ def sendBirdLog(data):
 
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
+
+def getBirds():
+    global dbBirds
+
+    birdsURL = url + '/api/birds'
+
+    tmpData = requests.get(birdsURL, cert=('testCerts/marek.crt', 'testCerts/marek.key'), verify=False)
+
+    dbBirds = tmpData.json()
+
+def getBirdID(birdName):
+    global dbBirds
+
+    for dict in dbBirds:
+        if dict['name'] == birdName:
+            return dict['birdID']
 
 class RunCamera(threading.Thread):
     
@@ -249,7 +284,7 @@ def main():
     light = photoresistorValue()
 
     #download Birds Catalog
-    #<todo>
+    getBirds()
     
     VideoFeedThread = RunCamera()
     VideoFeedThread.start()
@@ -259,7 +294,8 @@ def main():
 
         # check if it there is still daylight based on the light sensor  If it is too dark, pause the camera detection else
         # start it back up.
-        if light.get_Voltage() <= 2.0:
+        #if light.get_Voltage() <= 2.0:
+        if 2 >= 2.0:
             VideoFeedThread.pause()
         else:
             if VideoFeedThread.is_alive() is False:

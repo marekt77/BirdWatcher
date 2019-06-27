@@ -125,6 +125,9 @@ def bird_logger(frame):
         line_thickness=8,
         min_score_thresh=0.40)
 
+    final_score = np.squeeze(scores)
+    myClasses = np.squeeze(classes).astype(np.int32)
+
     if (((int(classes[0][0]) >= 1) or (int(classes[0][0]) <= 12 ))):
         bird_identified = bird_identified + 1
     
@@ -133,9 +136,18 @@ def bird_logger(frame):
         print("Image ID: " + str(int(classes[0][0])))
         
         print("Bird Found! Bird Type: " + getBirdByID(int(classes[0][0]), category_index)['name'])
+
         #save image:
         tmpFilename = id_generator()
         cv2.imwrite('/home/pi/images/' + tmpFilename + '.png', frame)
+
+        #iterate through birds found in image
+        for i in range(100):
+            if scores is None or final_score[i] > 0.5:
+                if myClasses[i] in category_index.keys():
+                    #create list of found birds
+                    print("Hello")
+                    
         bird_identified = 0
 
     return frame
