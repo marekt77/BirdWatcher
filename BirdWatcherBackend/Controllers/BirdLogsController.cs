@@ -179,9 +179,13 @@ namespace BirdWatcherBackend.Controllers
 
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> PostLogPicture()
+        public async Task<IActionResult> LogPicture()
         {
-            string fileName = Guid.NewGuid().ToString() + ".jpg";
+            string ContentType = await Request.ContentType;
+
+
+
+            string fileName = Guid.NewGuid().ToString() + ".";
             string filePath = Path.Combine(_env.WebRootPath, "images", "captured", fileName);
 
             try
