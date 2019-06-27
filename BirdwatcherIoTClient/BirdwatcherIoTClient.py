@@ -30,8 +30,8 @@ import datetime
 import time
 
 # Import my sensor libraries:
-from Temperature import Temperature
-from photoresistorValue import photoresistorValue
+#from Temperature import Temperature
+#from photoresistorValue import photoresistorValue
 from BirdLog import BirdLog
 
 # Set up camera constants
@@ -45,7 +45,7 @@ bird_identified = 0
 url = 'https://192.168.1.21/'
 
 #set global variable to hold bird ids from database
-dbBirds = ''
+dbBirds = list()
 
 # This is needed since the working directory is the object_detection folder.
 sys.path.append('..')
@@ -115,7 +115,7 @@ font = cv2.FONT_HERSHEY_SIMPLEX
 def getBirdByID(ID, birds):
     return [element for element in birds if element['id'] == ID]
 
-def bird_logger(frame):
+def bird_logger(frame, frame_expanded):
 
     global bird_identified
 
@@ -148,7 +148,7 @@ def bird_logger(frame):
         
         print("Image ID: " + str(int(classes[0][0])))
         
-        print("Bird Found! Bird Type: " + getBirdByID(int(classes[0][0]), category_index)['name'])
+        #print("Bird Found! Bird Type: " + getBirdByID(int(classes[0][0]), category_index)['name'])
         #save image:
         tmpFilePath = '/home/pi/images/' + id_generator() + '.png'
 
@@ -170,10 +170,11 @@ def bird_logger(frame):
                     birdList.append(getBirdID(category_index[myClasses[i]]['name']))
                     
         #now post the bird log.
-        temp = Temperature()
+        #temp = Temperature()
+        temp = 26.34
 
-        #def __init__(self, Timestamp, Temperature, Picture, Location_Latitude, Location_Longitude, UserGUID, Birds):
-        data = BirdLog(datetime.datetime.now(), temp.getTemperature(), serverFileName, 0.0,0.0,'', birdList)
+        #data = BirdLog(datetime.datetime.now(), temp.getTemperature(), serverFileName, 0.0,0.0,'', birdList)
+        data = BirdLog(datetime.datetime.now(), temp, serverFileName, 0.0,0.0,'', birdList)
         
         jsonData = jsonpickle.encode(data, unpicklable=False)
         
@@ -188,18 +189,37 @@ def bird_logger(frame):
 
 def sendPhoto(tmpPhotoFile):
     
+    print("Photo locations: " + tmpPhotoFile)
+
     serverFileName = ''
 
     postImageURL = url + 'api/BirdLogs/PostLogPicture'
 
-    with open(tmpPhotoFile, "rb") as binary_file:
-        imageData = bytearray(binary_file.read())
-        
-        headers = {'Content-type': 'image/png'}
-        req = requests.post(postImageURL, headers = headers, data=imageData, cert=('testCerts/marek.crt', 'testCerts/marek.key'), verify=False)
-        
-        if(req.status_code == 200):
-            serverFileName = req.text
+    print(postImageURL)
+
+    try:
+        with open(tmpPhotoFile, "rb") as binary_file:
+            imageData = bytearray(binary_file.read())
+            
+            headers = {'Content-type': 'image/png'}
+
+            try:
+                print("About to send something...")
+                req = requests.post(postImageURL, headers = headers, data=imageData, cert=('/home/pi/certs/marek.crt', '/home/pi/certs/marek.key'), verify=False)
+                #req = requests.post(postImageURL, headers = headers, data=imageData)
+                print('hopefully sent something')
+            except requests.ConnectionError as e:
+                print("Could not connect", e)
+
+            #print("REquests: ", req.status_code, req.reason)
+
+            #if(req.status_code == 200):
+                #serverFileName = req.text
+            #else:
+                #print("could not send file")
+
+    except Exception as Argument:
+        print("something bad happened", Argument)
 
     return serverFileName
         
@@ -208,7 +228,7 @@ def sendBirdLog(data):
 
     headers = {'Content-type': 'application/json'}
     
-    req = requests.post(postLogURL, headers = headers, data=data, cert=('/home/marekt/BirdWatcherIoT/testCerts/marek.crt', '/home/marekt/BirdWatcherIoT/testCerts/marek.key'), verify=False)
+    req = requests.post(postLogURL, headers = headers, data=data, cert=('/home/pi/certs/marek.crt', '/home/pi/certs/marek.key'), verify=False)
 
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
@@ -216,11 +236,17 @@ def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
 def getBirds():
     global dbBirds
 
-    birdsURL = url + '/api/birds'
+    birdsURL = url + 'api/birds'
 
-    tmpData = requests.get(birdsURL, cert=('testCerts/marek.crt', 'testCerts/marek.key'), verify=False)
+    print(birdsURL)
 
-    dbBirds = tmpData.json()
+    tmpData = requests.get(birdsURL, cert=('/home/pi/certs/marek.crt', '/home/pi/certs/marek.key'), verify=False)
+
+    if tmpData.status_code == 200:
+        dbBirds = tmpData.json()
+        print(dbBirds)
+    else:
+        print(tmpData.status_code)
 
 def getBirdID(birdName):
     global dbBirds
@@ -248,6 +274,9 @@ class RunCamera(threading.Thread):
                 while self.paused:
                     self.pause_cond.wait()
                 #Start Video Capture and processing:
+                global frame_rate_calc
+                global freq
+                global font 
                 for frame1 in camera.capture_continuous(rawCapture, format="bgr",use_video_port=True):
                     t1 = cv2.getTickCount()
                     # Acquire frame and expand frame dimensions to have shape: [1, None, None, 3]
@@ -258,7 +287,7 @@ class RunCamera(threading.Thread):
                     frame_expanded = np.expand_dims(frame, axis=0)
                     
                     #Send frame to bird_logger of ID
-                    frame = bird_logger(frame)
+                    frame = bird_logger(frame, frame_expanded)
 
                     cv2.putText(frame,"FPS: {0:.2f}".format(frame_rate_calc),(30,50),font,1,(255,255,0),2,cv2.LINE_AA)
 
@@ -281,7 +310,7 @@ class RunCamera(threading.Thread):
         self.pause_cond.release()
 
 def main():
-    light = photoresistorValue()
+    #light = photoresistorValue()
 
     #download Birds Catalog
     getBirds()
