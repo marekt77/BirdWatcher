@@ -148,7 +148,6 @@ def bird_logger(frame, frame_expanded):
         
         print("Image ID: " + str(int(classes[0][0])))
         
-        #print("Bird Found! Bird Type: " + getBirdByID(int(classes[0][0]), category_index)['name'])
         #save image:
         tmpFilePath = '/home/pi/images/' + id_generator() + '.png'
 
@@ -180,8 +179,7 @@ def bird_logger(frame, frame_expanded):
         
         print(jsonData)
         
-        #sendBirdLog(jsonData)
-
+        sendBirdLog(jsonData)
 
         bird_identified = 0
 
@@ -194,29 +192,18 @@ def sendPhoto(tmpPhotoFile):
     serverFileName = ''
 
     postImageURL = url + 'api/BirdLogs/PostLogPicture'
-
-    print(postImageURL)
+    
+    headers = {'Content-type': 'image/png'}
 
     try:
-        with open(tmpPhotoFile, "rb") as binary_file:
-            imageData = bytearray(binary_file.read())
-            
-            headers = {'Content-type': 'image/png'}
+        imageData = open(tmpPhotoFile, 'rb').read()
+         
+        req = requests.post(postImageURL, headers = headers, data=imageData, cert=('/home/pi/certs/marek.crt', '/home/pi/certs/marek.key'), verify=False)
 
-            try:
-                print("About to send something...")
-                req = requests.post(postImageURL, headers = headers, data=imageData, cert=('/home/pi/certs/marek.crt', '/home/pi/certs/marek.key'), verify=False)
-                #req = requests.post(postImageURL, headers = headers, data=imageData)
-                print('hopefully sent something')
-            except requests.ConnectionError as e:
-                print("Could not connect", e)
-
-            #print("REquests: ", req.status_code, req.reason)
-
-            #if(req.status_code == 200):
-                #serverFileName = req.text
-            #else:
-                #print("could not send file")
+        if(req.status_code == 200):
+            serverFileName = req.text
+        else:
+            print("could not send file")
 
     except Exception as Argument:
         print("something bad happened", Argument)
