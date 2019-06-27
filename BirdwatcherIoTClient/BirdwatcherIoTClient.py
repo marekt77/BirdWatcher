@@ -32,6 +32,7 @@ import time
 # Import my sensor libraries:
 from Temperature import Temperature
 from photoresistorValue import photoresistorValue
+from BirdLog import BirdLog
 
 # Set up camera constants
 IM_WIDTH = 1280
@@ -39,6 +40,9 @@ IM_HEIGHT = 720
 
 #Initialize variable to count # of frames a bird was detected
 bird_identified = 0
+
+#set URL of API Server:
+url = 'https://192.168.1.21/'
 
 # This is needed since the working directory is the object_detection folder.
 sys.path.append('..')
@@ -135,29 +139,60 @@ def bird_logger(frame):
     
     #If bird is present for 10 frames or more, log the entry
     if(bird_identified > 10):
+        
         print("Image ID: " + str(int(classes[0][0])))
         
         print("Bird Found! Bird Type: " + getBirdByID(int(classes[0][0]), category_index)['name'])
         #save image:
-        tmpFilename = id_generator()
-        cv2.imwrite('/home/pi/images/' + tmpFilename + '.png', frame)
+        tmpFilePath = '/home/pi/images/' + id_generator() + '.png'
+
+        #save image as tmp file...
+        cv2.imwrite(tmpFilePath, frame)
+
+        #Send image that was captured
+        serverFileName = sendPhoto(tmpFilePath)
+
+        #remove temp image.
+        os.remove(tmpFilePath)
+
+        #now post the bird log.
+        temp = Temperature()
+        
+        data = BirdLog(Timestamp = datetime.datetime.now(), Temperature = temp.getTemperature(), serverFileName, 0.0,0,0,'', Birds)
+        jsonData = jsonpickle.encode(data, unpickable=False)
+        sendBirdLog(jsonData)
+
+
         bird_identified = 0
 
     return frame
 
+def sendPhoto(tmpPhotoFile):
+    
+    serverFileName = ''
+
+    postImageURL = url + 'api/BirdLogs/PostLogPicture'
+
+    with open(tmpPhotoFile, "rb") as binary_file:
+        imageData = bytearray(binary_file.read())
+        
+        headers = {'Content-type': 'image/png'}
+        req = requests.post(postImageURL, headers = headers, data=imageData, cert=('testCerts/marek.crt', 'testCerts/marek.key'), verify=False)
+        
+        if(req.status_code == 200):
+            serverFileName = req.text
+
+    return serverFileName
+        
+def sendBirdLog(data):
+    postLogURL = url + 'api/BirdLogs'
+
+    headers = {'Content-type': 'application/json'}
+    
+    req = requests.post(postLogURL, headers = headers, data=data, cert=('/home/marekt/BirdWatcherIoT/testCerts/marek.crt', '/home/marekt/BirdWatcherIoT/testCerts/marek.key'), verify=False)
+
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
-
-def logData(data):
-        # working URL
-        # Change IP address to your local PiCompute Client
-        url = 'https://192.168.1.21/api/devTempLights'
-
-        headers = {'Content-type': 'application/json'}
-        req = requests.post(url, headers = headers, data=data, cert=('/home/marekt/BirdWatcherIoT/testCerts/marek.crt', '/home/marekt/BirdWatcherIoT/testCerts/marek.key'), verify=False)
-
-        # Log if cannot send data...
-        #print(req.status_code)
 
 class RunCamera(threading.Thread):
     
