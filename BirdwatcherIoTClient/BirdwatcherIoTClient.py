@@ -191,7 +191,7 @@ def sendPhoto(tmpPhotoFile):
 
     serverFileName = ''
 
-    postImageURL = url + 'api/BirdLogs/PostLogPicture'
+    postImageURL = url + 'api/BirdLogs/LogPicture'
     
     headers = {'Content-type': 'image/png'}
 
