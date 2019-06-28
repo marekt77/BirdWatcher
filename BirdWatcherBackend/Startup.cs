@@ -1,5 +1,4 @@
 ﻿using BirdWatcherBackend.Models;
-using BirdWatcherBackend.Setup;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;

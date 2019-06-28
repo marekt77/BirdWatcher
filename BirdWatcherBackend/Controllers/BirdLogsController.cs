@@ -44,7 +44,7 @@ namespace BirdWatcherBackend.Controllers
 
             tmpPagedBirdLogVM.PagingHeader = new PagingHeader(count, page, pageSize, totalPages);
 
-            foreach(BirdLog tmpBL in tmpBirdLog)
+            foreach(BirdLog tmpBL in entries)
             {
                 BirdLogVM tmpBLvm = new BirdLogVM();
 
@@ -167,7 +167,6 @@ namespace BirdWatcherBackend.Controllers
                 tmpBird.BirdLogBird.Add(tmpBLB);
             }
 
-
             _context.BirdLog.Add(tmpBirdLog);
 
             await _context.SaveChangesAsync();
@@ -182,7 +181,26 @@ namespace BirdWatcherBackend.Controllers
         [Route("[action]")]
         public async Task<IActionResult> LogPicture()
         {
-            string fileName = Guid.NewGuid().ToString() + ".png";
+            string fileType;
+
+            //Check Content type
+            switch(Request.ContentType)
+            {
+                case "image/jpeg":
+                    fileType = ".jpg";
+                    break;
+                case "image/png":
+                    fileType = ".png";
+                    break;
+                case "image/gif":
+                    fileType = ".gif";
+                    break;
+                default:
+                    fileType = "jpg";
+                    break;
+            }
+
+            string fileName = Guid.NewGuid().ToString() + fileType;
             string filePath = Path.Combine(_env.WebRootPath, "images", "captured", fileName);
 
             try
