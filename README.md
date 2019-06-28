@@ -10,7 +10,6 @@ About 90% of the project is written in C# and runs on .Net Core 2.2, the Object 
 
 Why C#? Well I was able to use one language for 90% of the project from the backend API to the end user apps that are written in Xamarin and target iOS, Android, and Windows 10 (UWP).
 
-
 This project is built to run on three Raspberry Pi 3b+ computers.  They are organized as follows:
 
 1. RaspCompute - This module will run the API Backend
