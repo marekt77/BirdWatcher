@@ -1,5 +1,16 @@
 # BirdWatcher
 
+The idea and inspiration for this project came from my mom’s birdfeeder at her house in Wisconsin.  She can see the feeder from her kitchen window and spends some of her morning looking at the feeder and trying to identify what birds are showing up and for how long.  She takes great joy at seeing the various species of birds come to her feeder to get some seeds.
+
+Two years ago, during the keynote at Microsoft’s Build conference they demoed image detection running on an Edge device, specifically a Raspberry Pi.  A few months later, while visiting my mom, she called me over to show me some of the birds that were feeding.  Aside from a cardinal and sparrow, neither of us could identify any of the other birds.  Sometime later, the idea popped in my head: “wouldn’t it be cool if that image detection thing I saw at Build could be applied to the birdfeeder…”
+
+Fast forward to today, and this is the result of that idea.  After much time learning and researching Tensorflow, looking at other examples, and building a hardware prototype that uses a Video Camera hooked up to a Raspberry Pi to look at the birdfeeder and then attempt to identify and catalog the birds that come to feed there.  This project would not exist if not for Evan Juras and his Object Detection demos on GitHub: https://github.com/EdjeElectronics
+
+About 90% of the project is written in C# and runs on .Net Core 2.2, the Object Detection part that runs on the Raspberry Pi is written in Python.  
+
+Why C#? Well I was able to use one language for 90% of the project from the backend API to the end user apps that are written in Xamarin and target iOS, Android, and Windows 10 (UWP).
+
+
 This project is built to run on three Raspberry Pi 3b+ computers.  They are organized as follows:
 
 1. RaspCompute - This module will run the API Backend
