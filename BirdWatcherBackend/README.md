@@ -195,7 +195,8 @@ Create a new file:
 
 And type in the following:
 
-```server {
+```
+server {
     listen 80;
 
     location / {
