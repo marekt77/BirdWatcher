@@ -26,7 +26,9 @@ namespace BirdWatcherBackend
                 //MySQL Context
                 //options.UseMySQL(Configuration.GetSection("ConnectionStrings:devMySQLConnection").Value
                 //Using Postgre instead of MySQL
-                options.UseNpgsql(Configuration.GetSection("ConnectionStrings:devPostgreConnection").Value
+                //options.UseNpgsql(Configuration.GetSection("ConnectionStrings:devPostgreConnection").Value
+                //North:
+                options.UseNpgsql(Configuration.GetSection("ConnectionStrings:wisPostgreConnection").Value
             ));
         }
 

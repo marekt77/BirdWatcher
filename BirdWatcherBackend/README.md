@@ -146,7 +146,7 @@ RaspSQL is now configured and ready to for use in this project.
 
 #### Install Docker
 
-`sudo apt-get install docker-engine`
+`sudo apt-get install docker-ce`
 
 Now we are going to add our user to the *docker* group, so we can run the docker command without *sudo*
 
@@ -177,6 +177,39 @@ Next you will be prompted for your Docker Hub Password.  If you have logged in s
 
 #### Configure NGINX
 
+##### Create new site
+
+We are setting up a reverse proxy in NGINX which will redirect all of the incomming traffic on port 80 to our docker container listening on port 5000.
+
+First navigate to the following directory:
+
+`cd /etc/nginx/sites-enabled`
+
+Now remove the existing file:
+
+`sudo rm default`
+
+Create a new file:
+
+`sudo nano default`
+
+And type in the following:
+
+```server {
+    listen 80;
+
+    location / {
+            proxy_pass http://localhost:5000;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
+    }
+}
+```
+
+Save the file and exit.
+
 ##### Allow larger uploads
 
 Edit nginx.conf file located at: /etc/nginx/nginx.conf
@@ -201,9 +234,13 @@ Restart NGINX:
 `sudo mkdir -p /mnt/birdwatcher/images`
 `sudo chmod -R 0777 /mnt/birdwatcher/images`
 
+#### Edit fstab to mount at boot time:
+
+`sudo nano /etc/fstab`
+
 Add this line to file:
 
-`//192.168.1.20/BirdwatcherShare /mnt/birdwatcher/images cifs username=bw_client,password=client_123,file_mode=0777,dir_mode=0777 0 0`
+`//<RaspSQL IP Address>/BirdwatcherShare /mnt/birdwatcher/images cifs username=bw_client,password=client_123,file_mode=0777,dir_mode=0777 0 0`
 
 ### On your Dev Machine
 
