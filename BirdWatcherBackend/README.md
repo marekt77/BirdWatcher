@@ -65,7 +65,8 @@ Go to the BirdWatcherBackend project directory.
 
 Create a file called: secretConfig.json, place the following inside:  Replace host with IP of your server and <password> with whatever password you have the user above.
 
-```{
+```
+{
     "ConnectionStrings": {
     "BirdWatcherDB": "host=<IP of Postgre Server>;database=BirdWatcher;user id=dbbirdwatcher;password=<Password>;"
     }
