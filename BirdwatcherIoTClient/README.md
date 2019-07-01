@@ -107,3 +107,15 @@ Finally run:
 We are done!  Protobuf should be installed on your raspberry pi.  Verify that it is working by running:
 
 `protoc`
+
+### Setup the Tensorflow Directory Structure and PYTHONPATH Variable
+
+Create the `Tensorflow` directory in your home directory, from where the BirdWatcher App will run and Live.  In your home directory type: **Note: I chose tensorflow13 because that is the version of tensorflow that this project was built to support**
+
+`mkdir tensorflow13`
+
+`cd tensorflow13`
+
+Now we are going to download the tensorflow models repository from GitHub:
+
+`git clone --recurse-submodules https://github.com/tensorflow/models.git`
