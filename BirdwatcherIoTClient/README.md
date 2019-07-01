@@ -92,12 +92,15 @@ Now move into the python directory and export the library path:
 Then run the following:
 
 `python3 setup.py build --cpp_implementation`
+
 `python3 setup.py test --cpp_implementation`
+
 `sudo python3 setup.py install --cpp_implementation`
 
 Now issue the following PATH commands:
 
 `export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=cpp`
+
 `export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION_VERSION=3`
 
 Finally run:
