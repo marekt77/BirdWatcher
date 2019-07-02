@@ -104,6 +104,8 @@ network={
 }
 ```
 
+Save the file and exit.
+
 Reboot
 
 Check if network is working:
@@ -148,6 +150,10 @@ Test by trying to ssh to the Raspberry Pi by going to another computer:
 `ssh <userid>@<staticIP you chose>`
 
 If you are able to login everything is working ok.
+
+### Install Python 3 pip:
+
+`sudo apt-get install python3-pip`
 
 The general setup of Raspbian is now complete, you can now move on to the individual sections to configure either the RaspComp, RaspSQL, or RaspClient nodes.
 
