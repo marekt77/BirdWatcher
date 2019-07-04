@@ -9,6 +9,7 @@
 #### Start and enable Services of postgresql
 
 `sudo systemctl start postgresql`
+
 `sudo systemctl enable postgresql`
 
 #### Add Listen Address
@@ -19,13 +20,20 @@ This will configure PostGRE to listen to all network connections:
 
 Edit the following line :
 
+`listen_addresses = 'localhost'`
+
+to
+
 `listen_addresses = '*'`
 
 Save File
 
 #### Allow users to connect from any IP
 
-Add the following line as the first line of pg_hba.conf. It allows access to all databases for all users with an encrypted password:
+Add the following line as the first line of pg_hba.conf.
+It allows access to all databases for all users with an encrypted password:
+
+`sudo nano /etc/postgresql/9.6/main/pg_hba.conf`
 
 `host  all  all 0.0.0.0/0 md5`
 
