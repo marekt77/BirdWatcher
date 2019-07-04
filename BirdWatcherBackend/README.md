@@ -29,11 +29,12 @@ to
 Save File
 
 #### Allow users to connect from any IP
-
-Add the following line as the first line of pg_hba.conf.
+Edit the `pg_hba.conf` file.
 It allows access to all databases for all users with an encrypted password:
 
 `sudo nano /etc/postgresql/9.6/main/pg_hba.conf`
+
+Add the following line as the last line of pg_hba.conf.
 
 `host  all  all 0.0.0.0/0 md5`
 
@@ -49,6 +50,7 @@ The postgres user is created automatically when you install PostgreSQL. This use
 To log in to the PostgreSQL server as the postgres user first you need to switch to the postgres user and then you can access a PostgreSQL prompt using the psql utility:
 
 `sudo su - postgres`
+
 `psql`
 
 Create Birdwatcher Database:
