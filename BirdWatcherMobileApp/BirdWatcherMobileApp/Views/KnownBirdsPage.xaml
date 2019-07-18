@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
              mc:Ignorable="d"
              x:Class="BirdWatcherMobileApp.Views.KnownBirdsPage"
              Title="{Binding Title}"
@@ -10,28 +11,27 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Know Birds"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            <ListView x:Name="KnownBirdsListView"
-                      ItemsSource="{Binding KnownBirds}"
-                      VerticalOptions="FillAndExpand"
-                      RefreshCommand="{Binding LoadKnownBirdsCommand}"
-                      IsPullToRefreshEnabled="True"
-                      IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-                      CachingStrategy="RecycleElement">
-                <ListView.ItemTemplate>
+            <flv:FlowListView 
+                FlowColumnCount="3" 
+                HasUnevenRows="True" 
+                FlowItemsSource="{Binding KnownBirds}" 
+                IsPullToRefreshEnabled="True" 
+                IsRefreshing="{Binding IsBusy, Mode=OneWay}" 
+                RefreshCommand="{Binding LoadKnownBirdsCommand}">
+                <flv:FlowListView.FlowColumnTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <StackLayout Padding="10">
-                                <Label Text="{Binding Name}"
-                                       LineBreakMode="NoWrap"
-                                       FontSize="16"/>
-                            </StackLayout>
-                        </ViewCell>
+                        <StackLayout Orientation="Vertical" Margin="10" BackgroundColor="Azure" HeightRequest="125">
+                            <Image Source="{Binding BirdImage}" HeightRequest="100" />
+                            <Label 
+                                Text="{Binding Name}" 
+                                FontSize="16" 
+                                HorizontalTextAlignment="Center"
+                                VerticalTextAlignment="Start"
+                                HorizontalOptions="CenterAndExpand" />
+                        </StackLayout>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </flv:FlowListView.FlowColumnTemplate>
+            </flv:FlowListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

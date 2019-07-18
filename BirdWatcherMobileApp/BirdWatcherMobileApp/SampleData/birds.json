@@ -2,62 +2,62 @@
   "birds": [
     {
       "BirdID": 1,
-      "Name": "bluejay",
+      "Name": "Bluejay",
       "Image": "Bluejay.jpg"
     },
     {
       "BirdID": 2,
-      "Name": "cardinal",
+      "Name": "Cardinal",
       "Image": "Northern_Cardinal.jpg"
     },
     {
       "BirdID": 3,
-      "Name": "chickadee",
+      "Name": "Chickadee",
       "Image": "Chickadee.jpg"
     },
     {
       "BirdID": 4,
-      "Name": "goldfinch",
+      "Name": "Goldfinch",
       "Image": "American_Goldfinch.jpg"
     },
     {
       "BirdID": 5,
-      "Name": "hummingbird",
-      "Image": "hummingbird.jpg"
+      "Name": "Hummingbird",
+      "Image": "Hummingbird.jpg"
     },
     {
       "BirdID": 6,
-      "Name": "mourningdove",
+      "Name": "Mourning Dove",
       "Image": "Mourning_Dove.jpg"
     },
     {
       "BirdID": 7,
-      "Name": "northernflicker",
-      "Image": "Mourning_Dove.jpg"
+      "Name": "Northern Flicker",
+      "Image": "Northern_Flicker.jpg"
     },
     {
       "BirdID": 8,
-      "Name": "nuthatch",
+      "Name": "Nuthatch",
       "Image": "Nuthatch.jpg"
     },
     {
       "BirdID": 9,
-      "Name": "sparrow",
+      "Name": "Sparrow",
       "Image": "Sparrow.jpg"
     },
     {
       "BirdID": 10,
-      "Name": "titmouse",
+      "Name": "Titmouse",
       "Image": "Titmouse.jpg"
     },
     {
       "BirdID": 11,
-      "Name": "towhee",
+      "Name": "Towhee",
       "Image": "Towhee.jpg"
     },
     {
       "BirdID": 12,
-      "Name": "woodpecker",
+      "Name": "Woodpecker",
       "Image": "Downy_Woodpecker.jpg"
     }
   ]
