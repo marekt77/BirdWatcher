@@ -1,9 +1,4 @@
 ﻿using BirdWatcherMobileApp.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -14,7 +9,8 @@ namespace BirdWatcherMobileApp.Views
     public partial class KnownBirdsPage : ContentPage
     {
         KnownBirdsViewModel knownBirdsVM;
-        public KnownBirdsPage()
+
+         public KnownBirdsPage()
         {
             InitializeComponent();
 
@@ -27,6 +23,11 @@ namespace BirdWatcherMobileApp.Views
 
             if (knownBirdsVM.KnownBirds.Count == 0)
                 knownBirdsVM.LoadKnownBirdsCommand.Execute(null);
+        }
+
+        private void FlowListView_FlowItemTapped(object sender, ItemTappedEventArgs args)
+        {
+            knownBirdsVM.OnItemTapped(sender, args, Navigation);
         }
     }
 }

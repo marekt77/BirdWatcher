@@ -15,6 +15,7 @@
                 FlowColumnCount="3" 
                 HasUnevenRows="True" 
                 FlowItemsSource="{Binding KnownBirds}" 
+                FlowItemTapped="FlowListView_FlowItemTapped"
                 IsPullToRefreshEnabled="True" 
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}" 
                 RefreshCommand="{Binding LoadKnownBirdsCommand}">

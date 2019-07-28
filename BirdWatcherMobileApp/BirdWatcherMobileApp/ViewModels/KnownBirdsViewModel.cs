@@ -1,21 +1,33 @@
 ﻿using BirdWatcherMobileApp.Models;
+using BirdWatcherMobileApp.Views;
+using DLToolkit.Forms.Controls;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace BirdWatcherMobileApp.ViewModels
 {
     public class KnownBirdsViewModel : BaseViewModel
     {
-        public ObservableCollection<KnownBirds> KnownBirds { get; set; }
+        public ObservableCollection<KnownBird> KnownBirds { get; set; }
         public Command LoadKnownBirdsCommand { get; set; }
+
+        public INavigation Navigation { get; set; }
+
+        public async void OnItemTapped(object sender, ItemTappedEventArgs args, INavigation myNav)
+        {
+            KnownBird selectedBird = args.Item as KnownBird;
+
+            await myNav.PushAsync(new KnownBirdDetailPage(new KnownBirdDetailPageViewModel(selectedBird)));
+        }
 
         public KnownBirdsViewModel()
         {
             Title = "Known Birds";
-            KnownBirds = new ObservableCollection<KnownBirds>();
+            KnownBirds = new ObservableCollection<KnownBird>();
 
             LoadKnownBirdsCommand = new Command(async () => await ExecuteLoadBirdsCommand());
         }
@@ -34,7 +46,7 @@ namespace BirdWatcherMobileApp.ViewModels
 
                 foreach (var tmpBird in _birds)
                 {
-                    KnownBirds tmpKB = new KnownBirds();
+                    KnownBird tmpKB = new KnownBird();
 
                     tmpKB.BirdID = tmpBird.BirdID;
                     tmpKB.Name = tmpBird.Name;
@@ -57,7 +69,7 @@ namespace BirdWatcherMobileApp.ViewModels
         }
     }
 
-    public class KnownBirds : Bird
+    public class KnownBird : Bird
     {
         public ImageSource BirdImage { get; set; }
     }
