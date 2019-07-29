@@ -4,12 +4,22 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="BirdWatcherMobileApp.Views.KnownBirdDetailPage">
+             x:Class="BirdWatcherMobileApp.Views.KnownBirdDetailPage"
+             Title="{Binding Title}">
+    
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Known Birds View!!!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout 
+            Orientation="Vertical" 
+            VerticalOptions="StartAndExpand">
+            <Image 
+                Source="{Binding knownBird.BirdImage}" 
+                HorizontalOptions="CenterAndExpand" 
+                VerticalOptions="StartAndExpand"/>
+            <Label 
+                Margin="5" 
+                Text="{Binding knownBird.Name}" 
+                FontSize="25" 
+                HorizontalOptions="StartAndExpand" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
