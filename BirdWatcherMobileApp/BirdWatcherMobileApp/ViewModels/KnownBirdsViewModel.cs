@@ -1,11 +1,9 @@
 ﻿using BirdWatcherMobileApp.Models;
 using BirdWatcherMobileApp.Views;
-using DLToolkit.Forms.Controls;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace BirdWatcherMobileApp.ViewModels
