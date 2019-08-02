@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="BirdWatcherMobileApp.Views.BirdLogPage"
+             Title="{Binding Title}">
+  
+    <ListView x:Name="BirdLogLW"
+            ItemsSource="{Binding BirdLog}"
+            CachingStrategy="RecycleElement">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="{Binding Image}" HeightRequest="30" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
+                    <StackLayout Orientation="Vertical">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Date: " HorizontalOptions="StartAndExpand" FontAttributes="Bold" />
+                            <Label Text="{Binding Date}" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Number of Birds Found: " HorizontalOptions="StartAndExpand" FontAttributes="Bold" />
+                            <Label Text="{Binding BirdCount}" />
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>

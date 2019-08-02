@@ -19,9 +19,14 @@ namespace BirdWatcherMobileApp.ViewModels
             ServerAddressPage _serverAddressPage = new ServerAddressPage();
 
             OpenSetServerAddressCommand = new Command(async () => await Navigation.PushModalAsync(_serverAddressPage));
+
+            MessagingCenter.Subscribe<SetServerAddressViewModel>(this, "update", (sender) =>
+            {
+                UpdatePageData();
+            });
         }
 
-        public void UpdatePageData()
+        private void UpdatePageData()
         {
             ServerIP = Settings.ServerAddress;
             ConnStatus = "Connected";

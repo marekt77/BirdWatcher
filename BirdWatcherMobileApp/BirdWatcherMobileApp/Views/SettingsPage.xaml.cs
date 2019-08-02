@@ -15,14 +15,5 @@ namespace BirdWatcherMobileApp.Views
 
             BindingContext = settingsVM = new SettingsViewModel(Navigation);
         }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            if (settingsVM != null)
-            {
-                settingsVM.UpdatePageData();
-            }
-        }
     }
 }

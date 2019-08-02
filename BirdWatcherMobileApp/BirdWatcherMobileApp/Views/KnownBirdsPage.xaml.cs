@@ -14,6 +14,8 @@ namespace BirdWatcherMobileApp.Views
         {
             InitializeComponent();
 
+            Title = "Known Birds";
+
             BindingContext = knownBirdsVM = new KnownBirdsViewModel();
         }
 

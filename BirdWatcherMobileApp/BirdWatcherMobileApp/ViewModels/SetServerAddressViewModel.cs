@@ -1,4 +1,5 @@
 ﻿using BirdWatcherMobileApp.Models;
+using BirdWatcherMobileApp.Views;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -14,7 +15,7 @@ namespace BirdWatcherMobileApp.ViewModels
 
             if(!string.IsNullOrEmpty(Settings.ServerAddress))
             {
-                _serverAddress = Settings.ServerAddress;
+                ServerAddress = Settings.ServerAddress;
             }
         }
 
@@ -37,9 +38,10 @@ namespace BirdWatcherMobileApp.ViewModels
 
         private async void SetServerAddress()
         {
-            if(!string.IsNullOrEmpty(_serverAddress))
+            if(!string.IsNullOrEmpty(ServerAddress))
             {
-                Settings.ServerAddress = _serverAddress;
+                Settings.ServerAddress = ServerAddress;
+                MessagingCenter.Send<SetServerAddressViewModel>(this, "update");
                 await Navigation.PopModalAsync();
             }
         }
