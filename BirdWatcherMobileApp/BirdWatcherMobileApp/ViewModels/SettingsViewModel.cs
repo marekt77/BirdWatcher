@@ -1,17 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using BirdWatcherMobileApp.Models;
+using BirdWatcherMobileApp.Views;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace BirdWatcherMobileApp.ViewModels
 {
     public class SettingsViewModel : BaseViewModel
     {
-        public SettingsViewModel()
+        public SettingsViewModel(INavigation _nav)
         {
             Title = "Settings";
 
-            _serverIP = "192.168.1.2";
+            _serverIP = Settings.ServerAddress;
             _connStatus = "Connected";
+
+            Navigation = _nav;
+
+            ServerAddressPage _serverAddressPage = new ServerAddressPage();
+
+            OpenSetServerAddressCommand = new Command(async () => await Navigation.PushModalAsync(_serverAddressPage));
+        }
+
+        public void UpdatePageData()
+        {
+            ServerIP = Settings.ServerAddress;
+            ConnStatus = "Connected";
         }
 
         private string _connStatus;
@@ -24,6 +37,7 @@ namespace BirdWatcherMobileApp.ViewModels
             set
             {
                 _connStatus = value;
+                OnPropertyChanged("ConnStatus");
                 
             }
         }
@@ -38,7 +52,13 @@ namespace BirdWatcherMobileApp.ViewModels
             set
             {
                 _serverIP = value;
+                OnPropertyChanged("ServerIP");
             }
         }
+
+        public ICommand OpenSetServerAddressCommand { get; }
+
+        private INavigation Navigation { get; set; }
+
     }
 }

@@ -13,7 +13,16 @@ namespace BirdWatcherMobileApp.Views
         {
             InitializeComponent();
 
-            BindingContext = settingsVM = new SettingsViewModel();
+            BindingContext = settingsVM = new SettingsViewModel(Navigation);
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            if (settingsVM != null)
+            {
+                settingsVM.UpdatePageData();
+            }
         }
     }
 }

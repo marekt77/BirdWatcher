@@ -10,20 +10,25 @@
     <ContentPage.Content>
         <StackLayout 
             Orientation="Vertical" 
-            VerticalOptions="StartAndExpand">
+            VerticalOptions="StartAndExpand" 
+            Margin="5,0,0,0">
             <Label Text="Server Details" 
                 HorizontalOptions="Start" 
                 FontSize="20" />
             <StackLayout 
                 Orientation="Horizontal" Margin="15,5,0,0">
                 <Label Text="Status: " FontSize="15"/>
-                <Label Text="{Binding ConnStatus}" FontSize="15" />
+                <Label Text="{Binding ConnStatus, Mode=OneWay}" FontSize="15" />
             </StackLayout>
             <StackLayout Orientation="Horizontal" Margin="15,0">
                 <Label Text="Server Address: " FontSize="15"/>
-                <Label Text="{Binding ServerIP}" FontSize="15" />
+                <Label Text="{Binding ServerIP, Mode=OneWay}" FontSize="15" />
             </StackLayout>
-            <Button Text="Change Server" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" />
+            <Button 
+                Text="Change Server"
+                Command="{Binding OpenSetServerAddressCommand}"
+                HorizontalOptions="CenterAndExpand" 
+                VerticalOptions="Start" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
