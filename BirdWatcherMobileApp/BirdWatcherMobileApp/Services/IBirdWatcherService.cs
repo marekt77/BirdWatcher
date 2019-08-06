@@ -16,4 +16,9 @@ namespace BirdWatcherMobileApp.Services
 
         Task<IEnumerable<T>> GetKnownBirdsAsync();
     }
+
+    public interface IBirdWatcherService<T>
+    {
+        Task<T> GetServerInfo();
+    }
 }

@@ -12,9 +12,9 @@ namespace BirdWatcherMobileApp.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>() ?? new MockDataStore();
-
         public IBirdExampleService<Bird> BirdService => DependencyService.Get<IBirdExampleService<Bird>>() ?? new MockBirdExampleDataService();
+
+        public IBirdWatcherService<BirdWatcher> BirdWatcherService => DependencyService.Get<IBirdWatcherService<BirdWatcher>>() ?? new BirdWatcherDataService();
 
         bool isBusy = false;
         public bool IsBusy

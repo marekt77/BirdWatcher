@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using BirdWatcherBackend.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,7 @@ namespace BirdWatcherBackend.Controllers
             myBirdWatcher.ApplicationName = "BirdWatcher API";
             myBirdWatcher.AppVersion = Assembly.GetEntryAssembly().GetName().Version.ToString();
             myBirdWatcher.WelcomeMessage = "If you can see this you are successfuly connected to the Bird Watcher API!";
+            myBirdWatcher.ServerOS = RuntimeInformation.OSDescription;
 
             return myBirdWatcher;
         }

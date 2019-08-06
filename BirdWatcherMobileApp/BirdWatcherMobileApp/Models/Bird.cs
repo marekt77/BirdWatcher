@@ -6,7 +6,7 @@ namespace BirdWatcherMobileApp.Models
     {
         public long BirdID { get; set; }
         public string Name { get; set; }
-        public string Image { get; set; }
+        public string examplePicture { get; set; }
     }
 
     public class RootObject

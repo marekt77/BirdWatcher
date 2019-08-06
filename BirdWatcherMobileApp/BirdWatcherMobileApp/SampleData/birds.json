@@ -1,64 +1,62 @@
-{
-  "birds": [
-    {
-      "BirdID": 1,
-      "Name": "Bluejay",
-      "Image": "Bluejay.jpg"
-    },
-    {
-      "BirdID": 2,
-      "Name": "Cardinal",
-      "Image": "Northern_Cardinal.jpg"
-    },
-    {
-      "BirdID": 3,
-      "Name": "Chickadee",
-      "Image": "Chickadee.jpg"
-    },
-    {
-      "BirdID": 4,
-      "Name": "Goldfinch",
-      "Image": "American_Goldfinch.jpg"
-    },
-    {
-      "BirdID": 5,
-      "Name": "Hummingbird",
-      "Image": "Hummingbird.jpg"
-    },
-    {
-      "BirdID": 6,
-      "Name": "Mourning Dove",
-      "Image": "Mourning_Dove.jpg"
-    },
-    {
-      "BirdID": 7,
-      "Name": "Northern Flicker",
-      "Image": "Northern_Flicker.jpg"
-    },
-    {
-      "BirdID": 8,
-      "Name": "Nuthatch",
-      "Image": "Nuthatch.jpg"
-    },
-    {
-      "BirdID": 9,
-      "Name": "Sparrow",
-      "Image": "Sparrow.jpg"
-    },
-    {
-      "BirdID": 10,
-      "Name": "Titmouse",
-      "Image": "Titmouse.jpg"
-    },
-    {
-      "BirdID": 11,
-      "Name": "Towhee",
-      "Image": "Towhee.jpg"
-    },
-    {
-      "BirdID": 12,
-      "Name": "Woodpecker",
-      "Image": "Downy_Woodpecker.jpg"
-    }
-  ]
-}
+[
+  {
+    "BirdID": 1,
+    "Name": "Bluejay",
+    "examplePicture": "Bluejay.jpg"
+  },
+  {
+    "BirdID": 2,
+    "Name": "Cardinal",
+    "examplePicture": "Northern_Cardinal.jpg"
+  },
+  {
+    "BirdID": 3,
+    "Name": "Chickadee",
+    "examplePicture": "Chickadee.jpg"
+  },
+  {
+    "BirdID": 4,
+    "Name": "Goldfinch",
+    "examplePicture": "American_Goldfinch.jpg"
+  },
+  {
+    "BirdID": 5,
+    "Name": "Hummingbird",
+    "examplePicture": "Hummingbird.jpg"
+  },
+  {
+    "BirdID": 6,
+    "Name": "Mourning Dove",
+    "examplePicture": "Mourning_Dove.jpg"
+  },
+  {
+    "BirdID": 7,
+    "Name": "Northern Flicker",
+    "examplePicture": "Northern_Flicker.jpg"
+  },
+  {
+    "BirdID": 8,
+    "Name": "Nuthatch",
+    "examplePicture": "Nuthatch.jpg"
+  },
+  {
+    "BirdID": 9,
+    "Name": "Sparrow",
+    "examplePicture": "Sparrow.jpg"
+  },
+  {
+    "BirdID": 10,
+    "Name": "Titmouse",
+    "examplePicture": "Titmouse.jpg"
+  },
+  {
+    "BirdID": 11,
+    "Name": "Towhee",
+    "examplePicture": "Towhee.jpg"
+  },
+  {
+    "BirdID": 12,
+    "Name": "Woodpecker",
+    "examplePicture": "Downy_Woodpecker.jpg"
+  }
+]

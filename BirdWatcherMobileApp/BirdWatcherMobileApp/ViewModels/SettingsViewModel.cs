@@ -1,5 +1,6 @@
 ﻿using BirdWatcherMobileApp.Models;
 using BirdWatcherMobileApp.Views;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -11,8 +12,7 @@ namespace BirdWatcherMobileApp.ViewModels
         {
             Title = "Settings";
 
-            _serverIP = Settings.ServerAddress;
-            _connStatus = "Connected";
+            UpdatePageData();
 
             Navigation = _nav;
 
@@ -26,10 +26,47 @@ namespace BirdWatcherMobileApp.ViewModels
             });
         }
 
-        private void UpdatePageData()
+        private async void UpdatePageData()
         {
             ServerIP = Settings.ServerAddress;
-            ConnStatus = "Connected";
+            ConnErrorVisible = false;
+            ServerDetailsVisible = false;
+            ConnStatus = null;
+
+            TryingConnectionVisible = true;
+            if(await IsConnected())
+            {
+                TryingConnectionVisible = false;
+                ConnStatus = "Connected";
+            }
+            else
+            {
+                TryingConnectionVisible = false;
+                ConnStatus = "Not Connected";
+                ConnErrorVisible = true;
+            }
+        }
+
+        private async Task<bool> IsConnected()
+        {
+            bool isConnected = false;
+            
+            BirdWatcher serverInfo = await BirdWatcherService.GetServerInfo();
+
+            if (serverInfo.welcomeMessage != null)
+            {
+                isConnected = true;
+                ServerVersion = serverInfo.appVersion;
+                ServerOS = serverInfo.serverOS;
+                WelcomeMessage = serverInfo.welcomeMessage;
+                ServerDetailsVisible = true;
+            }
+            else
+            {
+                ConnErrorMessage = serverInfo.errorMessage;
+            }
+
+            return isConnected;
         }
 
         private string _connStatus;
@@ -43,7 +80,6 @@ namespace BirdWatcherMobileApp.ViewModels
             {
                 _connStatus = value;
                 OnPropertyChanged("ConnStatus");
-                
             }
         }
 
@@ -58,6 +94,107 @@ namespace BirdWatcherMobileApp.ViewModels
             {
                 _serverIP = value;
                 OnPropertyChanged("ServerIP");
+            }
+        }
+
+        private string _connErrorMessage;
+        public string ConnErrorMessage
+        {
+            get
+            {
+                return _connErrorMessage;
+            }
+            set
+            {
+                _connErrorMessage = value;
+                OnPropertyChanged("ConnErrorMessage");
+            }
+        }
+
+        private bool _connErrorVisible = false;
+        public bool ConnErrorVisible
+        {
+            get
+            {
+                return _connErrorVisible;
+            }
+            set
+            {
+                _connErrorVisible = value;
+                OnPropertyChanged("ConnErrorVisible");
+            }
+        }
+
+        private bool _serverDetailsVisible = false;
+        public bool ServerDetailsVisible
+        {
+            get
+            {
+                return _serverDetailsVisible;
+            }
+            set
+            {
+                _serverDetailsVisible = value;
+                OnPropertyChanged("ServerDetailsVisible");
+            }
+        }
+
+        private string _serverVersion;
+
+        public string ServerVersion
+        {
+            get
+            {
+                return _serverVersion;
+            }
+            set
+            {
+                _serverVersion = value;
+                OnPropertyChanged("ServerVersion");
+            }
+        }
+
+        private string _serverOS;
+
+        public string ServerOS
+        {
+            get
+            {
+                return _serverOS;
+            }
+            set
+            {
+                _serverOS = value;
+                OnPropertyChanged("ServerOS");
+            }
+        }
+
+        private string _welcomeMessage;
+
+        public string WelcomeMessage
+        {
+            get
+            {
+                return _welcomeMessage;
+            }
+            set
+            {
+                _welcomeMessage = value;
+                OnPropertyChanged("WelcomeMessage");
+            }
+        }
+
+        private bool _tryingConnectionVisible;
+        public bool TryingConnectionVisible
+        {
+            get
+            {
+                return _tryingConnectionVisible;
+            }
+            set
+            {
+                _tryingConnectionVisible = value;
+                OnPropertyChanged("TryingConnectionVisible");
             }
         }
 

@@ -15,9 +15,13 @@
             <Label Text="Server Details" 
                 HorizontalOptions="Start" 
                 FontSize="20" />
-            <StackLayout 
+            <StackLayout
                 Orientation="Horizontal" Margin="15,5,0,0">
                 <Label Text="Status: " FontSize="15"/>
+                <StackLayout Orientation="Horizontal" IsVisible="{Binding TryingConnectionVisible}">
+                    <Label Text="Trying connection..." FontSize="15" />
+                    <ActivityIndicator IsRunning="True" Margin="5,0,0,0" HeightRequest="5" />
+                </StackLayout>
                 <Label Text="{Binding ConnStatus, Mode=OneWay}" FontSize="15" />
             </StackLayout>
             <StackLayout Orientation="Horizontal" Margin="15,0">
@@ -29,6 +33,32 @@
                 Command="{Binding OpenSetServerAddressCommand}"
                 HorizontalOptions="CenterAndExpand" 
                 VerticalOptions="Start" />
+
+            <StackLayout 
+                Orientation="Horizontal" 
+                IsVisible="{Binding ConnErrorVisible}" 
+                Margin="5,10,0,0">
+                <Label Text="Error Message: " FontSize="15" FontAttributes="Bold"/>
+                <Label Text="{Binding ConnErrorMessage}" FontSize="15" />
+            </StackLayout>
+
+            <StackLayout
+                Orientation="Vertical"
+                IsVisible="{Binding ServerDetailsVisible}"
+                Margin="5,10,0,0">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Bird Watcher Server Version: " FontSize="15" />
+                    <Label Text="{Binding ServerVersion}" FontSize="15"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Server OS: " FontSize="15" />
+                    <Label Text="{Binding ServerOS}" FontSize="15" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Server Message: " FontSize="15" />
+                    <Label Text="{Binding WelcomeMessage}" FontSize="15" />
+                </StackLayout>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

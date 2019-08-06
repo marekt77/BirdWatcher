@@ -11,5 +11,8 @@ namespace BirdWatcherBackend.Models
         public DateTime RequestDateTime { get; set; }
         public string WelcomeMessage { get; set; }
         public string AppVersion { get; set; }
+        public string ServerOS { get; set; }
+
+
     }
 }

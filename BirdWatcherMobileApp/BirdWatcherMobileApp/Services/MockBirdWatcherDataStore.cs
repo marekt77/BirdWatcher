@@ -1,18 +1,12 @@
 ﻿using BirdWatcherMobileApp.Models;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BirdWatcherMobileApp.Services
 {
-    class MockBirdWatcherDataService
-    {
-    }
-
     class MockBirdExampleDataService : IBirdExampleService<Bird>
     {
         private async Task<List<Bird>> LoadBirds()
@@ -23,8 +17,9 @@ namespace BirdWatcherMobileApp.Services
             using (var reader = new StreamReader(stream))
             {
                 var json = await reader.ReadToEndAsync();
-                var myBirds = JsonConvert.DeserializeObject<RootObject>(json).Birds;
 
+                var myBirds = JsonConvert.DeserializeObject<List<Bird>>(json);
+               
                 return myBirds;
             }
         }
