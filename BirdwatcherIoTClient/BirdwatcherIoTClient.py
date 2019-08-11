@@ -42,7 +42,7 @@ IM_HEIGHT = 720
 bird_identified = 0
 
 #set URL of API Server:
-url = 'https://192.168.1.21/'
+url = 'http://192.168.1.21/'
 
 #set global variable to hold bird ids from database
 dbBirds = list()
@@ -111,9 +111,6 @@ num_detections = detection_graph.get_tensor_by_name('num_detections:0')
 frame_rate_calc = 1
 freq = cv2.getTickFrequency()
 font = cv2.FONT_HERSHEY_SIMPLEX
-
-def getBirdByID(ID, birds):
-    return [element for element in birds if element['id'] == ID]
 
 def bird_logger(frame, frame_expanded):
 
@@ -198,7 +195,7 @@ def sendPhoto(tmpPhotoFile):
     try:
         imageData = open(tmpPhotoFile, 'rb').read()
          
-        req = requests.post(postImageURL, headers = headers, data=imageData, cert=('/home/pi/certs/marek.crt', '/home/pi/certs/marek.key'), verify=False)
+        req = requests.post(postImageURL, headers = headers, data=imageData)
 
         if(req.status_code == 200):
             serverFileName = req.text
@@ -215,7 +212,7 @@ def sendBirdLog(data):
 
     headers = {'Content-type': 'application/json'}
     
-    req = requests.post(postLogURL, headers = headers, data=data, cert=('/home/pi/certs/marek.crt', '/home/pi/certs/marek.key'), verify=False)
+    req = requests.post(postLogURL, headers = headers, data=data)
 
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
@@ -227,7 +224,7 @@ def getBirds():
 
     print(birdsURL)
 
-    tmpData = requests.get(birdsURL, cert=('/home/pi/certs/marek.crt', '/home/pi/certs/marek.key'), verify=False)
+    tmpData = requests.get(birdsURL)
 
     if tmpData.status_code == 200:
         dbBirds = tmpData.json()

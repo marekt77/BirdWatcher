@@ -103,7 +103,7 @@ freq = cv2.getTickFrequency()
 font = cv2.FONT_HERSHEY_SIMPLEX
 
 def getBirdByID(ID, birds):
-    return [element for element in birds if element['id'] == ID]
+    return [element for element in birds if int(element['id']) == ID]
 
 def bird_logger(frame):
 
