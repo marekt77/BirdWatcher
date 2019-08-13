@@ -1,8 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using BirdWatcherMobileApp.Services;
-using BirdWatcherMobileApp.Views;
+﻿using Xamarin.Forms;
 using BirdWatcherMobileApp.Models;
 
 namespace BirdWatcherMobileApp
@@ -14,7 +10,8 @@ namespace BirdWatcherMobileApp
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
+            //Get rid of this later....
+            //DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
         }
 

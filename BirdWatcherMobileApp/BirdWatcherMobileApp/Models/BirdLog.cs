@@ -6,12 +6,13 @@ namespace BirdWatcherMobileApp.Models
 {
     public class BirdLog
     {
-        public long BirdLogID { get; set; }
-        public DateTime Timestamp { get; set; }
-        public float Temperature { get; set; }
-        public float Location_latitude { get; set; }
-        public float location_longitude { get; set; }
-        public string UserGUID { get; set; }
-        public string Picture { get; set; }
+        public int birdLogID { get; set; }
+        public DateTime timestamp { get; set; }
+        public double temperature { get; set; }
+        public double location_latitude { get; set; }
+        public double location_longitude { get; set; }
+        public string userGUID { get; set; }
+        public string picture { get; set; }
+        public List<int> birds { get; set; }
     }
 }

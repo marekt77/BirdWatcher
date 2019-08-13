@@ -29,7 +29,6 @@ namespace BirdWatcherBackend.Controllers
         public async Task<ActionResult<PagedBirdLogVM>> GetBirdLog(int page = 1, int pageSize = 100)
         {
             List<BirdLogVM> tmpBirgLogsVM = new List<BirdLogVM>();
-            List<BirdLog> tmpBirdLog = null;
 
             PagedBirdLogVM tmpPagedBirdLogVM = new PagedBirdLogVM();
            

@@ -3,14 +3,16 @@ using System.Threading.Tasks;
 
 namespace BirdWatcherMobileApp.Services
 {
-    public interface IBirdWatcherLogService<T>
+    public interface IBirdWatcherLogService<T, U>
     {
-        Task<T> GetBirdLogAsync(long id);
+        Task<U> GetBirdLogAsync(long id);
 
-        Task<IEnumerable<T>> GetBirdLogsAsync();
+        Task<T> GetBirdLogsAsync();
+
+        Task<T> GetBirdLogsAsync(int page);
     }
 
-    public interface IBirdExampleService<T>
+    public interface IKnownBirdsService<T>
     {
         Task<T> GetKnownBirdAsync(long id);
 

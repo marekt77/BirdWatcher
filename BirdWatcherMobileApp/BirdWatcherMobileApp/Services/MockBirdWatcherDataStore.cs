@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BirdWatcherMobileApp.Services
 {
-    class MockBirdExampleDataService : IBirdExampleService<Bird>
+    class MockBirdExampleDataService : IKnownBirdsService<Bird>
     {
         private async Task<List<Bird>> LoadBirds()
         {

@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
 using Xamarin.Forms;
-
 using BirdWatcherMobileApp.Models;
 using BirdWatcherMobileApp.Services;
 
@@ -12,9 +10,13 @@ namespace BirdWatcherMobileApp.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IBirdExampleService<Bird> BirdService => DependencyService.Get<IBirdExampleService<Bird>>() ?? new MockBirdExampleDataService();
+        //Local data serivce for known birds.
+        //public IKnownBirdsService<Bird> BirdService => DependencyService.Get<IKnownBirdsService<Bird>>() ?? new MockBirdExampleDataService();
+        public IKnownBirdsService<Bird> BirdService => DependencyService.Get<IKnownBirdsService<Bird>>() ?? new KnownBirdsDataService();
 
         public IBirdWatcherService<BirdWatcher> BirdWatcherService => DependencyService.Get<IBirdWatcherService<BirdWatcher>>() ?? new BirdWatcherDataService();
+
+        public IBirdWatcherLogService<BirdLogRootObject, BirdLog> BirdWatcherLogService => DependencyService.Get<IBirdWatcherLogService<BirdLogRootObject, BirdLog>>() ?? new BirdWatcherLogDataService();
 
         bool isBusy = false;
         public bool IsBusy
