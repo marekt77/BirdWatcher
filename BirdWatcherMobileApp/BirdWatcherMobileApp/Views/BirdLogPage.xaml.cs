@@ -15,6 +15,13 @@ namespace BirdWatcherMobileApp.Views
 
             BindingContext = BirdLogVM = new BirdLogViewModel();
         }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (BirdLogVM.BirdLog.Count == 0)
+                BirdLogVM.LoadBirdLogCommand.Execute(null);
+        }
 
         /*
         async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)

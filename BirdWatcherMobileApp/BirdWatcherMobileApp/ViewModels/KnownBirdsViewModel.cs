@@ -10,7 +10,19 @@ namespace BirdWatcherMobileApp.ViewModels
 {
     public class KnownBirdsViewModel : BaseViewModel
     {
-        public ObservableCollection<KnownBird> KnownBirds { get; set; }
+        private ObservableCollection<KnownBird> _knownBirds { get; set; }
+        public ObservableCollection<KnownBird> KnownBirds
+        {
+            get
+            {
+                return _knownBirds;
+            }
+            set
+            {
+                _knownBirds = value;
+                OnPropertyChanged("KnownBirds");
+            }
+        }
         public Command LoadKnownBirdsCommand { get; set; }
 
         public INavigation Navigation { get; set; }

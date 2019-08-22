@@ -7,24 +7,47 @@
              x:Class="BirdWatcherMobileApp.Views.BirdLogPage"
              Title="{Binding Title}">
   
-    <ListView x:Name="BirdLogLW"
-            ItemsSource="{Binding BirdLog}"
-            CachingStrategy="RecycleElement">
+    <ListView 
+        x:Name="BirdLogLW"
+        ItemsSource="{Binding BirdLog}"
+        IsPullToRefreshEnabled="True"
+        RefreshCommand="{Binding LoadBirdLogCommand}"
+        IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+        CachingStrategy="RecycleElement"
+        RowHeight="100">
         <ListView.ItemTemplate>
             <DataTemplate>
-                <StackLayout Orientation="Horizontal">
-                    <Image Source="{Binding Image}" HeightRequest="30" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
-                    <StackLayout Orientation="Vertical">
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="Date: " HorizontalOptions="StartAndExpand" FontAttributes="Bold" />
-                            <Label Text="{Binding Date}" />
+                <ViewCell>
+                    <Grid Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image 
+                            Grid.Column="0" 
+                            Source="{Binding LogImage}"
+                            HorizontalOptions="CenterAndExpand" 
+                            VerticalOptions="CenterAndExpand"/>
+                        <StackLayout
+                            Grid.Column="1"
+                            Orientation="Vertical" VerticalOptions="StartAndExpand" >
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Date: " HorizontalOptions="StartAndExpand" FontAttributes="Bold" />
+                                    <Label Text="{Binding LogDate}" HorizontalOptions="StartAndExpand" />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Time: " HorizontalOptions="StartAndExpand" FontAttributes="Bold" />
+                                    <Label Text="{Binding LogTime}" HorizontalOptions="StartAndExpand" />
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Number of Birds Found: " HorizontalOptions="StartAndExpand" FontAttributes="Bold" />
+                                <Label Text="{Binding BirdsFound}" HorizontalOptions="StartAndExpand" />
+                            </StackLayout>
                         </StackLayout>
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="Number of Birds Found: " HorizontalOptions="StartAndExpand" FontAttributes="Bold" />
-                            <Label Text="{Binding BirdCount}" />
-                        </StackLayout>
-                    </StackLayout>
-                </StackLayout>
+                    </Grid>
+                </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
