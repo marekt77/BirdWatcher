@@ -2,6 +2,8 @@
 using BirdWatcherMobileApp.Views;
 using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -10,8 +12,8 @@ namespace BirdWatcherMobileApp.ViewModels
 {
     public class KnownBirdsViewModel : BaseViewModel
     {
-        private ObservableCollection<KnownBird> _knownBirds { get; set; }
-        public ObservableCollection<KnownBird> KnownBirds
+        private BindingList<KnownBird> _knownBirds { get; set; }
+        public BindingList<KnownBird> KnownBirds
         {
             get
             {
@@ -37,7 +39,7 @@ namespace BirdWatcherMobileApp.ViewModels
         public KnownBirdsViewModel()
         {
             Title = "Known Birds";
-            KnownBirds = new ObservableCollection<KnownBird>();
+            KnownBirds = new BindingList<KnownBird>();
 
             LoadKnownBirdsCommand = new Command(async () => await ExecuteLoadBirdsCommand());
         }
@@ -83,6 +85,28 @@ namespace BirdWatcherMobileApp.ViewModels
 
     public class KnownBird : Bird
     {
-        public ImageSource BirdImage { get; set; }
+        private ImageSource _birdImage { get; set; }
+        public ImageSource BirdImage
+        {
+            get
+            {
+                return _birdImage;
+            }
+            set
+            {
+                _birdImage = value;
+                OnPropertyChanged("BirdImage");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+        {
+            var changed = PropertyChanged;
+            if (changed == null)
+                return;
+
+            changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

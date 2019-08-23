@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BirdWatcherMobileApp.Androi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BirdWatcherMobileApp.iOS", "BirdWatcherMobileApp\BirdWatcherMobileApp.iOS\BirdWatcherMobileApp.iOS.csproj", "{AF4C93BD-D649-47BB-8832-59E67DAA56D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BirdWatcherMobileApp", "BirdWatcherMobileApp\BirdWatcherMobileApp\BirdWatcherMobileApp.csproj", "{2A18D5FD-38ED-42BA-BE9C-0CB2F7E2F326}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BirdWatcherMobileApp", "BirdWatcherMobileApp\BirdWatcherMobileApp\BirdWatcherMobileApp.csproj", "{2A18D5FD-38ED-42BA-BE9C-0CB2F7E2F326}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

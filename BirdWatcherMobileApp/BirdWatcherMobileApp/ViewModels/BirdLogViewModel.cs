@@ -73,10 +73,23 @@ namespace BirdWatcherMobileApp.ViewModels
         
     }
 
-    public class BirdLogEntry
+    public class BirdLogEntry : BaseViewModel
     {
         public long birdLogID { get; set; }
-        public ImageSource LogImage { get; set; }
+
+        private ImageSource _logImage { get; set; }
+        public ImageSource LogImage
+        {
+            get
+            {
+                return _logImage;
+            }
+            set
+            {
+                _logImage = value;
+                OnPropertyChanged("LogImage");
+            }
+        }
 
         public string LogDate { get; set; }
 
