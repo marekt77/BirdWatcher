@@ -1,5 +1,4 @@
 ﻿using BirdWatcherMobileApp.ViewModels;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -23,9 +22,9 @@ namespace BirdWatcherMobileApp.Views
                 BirdLogVM.LoadBirdLogCommand.Execute(null);
         }
 
-        /*
-        async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
+        private void BirdLogLW_ItemTapped(object sender, ItemTappedEventArgs args)
         {
-        }*/
+            BirdLogVM.OnItemTapped(sender, args, Navigation);
+        }
     }
 }

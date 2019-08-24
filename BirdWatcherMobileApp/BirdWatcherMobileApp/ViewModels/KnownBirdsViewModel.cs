@@ -2,8 +2,6 @@
 using BirdWatcherMobileApp.Views;
 using System;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -12,8 +10,8 @@ namespace BirdWatcherMobileApp.ViewModels
 {
     public class KnownBirdsViewModel : BaseViewModel
     {
-        private BindingList<KnownBird> _knownBirds { get; set; }
-        public BindingList<KnownBird> KnownBirds
+        private ObservableCollection<KnownBird> _knownBirds { get; set; }
+        public ObservableCollection<KnownBird> KnownBirds
         {
             get
             {
@@ -27,8 +25,6 @@ namespace BirdWatcherMobileApp.ViewModels
         }
         public Command LoadKnownBirdsCommand { get; set; }
 
-        public INavigation Navigation { get; set; }
-
         public async void OnItemTapped(object sender, ItemTappedEventArgs args, INavigation myNav)
         {
             KnownBird selectedBird = args.Item as KnownBird;
@@ -39,7 +35,7 @@ namespace BirdWatcherMobileApp.ViewModels
         public KnownBirdsViewModel()
         {
             Title = "Known Birds";
-            KnownBirds = new BindingList<KnownBird>();
+            KnownBirds = new ObservableCollection<KnownBird>();
 
             LoadKnownBirdsCommand = new Command(async () => await ExecuteLoadBirdsCommand());
         }
@@ -67,7 +63,7 @@ namespace BirdWatcherMobileApp.ViewModels
                     //Change this to URL when setting this from the REST API and not the local data.
                     //tmpKB.BirdImage = ImageSource.FromResource("BirdWatcherMobileApp.SampleData.images." + tmpBird.examplePicture);
 
-                    tmpKB.BirdImage = ImageSource.FromUri(new Uri("http://" + Settings.ServerAddress + "/images/bird_examples/" + tmpBird.examplePicture));
+                    tmpKB.BirdImage = new UriImageSource { CachingEnabled = false, Uri = new Uri("http://" + Settings.ServerAddress + "/images/bird_examples/" + tmpBird.examplePicture) };
 
                     KnownBirds.Add(tmpKB);
                 }
@@ -85,28 +81,6 @@ namespace BirdWatcherMobileApp.ViewModels
 
     public class KnownBird : Bird
     {
-        private ImageSource _birdImage { get; set; }
-        public ImageSource BirdImage
-        {
-            get
-            {
-                return _birdImage;
-            }
-            set
-            {
-                _birdImage = value;
-                OnPropertyChanged("BirdImage");
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
-        {
-            var changed = PropertyChanged;
-            if (changed == null)
-                return;
-
-            changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        public ImageSource BirdImage { get; set; }
     }
 }

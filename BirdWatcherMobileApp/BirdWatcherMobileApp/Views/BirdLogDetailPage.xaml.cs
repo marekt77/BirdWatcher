@@ -1,9 +1,4 @@
 ﻿using BirdWatcherMobileApp.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -14,11 +9,11 @@ namespace BirdWatcherMobileApp.Views
     public partial class BirdLogDetailPage : ContentPage
     {
         BirdLogDetailViewModel BirdLogDetailVM;
-        public BirdLogDetailPage()
+        public BirdLogDetailPage( BirdLogDetailViewModel tmpBirdLogDetailVM)
         {
             InitializeComponent();
 
-            BindingContext = BirdLogDetailVM = new BirdLogDetailViewModel(Navigation);
+            BindingContext = this.BirdLogDetailVM = tmpBirdLogDetailVM;
 
         }
     }

@@ -13,6 +13,7 @@
         IsPullToRefreshEnabled="True"
         RefreshCommand="{Binding LoadBirdLogCommand}"
         IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+        ItemTapped="BirdLogLW_ItemTapped"
         CachingStrategy="RecycleElement"
         RowHeight="100">
         <ListView.ItemTemplate>

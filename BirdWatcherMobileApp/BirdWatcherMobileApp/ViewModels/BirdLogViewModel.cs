@@ -1,4 +1,5 @@
 ﻿using BirdWatcherMobileApp.Models;
+using BirdWatcherMobileApp.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -37,7 +38,8 @@ namespace BirdWatcherMobileApp.ViewModels
                     tmpBLE.LogTime = tmpBirdLog.timestamp.ToString("hh:mm tt");
                     if(!String.IsNullOrEmpty(tmpBirdLog.picture))
                     {
-                        tmpBLE.LogImage = ImageSource.FromUri(new Uri("http://" + Settings.ServerAddress + "/images/captured/" + tmpBirdLog.picture));
+                        //tmpBLE.LogImage = ImageSource.FromUri(new Uri("http://" + Settings.ServerAddress + "/images/captured/" + tmpBirdLog.picture));
+                        tmpBLE.LogImage = new UriImageSource { CachingEnabled = false, Uri = new Uri("http://" + Settings.ServerAddress + "/images/captured/" + tmpBirdLog.picture) };
                     }
 
                     BirdLog.Add(tmpBLE);
@@ -56,7 +58,13 @@ namespace BirdWatcherMobileApp.ViewModels
 
         public Command LoadBirdLogCommand { get; set; }
 
-        public INavigation Navigation { get; set; }
+        public async void OnItemTapped(object sender, ItemTappedEventArgs args, INavigation myNav)
+        {
+
+            BirdLogEntry selectedBirdLog = args.Item as BirdLogEntry;
+
+            await myNav.PushAsync(new BirdLogDetailPage(new BirdLogDetailViewModel(selectedBirdLog.birdLogID)));
+        }
 
         private ObservableCollection<BirdLogEntry> _birdLog { get; set; }
         public ObservableCollection<BirdLogEntry> BirdLog {
@@ -73,23 +81,11 @@ namespace BirdWatcherMobileApp.ViewModels
         
     }
 
-    public class BirdLogEntry : BaseViewModel
+    public class BirdLogEntry
     {
         public long birdLogID { get; set; }
 
-        private ImageSource _logImage { get; set; }
-        public ImageSource LogImage
-        {
-            get
-            {
-                return _logImage;
-            }
-            set
-            {
-                _logImage = value;
-                OnPropertyChanged("LogImage");
-            }
-        }
+        public ImageSource LogImage { get;set; }
 
         public string LogDate { get; set; }
 
