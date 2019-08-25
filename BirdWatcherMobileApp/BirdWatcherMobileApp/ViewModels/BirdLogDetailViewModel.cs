@@ -35,13 +35,61 @@ namespace BirdWatcherMobileApp.ViewModels
 
         }
 
-        public ImageSource LogImage { get; set; }
+        private ImageSource _logImage;
+        public ImageSource LogImage
+        {
+            get
+            {
+                return _logImage;
+            }
+            set
+            {
+                _logImage = value;
+                OnPropertyChanged("LogImage");
+            }
+        }
 
-        public string LogDate { get; set; }
+        private string _logDate;
+        public string LogDate
+        {
+            get
+            {
+                return _logDate;
+            }
+            set
+            {
+                _logDate = value;
+                OnPropertyChanged("LogDate");
+            }
+        }
 
-        public string LogTime { get; set; }
+        private string _logTime;
+        public string LogTime
+        {
+            get
+            {
+                return _logTime;
+            }
+            set
+            {
+                _logTime = value;
+                OnPropertyChanged("LogTime");
+            }
+        }
 
-        public string LogTemp { get; set; }
+        private string _logTemp;
+        public string LogTemp
+        {
+            get
+            {
+                return _logTemp;
+            }
+            set
+            {
+                _logTemp = value;
+                OnPropertyChanged("LogTemp");
+            }
+        }
 
         private List<string> _birdsFound { get; set; }
         public List<string> BirdsFound

@@ -36,7 +36,7 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <Label Text="{Binding BirdsFound}" />
+                                    <Label Text="{Binding}" />
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
@@ -45,11 +45,20 @@
                 <StackLayout
                     Grid.Column="1"
                     Orientation="Vertical">
-                    
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Date: " FontAttributes="Bold" />
+                        <Label Text="{Binding LogDate}" HorizontalOptions="StartAndExpand" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Time: " FontAttributes="Bold" />
+                        <Label Text="{Binding LogTime}" HorizontalOptions="StartAndExpand" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Temp: " FontAttributes="Bold" />
+                        <Label Text="{Binding LogTemp}" />
+                    </StackLayout>
                 </StackLayout>
             </Grid>
-            
         </Grid>
-            
     </ContentPage.Content>
 </ContentPage>
