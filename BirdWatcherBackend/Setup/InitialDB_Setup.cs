@@ -29,6 +29,7 @@ namespace BirdWatcherBackend.Setup
                 {
                     Bird tmpBird = new Bird();
                     tmpBird.Name = tmpEB.name;
+                    tmpBird.DisplayName = tmpEB.displayname;
                     tmpBird.ExamplePicture = tmpEB.image;
 
                     context.Add(tmpBird);

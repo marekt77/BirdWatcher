@@ -8,6 +8,7 @@ namespace BirdWatcherBackend.Models
         [Key]
         public long BirdID { get; set; }
         public string Name { get; set; }
+        public string DisplayName { get; set; }
         public string ExamplePicture { get; set; }
         public ICollection<BirdLogBird> BirdLogBird { get; set; }
     }

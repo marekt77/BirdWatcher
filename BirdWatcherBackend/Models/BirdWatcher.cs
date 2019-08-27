@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BirdWatcherBackend.Models
 {
@@ -12,7 +9,5 @@ namespace BirdWatcherBackend.Models
         public string WelcomeMessage { get; set; }
         public string AppVersion { get; set; }
         public string ServerOS { get; set; }
-
-
     }
 }
