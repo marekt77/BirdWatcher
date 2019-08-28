@@ -35,7 +35,14 @@ namespace BirdWatcherMobileApp.ViewModels
 
                     tmpBLE.birdLogID = tmpBirdLog.birdLogID;
                     tmpBLE.LogDate = tmpBirdLog.timestamp.ToString("MM/dd/yyyy");
-                    tmpBLE.LogTime = tmpBirdLog.timestamp.ToString("hh:mm tt");
+                    if(Settings.Use24Hour)
+                    {
+                        tmpBLE.LogTime = tmpBirdLog.timestamp.ToString("HH:mm");
+                    }
+                    else
+                    {
+                        tmpBLE.LogTime = tmpBirdLog.timestamp.ToString("hh:mm tt");
+                    }
                     if(!String.IsNullOrEmpty(tmpBirdLog.picture))
                     {
                         //tmpBLE.LogImage = ImageSource.FromUri(new Uri("http://" + Settings.ServerAddress + "/images/captured/" + tmpBirdLog.picture));

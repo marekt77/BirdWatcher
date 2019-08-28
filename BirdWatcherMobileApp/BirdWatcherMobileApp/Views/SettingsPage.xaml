@@ -12,9 +12,24 @@
             Orientation="Vertical" 
             VerticalOptions="StartAndExpand" 
             Margin="5,0,0,0">
+            <Label Text="App Settings" 
+                HorizontalOptions="Start"
+                FontSize="20" />
+            <StackLayout
+                Margin="15,5,0,0"
+                Orientation="Horizontal">
+                <Label Text="Use Metric: " FontSize="15" />
+                <Switch HorizontalOptions="Start" IsToggled="{Binding UseMetric}"/>
+            </StackLayout>
+            <StackLayout
+                Margin="15,5,0,0"
+                Orientation="Horizontal">
+                <Label Text="Use 24 Hour: " FontSize="15" />
+                <Switch HorizontalOptions="Start" IsToggled="{Binding Use24Hour}"/>
+            </StackLayout>
             <Label Text="Server Details" 
                 HorizontalOptions="Start" 
-                FontSize="20" />
+                FontSize="20" Margin="0,10,0,0" />
             <StackLayout
                 Orientation="Horizontal" Margin="15,5,0,0">
                 <Label Text="Status: " FontSize="15"/>

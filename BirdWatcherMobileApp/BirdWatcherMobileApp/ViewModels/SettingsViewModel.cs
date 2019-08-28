@@ -97,6 +97,32 @@ namespace BirdWatcherMobileApp.ViewModels
             }
         }
 
+        public bool UseMetric
+        {
+            get
+            {
+                return Settings.UseMetric;
+            }
+            set
+            {
+                Settings.UseMetric = value;
+                OnPropertyChanged("UseMetric");
+            }
+        }
+
+        public bool Use24Hour
+        {
+            get
+            {
+                return Settings.Use24Hour;
+            }
+            set
+            {
+                Settings.Use24Hour = value;
+                OnPropertyChanged("Use24Hour");
+            }
+        }
+
         private string _connErrorMessage;
         public string ConnErrorMessage
         {

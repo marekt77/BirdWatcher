@@ -17,10 +17,26 @@ namespace BirdWatcherMobileApp.ViewModels
         {
             var birdLog = await BirdWatcherLogService.GetBirdLogAsync(birdLogID);
 
+            if(Settings.UseMetric)
+            {
 
-            LogTemp = birdLog.temperature.ToString();
+                LogTemp = birdLog.temperature.ToString() + "C";
+            }
+            else
+            {
+                LogTemp = ConvertCelsiusToFahrenheit(birdLog.temperature).ToString() + "F";
+            }
+
             LogDate = birdLog.timestamp.ToString("MM/dd/yyyy");
-            LogTime = birdLog.timestamp.ToString("hh:mm tt");
+
+            if (Settings.Use24Hour)
+            {
+                LogTime = birdLog.timestamp.ToString("HH:mm");
+            }
+            else
+            {
+                LogTime = birdLog.timestamp.ToString("hh:mm tt");
+            }
 
             if (!String.IsNullOrEmpty(birdLog.picture))
             {
@@ -103,6 +119,11 @@ namespace BirdWatcherMobileApp.ViewModels
                 _birdsFound = value;
                 OnPropertyChanged("BirdsFound");
             }
+        }
+
+        private double ConvertCelsiusToFahrenheit(double c)
+        {
+            return ((9.0 / 5.0) * c) + 32;
         }
     }
 }
