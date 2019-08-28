@@ -24,7 +24,7 @@
                         <StackLayout Orientation="Vertical" Margin="10" HeightRequest="125">
                             <Image Source="{Binding BirdImage, Mode=OneWay}" HeightRequest="100" />
                             <Label 
-                                Text="{Binding Name}" 
+                                Text="{Binding displayName}" 
                                 FontSize="16" 
                                 HorizontalTextAlignment="Center"
                                 VerticalTextAlignment="Start"

@@ -17,7 +17,7 @@
                 VerticalOptions="StartAndExpand"/>
             <Label 
                 Margin="5" 
-                Text="{Binding knownBird.Name}" 
+                Text="{Binding knownBird.displayName}" 
                 FontSize="25" 
                 HorizontalOptions="StartAndExpand" />
         </StackLayout>

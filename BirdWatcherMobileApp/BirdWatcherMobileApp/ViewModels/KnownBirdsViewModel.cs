@@ -59,6 +59,7 @@ namespace BirdWatcherMobileApp.ViewModels
                     tmpKB.BirdID = tmpBird.BirdID;
                     tmpKB.Name = tmpBird.Name;
                     tmpKB.examplePicture = tmpBird.examplePicture;
+                    tmpKB.displayName = tmpBird.displayName;
 
                     //Change this to URL when setting this from the REST API and not the local data.
                     //tmpKB.BirdImage = ImageSource.FromResource("BirdWatcherMobileApp.SampleData.images." + tmpBird.examplePicture);
