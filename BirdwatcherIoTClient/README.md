@@ -6,10 +6,9 @@
 
 Go to Interface Options:
 
-*Enable the PiCamera interface.
-*Enable P7 1-Wire
-*Enable P4 SPI
-
+* Enable the PiCamera interface.
+* Enable P7 1-Wire
+* Enable P4 SPI
 
 Save and Exit. (A reboot maybe required)
 
