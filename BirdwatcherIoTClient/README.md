@@ -143,6 +143,7 @@ We are done!  Protobuf should be installed on your raspberry pi.  Verify that it
 ### Compile the Protocol Buffer files:
 
 `cd /home/pi/tensorflow1/models/research`
+
 `protoc object_detection/protos/*.proto --python_out=.`
 
 ### Setup the Tensorflow Directory Structure
@@ -161,6 +162,6 @@ Now we are going to download the tensorflow models repository from GitHub:
 
 `sudo nano ~/.bashrc`
 
-Add this line to the end of the file (Note: Replace <yourUserName> with your username):
+Add this line to the end of the file (**Note: Replace <yourUserName> with your username**):
 
 `export PYTHONPATH=$PYTHONPATH:/home/<yourUsername>/tensorflow13/models/research:/home/<yourUsername>/tensorflow13/models/research/slim`
