@@ -6,11 +6,13 @@
 
 Go to Interface Options:
 
-    *Enable the PiCamera interface.
-    *Enable P7 1-Wire
-    *Enable P4 SPI 
+```
+*Enable the PiCamera interface.
+*Enable P7 1-Wire
+*Enable P4 SPI
+```
 
-Save and Exit.  (A reboot maybe required)
+Save and Exit. (A reboot maybe required)
 
 ### Install Git:
 
@@ -33,7 +35,7 @@ If that does not work you can download the wheel file manually:
 
 Go [here](https://github.com/lhelontra/tensorflow-on-arm/releases)
 
-Download the latest version.  (As of this writing I was using version 13)
+Download the latest version. (As of this writing I was using version 13)
 
 `wget https://github.com/lhelontra/tensorflow-on-arm/releases/download/v1.13.1/tensorflow-1.13.1-cp35-none-linux_armv7l.whl`
 
@@ -60,7 +62,7 @@ Then run the installer:
 
 `sudo apt-get install qt4-dev-tools`
 
-`pip3 install opencv-python` 
+`pip3 install opencv-python`
 
 ### Install Python libraries for BirdWatcher:
 
@@ -99,15 +101,15 @@ Configure the build:
 
 `./configure`
 
-We will not build the package.  **Note: This step will take a LONG time to complete.  About 60min or so.**
+We will not build the package. **Note: This step will take a LONG time to complete. About 60min or so.**
 
 `make`
 
-Once that step is complete, run:  **Note: This step will take longer than the previosus one.**
+Once that step is complete, run: **Note: This step will take longer than the previosus one.**
 
 `make check`
 
-**Note: There maybe some errors during this process.  Most likely everything is fine and protobuf will still run.
+**Note: There maybe some errors during this process. Most likely everything is fine and protobuf will still run.
 
 Next we issue the following:
 
@@ -136,7 +138,7 @@ Finally run:
 
 `sudo ldconfig`
 
-We are done!  Protobuf should be installed on your raspberry pi.  Verify that it is working by running:
+We are done! Protobuf should be installed on your raspberry pi. Verify that it is working by running:
 
 `protoc`
 
@@ -148,7 +150,7 @@ We are done!  Protobuf should be installed on your raspberry pi.  Verify that it
 
 ### Setup the Tensorflow Directory Structure
 
-Create the `Tensorflow` directory in your home directory, from where the BirdWatcher App will run and Live.  In your home directory type: **Note: I chose tensorflow13 because that is the version of tensorflow that this project was built to support**
+Create the `Tensorflow` directory in your home directory, from where the BirdWatcher App will run and Live. In your home directory type: **Note: I chose tensorflow13 because that is the version of tensorflow that this project was built to support**
 
 `mkdir tensorflow13`
 
@@ -162,6 +164,7 @@ Now we are going to download the tensorflow models repository from GitHub:
 
 `sudo nano ~/.bashrc`
 
-Add this line to the end of the file (**Note: Replace <yourUserName> with your username**):
+Add this line to the end of the file (**Note: Replace `<yourUserName>` with your username**):
 
+<br>
 `export PYTHONPATH=$PYTHONPATH:/home/<yourUsername>/tensorflow13/models/research:/home/<yourUsername>/tensorflow13/models/research/slim`
