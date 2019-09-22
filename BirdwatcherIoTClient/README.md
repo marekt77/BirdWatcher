@@ -1,10 +1,24 @@
 # Birdwatcher IoT Client - BirdWatcher
 
-### Enable Camera
+### Enable Camera, One-Wire Interface and SPI:
 
 `sudo raspi-config`
 
-Go to interface options, and enable the PiCamera interface.  Save and Exit.
+Go to Interface Options:
+
+    *Enable the PiCamera interface.
+    *Enable P7 1-Wire
+    *Enable P4 SPI 
+
+Save and Exit.  (A reboot maybe required)
+
+### Install Git:
+
+`sudo apt-get install git`
+
+### Install PiP for Python3:
+
+`sudo apt-get install python3-pip`
 
 ### Install Tensorflow
 
@@ -27,9 +41,14 @@ Then run the installer:
 
 `sudo pip3 install ~/tf/tensorflow-1.13.1-cp35-none-linux_armv7l.whl`
 
+### Install LibAtlas Package:
+
+`sudo apt-get install libatlas-base-dev`
+
 ### Install Object Detection Dependencies:
 
 `sudo pip3 install pillow lxml jupyter matplotlib cython contextlib2`
+`sudo apt-get install python-tk`
 
 ### Install OpenCV:
 
@@ -42,6 +61,16 @@ Then run the installer:
 `sudo apt-get install qt4-dev-tools`
 
 `pip3 install opencv-python` 
+
+### Install Python libraries for BirdWatcher:
+
+`pip3 install adafruit-circuitpython-lis3dh`
+
+`sudo pip3 install adafruit-circuitpython-mcp3xxx`
+
+`sudo pip3 install jsonpickle`
+
+`sudo pip3 install W1ThermSensor`
 
 ### Compile and Install Protobuf
 
@@ -111,7 +140,12 @@ We are done!  Protobuf should be installed on your raspberry pi.  Verify that it
 
 `protoc`
 
-### Setup the Tensorflow Directory Structure and PYTHONPATH Variable
+### Compile the Protocol Buffer files:
+
+`cd /home/pi/tensorflow1/models/research`
+`protoc object_detection/protos/*.proto --python_out=.`
+
+### Setup the Tensorflow Directory Structure
 
 Create the `Tensorflow` directory in your home directory, from where the BirdWatcher App will run and Live.  In your home directory type: **Note: I chose tensorflow13 because that is the version of tensorflow that this project was built to support**
 
@@ -122,3 +156,11 @@ Create the `Tensorflow` directory in your home directory, from where the BirdWat
 Now we are going to download the tensorflow models repository from GitHub:
 
 `git clone --recurse-submodules https://github.com/tensorflow/models.git`
+
+### Set the PYTHONPATH for Tensorflow:
+
+`sudo nano ~/.bashrc`
+
+Add this line to the end of the file (Note: Replace <yourUserName> with your username):
+
+`export PYTHONPATH=$PYTHONPATH:/home/<yourUsername>/tensorflow13/models/research:/home/<yourUsername>/tensorflow13/models/research/slim`
