@@ -18,6 +18,8 @@ This project is built to run on three Raspberry Pi 3b+ computers.  They are orga
 
 All three modules are running on the Raspian, and the document contains the instructions on how to install and configure the base image for use in all three.
 
+Instructions on building the BirdWatcher Device can be found in the project's [Wiki](https://github.com/marekt77/BirdWatcher/wiki). 
+
 ---
 
 ## Installing and Configuring
