@@ -8,7 +8,7 @@ Fast forward to today, and this is the result of that idea.  After much time lea
 
 About 90% of the project is written in C# and runs on .Net Core 2.2, the Object Detection part that runs on the Raspberry Pi is written in Python.  
 
-Why C#? Well I was able to use one language for 90% of the project from the backend API to the end user apps that are written in Xamarin and target iOS, Android, and Windows 10 (UWP).
+Why C#? Well I was able to use one language for 90% of the project from the backend API to the end user apps that are written in Xamarin and target iOS, and Android. A Windows UWP version is coming soon.
 
 This project is built to run on three Raspberry Pi 3b+ computers.  They are organized as follows:
 
