@@ -62,6 +62,9 @@ Then run the installer:
 
 `pip3 install opencv-python`
 
+**NOTE: The latest version of opencv does not work, for now, use this command instead:**
+`pip3 install opencv-python==3.4.6.27`
+
 ### Install Python libraries for BirdWatcher:
 
 `pip3 install adafruit-circuitpython-lis3dh`
@@ -74,7 +77,41 @@ Then run the installer:
 
 ### Compile and Install Protobuf
 
-*verify that this works: `sudo apt install python3-protobuf`
+Run this command:
+`sudo apt-get install protobuf-compiler`
+
+We are done! Protobuf should be installed on your raspberry pi. Verify that it is working by running:
+
+`protoc`
+
+### Compile the Protocol Buffer files:
+
+`cd /home/pi/tensorflow1/models/research`
+
+`protoc object_detection/protos/*.proto --python_out=.`
+
+### Setup the Tensorflow Directory Structure
+
+Create the `Tensorflow` directory in your home directory, from where the BirdWatcher App will run and Live. In your home directory type: **Note: I chose tensorflow13 because that is the version of tensorflow that this project was built to support**
+
+`mkdir tensorflow13`
+
+`cd tensorflow13`
+
+Now we are going to download the tensorflow models repository from GitHub:
+
+`git clone --recurse-submodules https://github.com/tensorflow/models.git`
+
+### Set the PYTHONPATH for Tensorflow:
+
+`sudo nano ~/.bashrc`
+
+Add this line to the end of the file (**Note: Replace `<yourUserName>` with your username**):
+
+`export PYTHONPATH=$PYTHONPATH:/home/<yourUsername>/tensorflow13/models/research:/home/<yourUsername>/tensorflow13/models/research/slim`
+
+
+## Old Protobuf installation:
 
 Sice there is no Protobuf package available for the Raspberry Pi, we have to download and compile it from the source manually.
 
@@ -136,32 +173,3 @@ Finally run:
 
 `sudo ldconfig`
 
-We are done! Protobuf should be installed on your raspberry pi. Verify that it is working by running:
-
-`protoc`
-
-### Compile the Protocol Buffer files:
-
-`cd /home/pi/tensorflow1/models/research`
-
-`protoc object_detection/protos/*.proto --python_out=.`
-
-### Setup the Tensorflow Directory Structure
-
-Create the `Tensorflow` directory in your home directory, from where the BirdWatcher App will run and Live. In your home directory type: **Note: I chose tensorflow13 because that is the version of tensorflow that this project was built to support**
-
-`mkdir tensorflow13`
-
-`cd tensorflow13`
-
-Now we are going to download the tensorflow models repository from GitHub:
-
-`git clone --recurse-submodules https://github.com/tensorflow/models.git`
-
-### Set the PYTHONPATH for Tensorflow:
-
-`sudo nano ~/.bashrc`
-
-Add this line to the end of the file (**Note: Replace `<yourUserName>` with your username**):
-
-`export PYTHONPATH=$PYTHONPATH:/home/<yourUsername>/tensorflow13/models/research:/home/<yourUsername>/tensorflow13/models/research/slim`
