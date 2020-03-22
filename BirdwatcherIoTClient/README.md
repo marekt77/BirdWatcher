@@ -110,6 +110,7 @@ Add this line to the end of the file (**Note: Replace `<yourUserName>` with your
 
 `export PYTHONPATH=$PYTHONPATH:/home/<yourUsername>/tensorflow13/models/research:/home/<yourUsername>/tensorflow13/models/research/slim`
 
+---
 
 ## Old Protobuf installation:
 
