@@ -195,7 +195,7 @@ namespace BirdWatcherBackend.Controllers
                     fileType = ".gif";
                     break;
                 default:
-                    fileType = "jpg";
+                    fileType = ".jpg";
                     break;
             }
 

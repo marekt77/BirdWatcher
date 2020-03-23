@@ -1,9 +1,7 @@
-
-######## Raspberry Pi Bird Identifier using TensorFlow Object Detection API #########
-#
+#####
+# New Bird Watcher IoT Client
+# Date: March 22nd 2020
 # Author: Marek Tyrpa
-# Date: 05/22/2019
-# Description:
 #
 # This program will attempt to identify 12 common species of birds in the 
 # US Midwest, and will send a positive ID to the BirdwatcherBackEnd API.
@@ -11,6 +9,7 @@
 #
 # The framework is based off the Object_detection_picamera.py script located here:
 # https://github.com/EdjeElectronics/TensorFlow-Object-Detection-on-the-Raspberry-Pi/blob/master/Object_detection_picamera.py
+#####
 
 # Import packages
 import os
@@ -30,9 +29,15 @@ import datetime
 import time
 
 # Import my sensor libraries:
-#from Temperature import Temperature
-#from photoresistorValue import photoresistorValue
-from BirdLog import BirdLog
+from Temperature import Temperature
+from photoresistorValue import photoresistorValue
+
+# This is needed since the working directory is the object_detection folder.
+sys.path.append('..')
+
+# Import utilites
+from utils import label_map_util
+from utils import visualization_utils as vis_util
 
 # Set up camera constants
 IM_WIDTH = 1280
@@ -47,25 +52,19 @@ url = 'http://192.168.1.21/'
 #set global variable to hold bird ids from database
 dbBirds = list()
 
-# This is needed since the working directory is the object_detection folder.
-sys.path.append('..')
-
-# Import utilites
-from utils import label_map_util
-from utils import visualization_utils as vis_util
-
-# Name of the directory containing the object detection module we're using
-MODEL_NAME = 'ssd_mobilenet_v2_coco_2018_03_29'
-
 # Grab path to current working directory
 CWD_PATH = os.getcwd()
 
 # Path to frozen detection graph .pb file, which contains the model that is used
 # for object detection.
-PATH_TO_CKPT = os.path.join(CWD_PATH,"frozen_graphs","ssd_mobilenet_v2_coco_2018_03_29",'frozen_inference_graph.pb')
+#PATH_TO_CKPT = os.path.join(CWD_PATH,"frozen_graphs","ssd_mobilenet_v2_coco_2018_03_29",'frozen_inference_graph.pb')
+PATH_TO_CKPT = os.path.join(CWD_PATH,"model",'frozen_inference_graph.pb')
 
 # Path to label map file
 PATH_TO_LABELS = os.path.join(CWD_PATH,'labelmap','birds_labelmap.pbtxt')
+
+# Path to tmp image folder
+PATH_TO_TEMP_IMAGES = os.path.expanduser('~') + "/BirdWatcher/tmpImages/"
 
 # Number of classes the object detector can identify
 NUM_CLASSES = 12
@@ -82,13 +81,13 @@ category_index = label_map_util.create_category_index(categories)
 # Load the Tensorflow model into memory.
 detection_graph = tf.Graph()
 with detection_graph.as_default():
-    od_graph_def = tf.GraphDef()
-    with tf.gfile.GFile(PATH_TO_CKPT, 'rb') as fid:
+    od_graph_def = tf.compat.v1.GraphDef()
+    with tf.io.gfile.GFile(PATH_TO_CKPT, 'rb') as fid:
         serialized_graph = fid.read()
         od_graph_def.ParseFromString(serialized_graph)
         tf.import_graph_def(od_graph_def, name='')
 
-    sess = tf.Session(graph=detection_graph)
+    sess = tf.compat.v1.Session(graph=detection_graph)
 
 # Define input and output tensors (i.e. data) for the object detection classifier
 
@@ -146,16 +145,16 @@ def bird_logger(frame, frame_expanded):
         print("Image ID: " + str(int(classes[0][0])))
         
         #save image:
-        tmpFilePath = '/home/pi/images/' + id_generator() + '.png'
+        tmpImagePath = PATH_TO_TEMP_IMAGES + id_generator() + '.png'
 
         #save image as tmp file...
-        cv2.imwrite(tmpFilePath, frame)
+        cv2.imwrite(tmpImagePath, frame)
 
         #Send image that was captured
-        serverFileName = sendPhoto(tmpFilePath)
+        serverFileName = sendPhoto(tmpImagePath)
 
         #remove temp image.
-        os.remove(tmpFilePath)
+        #os.remove(tmpImagePath)
 
         birdList = []
         #iterate through birds found in image
@@ -169,6 +168,7 @@ def bird_logger(frame, frame_expanded):
         #temp = Temperature()
         temp = 26.34
 
+        #Commented out for testing and not running on actual hardware.
         #data = BirdLog(datetime.datetime.now(), temp.getTemperature(), serverFileName, 0.0,0.0,'', birdList)
         data = BirdLog(datetime.datetime.now(), temp, serverFileName, 0.0,0.0,'', birdList)
         
@@ -206,7 +206,7 @@ def sendPhoto(tmpPhotoFile):
         print("something bad happened", Argument)
 
     return serverFileName
-        
+
 def sendBirdLog(data):
     postLogURL = url + 'api/BirdLogs'
 
@@ -276,7 +276,7 @@ class RunCamera(threading.Thread):
                     cv2.putText(frame,"FPS: {0:.2f}".format(frame_rate_calc),(30,50),font,1,(255,255,0),2,cv2.LINE_AA)
 
                     # All the results have been drawn on the frame, so it's time to display it.
-                    cv2.imshow('Object detector', frame)
+                    #cv2.imshow('Object detector', frame)
 
                     t2 = cv2.getTickCount()
                     time1 = (t2-t1)/freq
@@ -292,6 +292,17 @@ class RunCamera(threading.Thread):
         self.paused = False
         self.pause_cond.notify()
         self.pause_cond.release()
+
+class BirdLog:
+    
+    def __init__(self, Timestamp, Temperature, Picture, Location_Latitude, Location_Longitude, UserGUID, Birds):
+        self.Timestamp = Timestamp
+        self.Temperature = Temperature
+        self.Picture = Picture
+        self.Location_Latitude = Location_Latitude
+        self.Location_Longitude = Location_Longitude
+        self.UserGUID = UserGUID
+        self.Birds = Birds
 
 def main():
     #light = photoresistorValue()
