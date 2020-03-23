@@ -1,4 +1,4 @@
-#####
+#######################################################
 # New Bird Watcher IoT Client
 # Date: March 22nd 2020
 # Author: Marek Tyrpa
@@ -9,7 +9,7 @@
 #
 # The framework is based off the Object_detection_picamera.py script located here:
 # https://github.com/EdjeElectronics/TensorFlow-Object-Detection-on-the-Raspberry-Pi/blob/master/Object_detection_picamera.py
-#####
+########################################################
 
 # Import packages
 import os
