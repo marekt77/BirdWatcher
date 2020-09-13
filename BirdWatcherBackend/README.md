@@ -157,7 +157,13 @@ RaspSQL is now configured and ready to for use in this project.
 
 #### Install Docker
 
-`sudo apt-get install docker-ce`
+Download the installation Script:
+
+`curl -fsSL https://get.docker.com -o get-docker.sh`
+
+Run the script:
+
+`sudo sh get-docker.sh`
 
 Now we are going to add our user to the *docker* group, so we can run the docker command without *sudo*
 
