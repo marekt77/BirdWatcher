@@ -21,7 +21,7 @@ namespace BirdWatcherBackend
                 try
                 {
                     var context = services.GetRequiredService<BirdWatcherContext>();
-                    var env = services.GetRequiredService<IHostingEnvironment>();
+                    var env = services.GetRequiredService<IWebHostEnvironment>();
                     InitialDB_Setup.SeedDB(context, env);
                 }
                 catch (Exception ex)

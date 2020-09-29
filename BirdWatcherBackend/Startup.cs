@@ -5,6 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using Pomelo.EntityFrameworkCore.MySql.Internal;
+using Pomelo.EntityFrameworkCore.MySql.Storage;
+using System;
 
 namespace BirdWatcherBackend
 {
@@ -20,20 +25,26 @@ namespace BirdWatcherBackend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services
+                .AddControllers()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddDbContext<BirdWatcherContext>(options =>
                 //MySQL Context
-                //options.UseMySQL(Configuration.GetSection("ConnectionStrings:devMySQLConnection").Value
+                options.UseMySql(Configuration.GetSection("ConnectionStrings:devMySQLConnection").Value,
+                MySqlOptions =>
+                    MySqlOptions.ServerVersion(new ServerVersion(new Version(10, 1, 44), ServerType.MariaDb)))
                 //Using Postgre instead of MySQL
                 //options.UseNpgsql(Configuration.GetSection("ConnectionStrings:devPostgreConnection").Value
                 //North:
-                options.UseNpgsql(Configuration.GetSection("ConnectionStrings:wisPostgreConnection").Value
-            ));
+                //options.UseNpgsql(Configuration.GetSection("ConnectionStrings:wisPostgreConnection").Value
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, BirdWatcherContext context)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, BirdWatcherContext context)
         {
             if (env.IsDevelopment())
             {
@@ -47,7 +58,12 @@ namespace BirdWatcherBackend
 
             app.UseStaticFiles();
             app.UseHttpsRedirection();
-            app.UseMvc();
+
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }

@@ -16,9 +16,9 @@ namespace BirdWatcherBackend.Controllers
     public class BirdLogsController : ControllerBase
     {
         private readonly BirdWatcherContext _context;
-        private readonly IHostingEnvironment _env;
+        private readonly IWebHostEnvironment _env;
 
-        public BirdLogsController(BirdWatcherContext context, IHostingEnvironment env)
+        public BirdLogsController(BirdWatcherContext context, IWebHostEnvironment env)
         {
             _context = context;
             _env = env;

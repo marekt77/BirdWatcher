@@ -8,7 +8,7 @@ namespace BirdWatcherBackend.Setup
 {
     public static class InitialDB_Setup
     {
-        public static void SeedDB(BirdWatcherContext context, IHostingEnvironment env)
+        public static void SeedDB(BirdWatcherContext context, IWebHostEnvironment env)
         {
             context.Database.EnsureCreated();
 
