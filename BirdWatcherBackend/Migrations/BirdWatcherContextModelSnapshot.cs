@@ -81,7 +81,7 @@ namespace BirdWatcherBackend.Migrations
                     b.ToTable("BirdLogBird");
                 });
 
-            modelBuilder.Entity("BirdWatcherBackend.Models.devTempLight", b =>
+            modelBuilder.Entity("BirdWatcherBackend.Models.SunTrack", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -98,7 +98,7 @@ namespace BirdWatcherBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("devTempLight");
+                    b.ToTable("SunTrack");
                 });
 
             modelBuilder.Entity("BirdWatcherBackend.Models.BirdLogBird", b =>

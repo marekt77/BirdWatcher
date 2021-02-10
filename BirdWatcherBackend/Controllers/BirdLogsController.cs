@@ -212,6 +212,7 @@ namespace BirdWatcherBackend.Controllers
             catch(Exception ex)
             {
                 //Todo log error
+                Console.WriteLine($"Error: {ex.Message}");
                 return StatusCode(500);
             }
 
