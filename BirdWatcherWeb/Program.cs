@@ -20,6 +20,7 @@ namespace BirdWatcherWeb
                 var services = scope.ServiceProvider;
                 try
                 {
+                    //Setup
                     var context = services.GetRequiredService<BirdWatcherContext>();
                     var env = services.GetRequiredService<IWebHostEnvironment>();
                     InitialDB_Setup.SeedDB(context, env);
