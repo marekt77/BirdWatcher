@@ -17,7 +17,7 @@ namespace BirdWatcherWeb.Setup
                 return;
             }
 
-            string jsonPath = Path.Combine(env.ContentRootPath, @"Data\birds.json");
+            string jsonPath = Path.Combine(env.ContentRootPath, @"Data/birds.json");
 
             using (StreamReader myReader = new StreamReader(jsonPath))
             {

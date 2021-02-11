@@ -28,7 +28,7 @@ namespace BirdWatcherWeb
                 catch (Exception ex)
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "ERROR seeding database");
+                    logger.LogError($"ERROR seeding database. Exception Message: {ex.Message}");
                 }
             }
 

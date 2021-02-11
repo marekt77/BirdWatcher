@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29020.237
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BirdWatcherBackend_old", "BirdWatcherBackend\BirdWatcherBackend_old.csproj", "{C9512279-7BA6-47F6-90FA-9FDFEDDAFD5F}"
-EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "BirdwatcherIoTClient", "BirdwatcherIoTClient\BirdwatcherIoTClient.pyproj", "{E93C7CFB-9DB2-4132-B1AB-B57E50B93966}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BirdWatcherMobileApp.Android", "BirdWatcherMobileApp\BirdWatcherMobileApp.Android\BirdWatcherMobileApp.Android.csproj", "{974F3BB1-C8A8-45FA-B1AE-7F5A1AE057B7}"
@@ -13,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BirdWatcherMobileApp.iOS", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BirdWatcherMobileApp", "BirdWatcherMobileApp\BirdWatcherMobileApp\BirdWatcherMobileApp.csproj", "{2A18D5FD-38ED-42BA-BE9C-0CB2F7E2F326}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BirdWatcherWeb", "BirdWatcherWeb\BirdWatcherWeb.csproj", "{08110A05-B835-4F52-9A46-E8BAB91E739D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BirdWatcherWeb", "BirdWatcherWeb\BirdWatcherWeb.csproj", "{08110A05-B835-4F52-9A46-E8BAB91E739D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,30 +29,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C9512279-7BA6-47F6-90FA-9FDFEDDAFD5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C9512279-7BA6-47F6-90FA-9FDFEDDAFD5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C9512279-7BA6-47F6-90FA-9FDFEDDAFD5F}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{C9512279-7BA6-47F6-90FA-9FDFEDDAFD5F}.Debug|ARM.Build.0 = Debug|Any CPU
-		{C9512279-7BA6-47F6-90FA-9FDFEDDAFD5F}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{C9512279-7BA6-47F6-90FA-9FDFEDDAFD5F}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{C9512279-7BA6-47F6-90FA-9FDFEDDAFD5F}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{C9512279-7BA6-47F6-90FA-9FDFEDDAFD5F}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{C9512279-7BA6-47F6-90FA-9FDFEDDAFD5F}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{C9512279-7BA6-47F6-90FA-9FDFEDDAFD5F}.Debug|x64.Build.0 = Debug|Any CPU
-		{C9512279-7BA6-47F6-90FA-9FDFEDDAFD5F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{C9512279-7BA6-47F6-90FA-9FDFEDDAFD5F}.Debug|x86.Build.0 = Debug|Any CPU
-		{C9512279-7BA6-47F6-90FA-9FDFEDDAFD5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C9512279-7BA6-47F6-90FA-9FDFEDDAFD5F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C9512279-7BA6-47F6-90FA-9FDFEDDAFD5F}.Release|ARM.ActiveCfg = Release|Any CPU
-		{C9512279-7BA6-47F6-90FA-9FDFEDDAFD5F}.Release|ARM.Build.0 = Release|Any CPU
-		{C9512279-7BA6-47F6-90FA-9FDFEDDAFD5F}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{C9512279-7BA6-47F6-90FA-9FDFEDDAFD5F}.Release|iPhone.Build.0 = Release|Any CPU
-		{C9512279-7BA6-47F6-90FA-9FDFEDDAFD5F}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{C9512279-7BA6-47F6-90FA-9FDFEDDAFD5F}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{C9512279-7BA6-47F6-90FA-9FDFEDDAFD5F}.Release|x64.ActiveCfg = Release|Any CPU
-		{C9512279-7BA6-47F6-90FA-9FDFEDDAFD5F}.Release|x64.Build.0 = Release|Any CPU
-		{C9512279-7BA6-47F6-90FA-9FDFEDDAFD5F}.Release|x86.ActiveCfg = Release|Any CPU
-		{C9512279-7BA6-47F6-90FA-9FDFEDDAFD5F}.Release|x86.Build.0 = Release|Any CPU
 		{E93C7CFB-9DB2-4132-B1AB-B57E50B93966}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E93C7CFB-9DB2-4132-B1AB-B57E50B93966}.Debug|ARM.ActiveCfg = Debug|Any CPU
 		{E93C7CFB-9DB2-4132-B1AB-B57E50B93966}.Debug|iPhone.ActiveCfg = Debug|Any CPU
