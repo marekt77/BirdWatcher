@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BirdWatcherWeb.Models
 {
@@ -11,5 +8,6 @@ namespace BirdWatcherWeb.Models
         public float Temperature { get; set; }
         public float PhotoresistorValue { get; set; }
         public DateTime Timestamp { get; set; }
+        public string Type { get; set; }
     }
 }

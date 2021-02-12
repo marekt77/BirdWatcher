@@ -20,17 +20,19 @@ def ProcessData():
     sensor = W1ThermSensor()
 
     data = SunTrack(sensor.get_temperature(), light.get_Voltage(), datetime.datetime.now())
-    jsonData = jsonpickle.encode(data, unpicklable=False)
-    print(jsonData)
     
     if light.get_Voltage() > 0.15:
         #check if file exsits, meaning sunrise has been recorded
         if not os.path.exists(os.path.expanduser('~/SunTrack/daytime')):
             #record sunrise
-            print("Sending data...")
+            data.Type = "sunrise"
+            jsonData = jsonpickle.encode(data, unpicklable=False)
             print("Data: " + jsonData)
+
+            print("Sending data...")
             response = requests.post(url, headers=headers, data=jsonData)
             print(response.status_code)
+            
             #create file to mark start of daytime
             print("Setting Daytime...")
             f = open(os.path.expanduser('~/SunTrack/daytime'), "w+")
@@ -39,11 +41,15 @@ def ProcessData():
     if light.get_Voltage() < 0.15:
         #check if daytime file exists
         if os.path.exists(os.path.expanduser('~/SunTrack/daytime')):
-            #if so, mark sunset
-            print("Sending data...")
+            #mark sunset
+            data.Type = "sunset"
+            jsonData = jsonpickle.encode(data, unpicklable=False)
             print("Data: " + jsonData)
+            
+            print("Sending data...")
             response = requests.post(url, headers=headers, data=jsonData)
             print(response.status_code)
+            
             #remove file to mark start of night time.
             print("Setting Night Time...")
             os.remove(os.path.expanduser('~/SunTrack/daytime'))

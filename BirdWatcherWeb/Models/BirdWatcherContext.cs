@@ -28,5 +28,6 @@ namespace BirdWatcherWeb.Models
         public DbSet<BirdLog> BirdLog { get; set; }
         public DbSet<SunTrack> SunTrack { get; set; }
         public DbSet<BirdLogBird> BirdLogBird { get; set; }
+        public DbSet<WatcherHealthCheck> WatcherHealthCheck { get; set; }
     }
 }
