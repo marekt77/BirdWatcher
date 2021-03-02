@@ -29,8 +29,17 @@
         </ResourceDictionary>
     </Shell.Resources>
 
+    <!-- Loading/Start Page -->
+    <ShellItem Route="loading">
+        <ShellContent ContentTemplate="{DataTemplate local:LoadingPage}" />
+    </ShellItem>
+
+    <!-- Login and Registration Page -->
+    <ShellContent Route="setup" ContentTemplate="{DataTemplate local:InitialSetupPage}">
+    </ShellContent>
+
     <!-- Your Pages -->
-    <TabBar>
+    <TabBar Route="main">
         <Tab Title="Bird Log" Icon="tab_BirdLog.png">
             <ShellContent ContentTemplate="{DataTemplate local:BirdLogPage}" />
         </Tab>
@@ -45,3 +54,5 @@
         </Tab>
     </TabBar>
 </Shell>
+
+     

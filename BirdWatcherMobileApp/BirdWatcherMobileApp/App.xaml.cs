@@ -1,5 +1,7 @@
 ﻿using Xamarin.Forms;
-using BirdWatcherMobileApp.Models;
+using Splat;
+using BirdWatcherMobileApp.Services.Routing;
+using BirdWatcherMobileApp.ViewModels;
 
 namespace BirdWatcherMobileApp
 {
@@ -8,6 +10,7 @@ namespace BirdWatcherMobileApp
 
         public App()
         {
+            InitializeDi();
             InitializeComponent();
 
             //Get rid of this later....
@@ -15,16 +18,17 @@ namespace BirdWatcherMobileApp
             MainPage = new AppShell();
         }
 
+        private void InitializeDi()
+        {
+            Locator.CurrentMutable.RegisterLazySingleton<IRoutingService>(() => new ShellRoutingService());
+
+            //ViewModels
+            Locator.CurrentMutable.Register(() => new LoadingPageViewModel());
+        }
+
         protected override void OnStart()
         {
             // Handle when your app starts
-            //Check if Server Address has been set.  If not, show modal window to ask user to set the Server Address
-            if (!Settings.IsServerAddressSet)
-            {
-
-                //Show Modal
-
-            }
         }
 
         protected override void OnSleep()
