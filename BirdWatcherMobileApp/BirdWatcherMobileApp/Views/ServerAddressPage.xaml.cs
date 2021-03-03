@@ -8,12 +8,12 @@ namespace BirdWatcherMobileApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ServerAddressPage : ContentPage
     {
-        SetServerAddressViewModel SetServerAddressVM;
+        ServerAddressViewModel SetServerAddressVM;
         public ServerAddressPage()
         {
             InitializeComponent();
 
-            BindingContext = SetServerAddressVM = new SetServerAddressViewModel(Navigation);
+            BindingContext = SetServerAddressVM = new ServerAddressViewModel(Navigation);
 
         }
     }

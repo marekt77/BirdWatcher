@@ -20,7 +20,7 @@ namespace BirdWatcherMobileApp.ViewModels
 
             OpenSetServerAddressCommand = new Command(async () => await Navigation.PushModalAsync(_serverAddressPage));
 
-            MessagingCenter.Subscribe<SetServerAddressViewModel>(this, "update", (sender) =>
+            MessagingCenter.Subscribe<ServerAddressViewModel>(this, "update", (sender) =>
             {
                 UpdatePageData();
             });
@@ -57,13 +57,12 @@ namespace BirdWatcherMobileApp.ViewModels
             {
                 isConnected = true;
                 ServerVersion = serverInfo.appVersion;
-                ServerOS = serverInfo.serverOS;
                 WelcomeMessage = serverInfo.welcomeMessage;
                 ServerDetailsVisible = true;
             }
             else
             {
-                ConnErrorMessage = serverInfo.errorMessage;
+                //ConnErrorMessage = serverInfo.errorMessage;
             }
 
             return isConnected;

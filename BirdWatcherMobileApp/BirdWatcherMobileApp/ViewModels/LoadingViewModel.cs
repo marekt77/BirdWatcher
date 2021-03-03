@@ -4,11 +4,11 @@ using Splat;
 
 namespace BirdWatcherMobileApp.ViewModels
 {
-    class LoadingPageViewModel : BaseViewModel
+    class LoadingViewModel : BaseViewModel
     {
         private readonly IRoutingService routingService;
 
-        public LoadingPageViewModel(IRoutingService routingService = null)
+        public LoadingViewModel(IRoutingService routingService = null)
         {
             this.routingService = routingService ?? Locator.Current.GetService<IRoutingService>();
         }

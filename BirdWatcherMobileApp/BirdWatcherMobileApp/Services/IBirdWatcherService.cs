@@ -22,5 +22,7 @@ namespace BirdWatcherMobileApp.Services
     public interface IBirdWatcherService<T>
     {
         Task<T> GetServerInfo();
+
+        Task<T> GetServerInfo(string ServerAddress);
     }
 }

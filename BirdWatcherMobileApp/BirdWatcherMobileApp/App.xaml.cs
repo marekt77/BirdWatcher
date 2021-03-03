@@ -23,7 +23,7 @@ namespace BirdWatcherMobileApp
             Locator.CurrentMutable.RegisterLazySingleton<IRoutingService>(() => new ShellRoutingService());
 
             //ViewModels
-            Locator.CurrentMutable.Register(() => new LoadingPageViewModel());
+            Locator.CurrentMutable.Register(() => new LoadingViewModel());
         }
 
         protected override void OnStart()

@@ -14,7 +14,7 @@ namespace BirdWatcherMobileApp.Views
             InitializeComponent();
         }
 
-        internal LoadingPageViewModel ViewModel { get; set; } = Locator.Current.GetService<LoadingPageViewModel>();
+        internal LoadingViewModel ViewModel { get; set; } = Locator.Current.GetService<LoadingViewModel>();
 
         protected override void OnAppearing()
         {
