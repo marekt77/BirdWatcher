@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 
 namespace BirdWatcherMobileApp.Models
 {
@@ -9,9 +8,6 @@ namespace BirdWatcherMobileApp.Models
         public DateTime requestDateTime { get; set; }
         public string welcomeMessage { get; set; }
         public string appVersion { get; set; }
-
-        /*
-        [JsonProperty(Required = Newtonsoft.Json.Required.AllowNull)]
-        public string errorMessage { get; set; }*/
+        public string errorMessage { get; set; }
     }
 }

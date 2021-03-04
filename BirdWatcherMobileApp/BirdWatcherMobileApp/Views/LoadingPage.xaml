@@ -1,21 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Shell.NavBarIsVisible="False"
              x:Class="BirdWatcherMobileApp.Views.LoadingPage">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+        <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center">
             <ActivityIndicator Color="Blue"
                                IsRunning="True"
                                IsVisible="True" />
-            <Label>
-                <Label.FormattedText>
-                    <FormattedString>
-                        <FormattedString.Spans>
-                            <Span Text="Loading" FontAttributes="Bold" FontSize="22" TextColor="Blue" />
-                        </FormattedString.Spans>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
+            <Label Text="Loading ..." TextColor="Blue" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

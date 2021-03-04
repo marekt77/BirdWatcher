@@ -1,5 +1,4 @@
 ﻿using BirdWatcherMobileApp.ViewModels;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,6 +8,7 @@ namespace BirdWatcherMobileApp.Views
     public partial class InitialSetupPage : ContentPage
     {
         InitialSetupViewModel initialSetupVM;
+
         public InitialSetupPage()
         {
             InitializeComponent();

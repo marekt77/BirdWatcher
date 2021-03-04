@@ -25,7 +25,7 @@ namespace BirdWatcherWeb
             services.AddControllersWithViews();
 
             services.AddDbContext<BirdWatcherContext>(options =>
-                options.UseMySql(Configuration.GetSection("ConnectionStrings:devMySQLConnection").Value, 
+                options.UseMySql(Configuration.GetSection("ConnectionStrings:BirdWatcherDB").Value, 
                 new MariaDbServerVersion(new Version(10, 1, 47)))
             );
         }

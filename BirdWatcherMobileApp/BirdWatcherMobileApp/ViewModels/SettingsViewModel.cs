@@ -62,7 +62,7 @@ namespace BirdWatcherMobileApp.ViewModels
             }
             else
             {
-                //ConnErrorMessage = serverInfo.errorMessage;
+                ConnErrorMessage = serverInfo.errorMessage;
             }
 
             return isConnected;

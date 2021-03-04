@@ -13,7 +13,6 @@ namespace BirdWatcherMobileApp.ViewModels
             this.routingService = routingService ?? Locator.Current.GetService<IRoutingService>();
         }
 
-
         //Called by the views OnAppearing method
         public void Init()
         {

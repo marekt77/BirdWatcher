@@ -5,7 +5,7 @@
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
        mc:Ignorable="d"
        xmlns:local="clr-namespace:BirdWatcherMobileApp.Views"
-       Title="BirdWatcherMobileApp"
+       Title="Birdwatcher"
        x:Class="BirdWatcherMobileApp.AppShell">
     <!-- 
         Styles and Resources 
@@ -24,18 +24,17 @@
                 <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
                 <Setter Property="Shell.TabBarTitleColor" Value="White"/>
             </Style>
-            <Style TargetType="ShellItem" BasedOn="{StaticResource BaseStyle}" />
+            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
         </ResourceDictionary>
     </Shell.Resources>
     
     <!-- Loading/Start Page -->
     <ShellItem Route="loading">
-        <ShellContent ContentTemplate="{DataTemplate local:LoadingPage}" />
+        <ShellContent Route="loading" ContentTemplate="{DataTemplate local:LoadingPage}" />
     </ShellItem>
-
+    
     <!-- Login and Registration Page -->
-    <ShellContent Route="setup" ContentTemplate="{DataTemplate local:InitialSetupPage}">
-    </ShellContent>
+    <ShellContent Route="setup" ContentTemplate="{DataTemplate local:InitialSetupPage}" />
 
     <!-- Your Pages -->
     <TabBar Route="main">

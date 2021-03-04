@@ -13,8 +13,6 @@ namespace BirdWatcherMobileApp
             InitializeDi();
             InitializeComponent();
 
-            //Get rid of this later....
-            //DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
         }
 
@@ -24,6 +22,7 @@ namespace BirdWatcherMobileApp
 
             //ViewModels
             Locator.CurrentMutable.Register(() => new LoadingViewModel());
+            Locator.CurrentMutable.Register(() => new InitialSetupViewModel());
         }
 
         protected override void OnStart()

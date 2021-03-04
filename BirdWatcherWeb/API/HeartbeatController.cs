@@ -12,7 +12,7 @@ namespace BirdWatcherWeb.API
     {
         // GET: api/<HeartBeatController>
         [HttpGet]
-        public IEnumerable<HeartbeatMessage> Get()
+        public ActionResult<HeartbeatMessage> Get()
         {
             HeartbeatMessage heartbeatMessage = new HeartbeatMessage();
 
@@ -21,7 +21,7 @@ namespace BirdWatcherWeb.API
             heartbeatMessage.AppVersion = Assembly.GetEntryAssembly().GetName().Version.ToString();
             heartbeatMessage.WelcomeMessage = "If you can see this you are successfuly connected to the Bird Watcher API!";
 
-            yield return heartbeatMessage;
+            return heartbeatMessage;
         }
     }
 }

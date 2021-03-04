@@ -25,11 +25,15 @@ namespace BirdWatcherMobileApp.Services
                     var content = await response.Content.ReadAsStringAsync();
                     _birdWatcher = JsonConvert.DeserializeObject<BirdWatcher>(content);
                 }
+                else
+                {
+                    _birdWatcher.errorMessage = $"Could not connect to Birdwatcher server. HTTP Response Code: {response.StatusCode}";
+                }
             }
             catch(Exception ex)
             {
                 _birdWatcher = new BirdWatcher();
-                //_birdWatcher.errorMessage = ex.Message;
+                _birdWatcher.errorMessage = ex.Message;
             }
 
             return _birdWatcher;
@@ -52,11 +56,15 @@ namespace BirdWatcherMobileApp.Services
                     var content = await response.Content.ReadAsStringAsync();
                     _birdWatcher = JsonConvert.DeserializeObject<BirdWatcher>(content);
                 }
+                else
+                {
+                    _birdWatcher.errorMessage = $"Could not connect to Birdwatcher server. HTTP Response Code: {response.StatusCode}";
+                }
             }
             catch (Exception ex)
             {
                 _birdWatcher = new BirdWatcher();
-                //_birdWatcher.errorMessage = ex.Message;
+                _birdWatcher.errorMessage = ex.Message;
             }
 
             return _birdWatcher;

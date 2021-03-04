@@ -10,6 +10,7 @@ namespace BirdWatcherMobileApp
         public AppShell()
         {
             InitializeComponent();
+            BindingContext = this;
         }
     }
 }
