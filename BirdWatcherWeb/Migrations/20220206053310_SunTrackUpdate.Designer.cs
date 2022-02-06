@@ -3,14 +3,16 @@ using System;
 using BirdWatcherWeb.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BirdWatcherWeb.Migrations
 {
     [DbContext(typeof(BirdWatcherContext))]
-    partial class BirdWatcherContextModelSnapshot : ModelSnapshot
+    [Migration("20220206053310_SunTrackUpdate")]
+    partial class SunTrackUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
