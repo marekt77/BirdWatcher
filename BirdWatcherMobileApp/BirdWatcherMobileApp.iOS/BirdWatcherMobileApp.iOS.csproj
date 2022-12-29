@@ -136,8 +136,8 @@
     <PackageReference Include="DLToolkit.Forms.Controls.FlowListView">
       <Version>2.0.11</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.1.0.581479" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.2.0" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2545" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.4" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

@@ -236,6 +236,10 @@ Add the following line to the http section:
 client_max_body_size 10M;
 ```
 
+##### Add Firewall Rule for NGINX
+
+`sudo ufw allow 'Nginx HTTP'`
+
 Restart NGINX:
 
 `sudo service nginx reload`
@@ -267,14 +271,14 @@ Note: You cannot compile .net on arm yet, so you need to do this on your local m
 
 #### Push the container to your docker repo
 
-`docker push <YourDockerHubAccount>/birdwatcherbackend:latest`
+`docker push <YourDockerHubAccount>/birdwatcherweb:latest`
 
 ### On the RaspCompute System
 
 #### Pull the Container
 
-`docker pull <YourDockerHubAccount>/birdwatcherbackend:latest`
+`docker pull <YourDockerHubAccount>/birdwatcherweb:latest`
 
 #### Run the Container
 
-`docker run --restart=always -d -v /mnt/birdwatcher/images:/app/wwwroot/images/captured -p 5000:5000 <YourDockerHubAccount>/birdwatcherbackend:latest`
+`docker run --restart=always -d -v /mnt/birdwatcher/images:/app/wwwroot/images/captured -p 5000:5000 <YourDockerHubAccount>/birdwatcherweb:latest`

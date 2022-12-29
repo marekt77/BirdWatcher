@@ -1,8 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <UserSecretsId>a4605a7d-e783-4d4d-bddb-fde972eaded5</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,18 +17,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.13" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.13">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.12">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.13">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.12">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.2" />
   </ItemGroup>
 
 </Project>

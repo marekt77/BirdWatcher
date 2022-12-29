@@ -25,9 +25,9 @@ namespace BirdWatcherWeb
             services.AddControllersWithViews();
 
             services.AddDbContext<BirdWatcherContext>(options =>
-                options.UseMySql(Configuration.GetSection("ConnectionStrings:devMySQLConnection").Value, 
-                new MariaDbServerVersion(new Version(10, 1, 47)))
-            );
+                 options.UseMySql(Configuration.GetSection("ConnectionStrings:BirdWatcherMySQL").Value,
+                 new MySqlServerVersion(new Version(8, 0, 31)))
+             );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
