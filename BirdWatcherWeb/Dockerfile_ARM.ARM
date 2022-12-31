@@ -1,10 +1,11 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+#Note: Need to be running Raspberry Pi OS Bullseye
 
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:6.0-bullseye-slim-arm32v7 AS base
 WORKDIR /app
 EXPOSE 5000/tcp
 
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["BirdWatcherWeb/BirdWatcherWeb.csproj", "BirdWatcherWeb/"]
 RUN dotnet restore "BirdWatcherWeb/BirdWatcherWeb.csproj" -r linux-arm
@@ -22,4 +23,4 @@ COPY --from=publish /app/publish .
 ENV ASPNETCORE_URLS http://*:5000
 ENV ASPNETCORE_ENVIRONMENT docker
 
-ENTRYPOINT ["dotnet", "BirdWatcherWeb.dll"
+ENTRYPOINT ["dotnet", "BirdWatcherWeb.dll"]
