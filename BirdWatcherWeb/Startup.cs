@@ -1,6 +1,9 @@
 using BirdWatcherWeb.Models;
+using BirdWatcherWeb.Services;
+using BirdWatcherWeb.Services.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +31,16 @@ namespace BirdWatcherWeb
                  options.UseMySql(Configuration.GetSection("ConnectionStrings:BirdWatcherMySQL").Value,
                  new MySqlServerVersion(new Version(8, 0, 31)))
              );
+
+            services.AddHttpContextAccessor();
+            services.AddSingleton<IUriService>(x =>
+            {
+                var accessor = x.GetRequiredService<IHttpContextAccessor>();
+                var request = accessor.HttpContext.Request;
+                var uri = string.Concat(request.Scheme, "://", request.Host.ToUriComponent());
+
+                return new UriService(uri);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

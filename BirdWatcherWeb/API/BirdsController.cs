@@ -1,4 +1,8 @@
-﻿using BirdWatcherWeb.Models;
+﻿using BirdWatcherWeb.Filter;
+using BirdWatcherWeb.Helpers;
+using BirdWatcherWeb.Models;
+using BirdWatcherWeb.Services.Interface;
+using BirdWatcherWeb.Wrappers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -12,17 +16,35 @@ namespace BirdWatcherWeb.API
     public class BirdsController : ControllerBase
     {
         private readonly BirdWatcherContext _context;
+        private readonly IUriService _uriService;
 
-        public BirdsController(BirdWatcherContext context)
+        public BirdsController(BirdWatcherContext context, IUriService uriService)
         {
             _context = context;
+            _uriService = uriService;
         }
 
-        // GET: api/Birds
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Bird>>> GetBirds()
+        public async Task<IActionResult> GetAll([FromQuery] PaginationFilter filter)
         {
-            return await _context.Birds.ToListAsync();
+            var route = Request.Path.Value;
+            var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
+
+            var pagedData = await _context.Birds
+                .Skip((validFilter.PageNumber - 1) * filter.PageSize)
+                .Take(validFilter.PageSize)
+                .ToListAsync();
+
+            var totalRecords = await _context.Birds.CountAsync();
+
+            var pagedResponse = PaginationHelper.CreatePagedReponse<Bird>(
+                pagedData,
+                validFilter,
+                totalRecords,
+                _uriService,
+                route);
+
+            return Ok(pagedResponse);
         }
 
         // GET: api/Birds/5
@@ -36,7 +58,7 @@ namespace BirdWatcherWeb.API
                 return NotFound();
             }
 
-            return bird;
+            return Ok(new Response<Bird>(bird));
         }
 
         /*

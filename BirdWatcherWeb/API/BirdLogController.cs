@@ -1,5 +1,9 @@
-﻿using BirdWatcherWeb.Models;
+﻿using BirdWatcherWeb.Filter;
+using BirdWatcherWeb.Helpers;
+using BirdWatcherWeb.Models;
+using BirdWatcherWeb.Services.Interface;
 using BirdWatcherWeb.ViewModels;
+using BirdWatcherWeb.Wrappers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,33 +21,32 @@ namespace BirdWatcherWeb.API
     {
         private readonly BirdWatcherContext _context;
         private readonly IWebHostEnvironment _env;
+        private readonly IUriService _uriService;
 
-        public BirdLogController(BirdWatcherContext context, IWebHostEnvironment env)
+        public BirdLogController(BirdWatcherContext context, IWebHostEnvironment env, IUriService uriService)
         {
             _context = context;
             _env = env;
+            _uriService = uriService;
         }
 
         // GET: api/BirdLog
         [HttpGet]
-        public async Task<ActionResult<PagedBirdLogVM>> GetBirdLog(int page = 1, int pageSize = 100)
+        public async Task<IActionResult> GetAll([FromQuery] PaginationFilter filter)
         {
             List<BirdLogVM> tmpBirgLogsVM = new List<BirdLogVM>();
 
-            PagedBirdLogVM tmpPagedBirdLogVM = new PagedBirdLogVM();
+            var route = Request.Path.Value;
+            var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
 
-            var query = _context.BirdLog
-                .Include(e => e.BirdLogBird)
-                .ThenInclude(e => e.Bird);
+            var pagedData = await _context.BirdLog
+                .Skip((validFilter.PageNumber - 1) * filter.PageSize)
+                .Take(filter.PageSize)
+                .ToListAsync();
 
-            var entries = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
-            var count = await query.CountAsync();
+            var totalRecords = await _context.BirdLog.CountAsync();
 
-            var totalPages = (int)Math.Ceiling(count / (float)pageSize);
-
-            tmpPagedBirdLogVM.PagingHeader = new PagingHeader(count, page, pageSize, totalPages);
-
-            foreach (BirdLog tmpBL in entries)
+            foreach (var tmpBL in pagedData)
             {
                 BirdLogVM tmpBLvm = new BirdLogVM();
 
@@ -65,9 +68,14 @@ namespace BirdWatcherWeb.API
                 tmpBirgLogsVM.Add(tmpBLvm);
             }
 
-            tmpPagedBirdLogVM.Items = tmpBirgLogsVM;
+            var pagedResponse = PaginationHelper.CreatePagedReponse<BirdLogVM>(
+                tmpBirgLogsVM,
+                validFilter,
+                totalRecords,
+                _uriService,
+                route);
 
-            return tmpPagedBirdLogVM;
+            return Ok(pagedResponse);
         }
 
         // GET: api/BirdLog/5
@@ -102,7 +110,7 @@ namespace BirdWatcherWeb.API
                 tmpBirgLogsVM.Birds.Add(tmpBLB.BirdID);
             }
 
-            return tmpBirgLogsVM;
+            return Ok(new Response<BirdLogVM>(tmpBirgLogsVM));
         }
 
         // PUT: api/BirdLogs/5

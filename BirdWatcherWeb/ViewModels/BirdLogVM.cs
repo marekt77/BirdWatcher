@@ -3,11 +3,6 @@ using System.Collections.Generic;
 
 namespace BirdWatcherWeb.ViewModels
 {
-    public class PagedBirdLogVM
-    {
-        public PagingHeader PagingHeader { get; set; }
-        public List<BirdLogVM> Items { get; set; }
-    }
     public class BirdLogVM
     {
         public long BirdLogID { get; set; }
