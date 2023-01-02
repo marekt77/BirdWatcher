@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29020.237
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "BirdwatcherIoTClient", "BirdwatcherIoTClient\BirdwatcherIoTClient.pyproj", "{E93C7CFB-9DB2-4132-B1AB-B57E50B93966}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BirdWatcherMobileApp", "BirdWatcherMobileApp\BirdWatcherMobileApp\BirdWatcherMobileApp.csproj", "{2A18D5FD-38ED-42BA-BE9C-0CB2F7E2F326}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BirdWatcherWeb", "BirdWatcherWeb\BirdWatcherWeb.csproj", "{08110A05-B835-4F52-9A46-E8BAB91E739D}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "WeatherStation", "WeatherStation\WeatherStation.pyproj", "{D4323469-62D6-4498-8702-579BFF9FC43A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -141,6 +143,18 @@ Global
 		{08110A05-B835-4F52-9A46-E8BAB91E739D}.Release|x64.Build.0 = Release|Any CPU
 		{08110A05-B835-4F52-9A46-E8BAB91E739D}.Release|x86.ActiveCfg = Release|Any CPU
 		{08110A05-B835-4F52-9A46-E8BAB91E739D}.Release|x86.Build.0 = Release|Any CPU
+		{D4323469-62D6-4498-8702-579BFF9FC43A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4323469-62D6-4498-8702-579BFF9FC43A}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{D4323469-62D6-4498-8702-579BFF9FC43A}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{D4323469-62D6-4498-8702-579BFF9FC43A}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{D4323469-62D6-4498-8702-579BFF9FC43A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D4323469-62D6-4498-8702-579BFF9FC43A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D4323469-62D6-4498-8702-579BFF9FC43A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4323469-62D6-4498-8702-579BFF9FC43A}.Release|ARM.ActiveCfg = Release|Any CPU
+		{D4323469-62D6-4498-8702-579BFF9FC43A}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{D4323469-62D6-4498-8702-579BFF9FC43A}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{D4323469-62D6-4498-8702-579BFF9FC43A}.Release|x64.ActiveCfg = Release|Any CPU
+		{D4323469-62D6-4498-8702-579BFF9FC43A}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
