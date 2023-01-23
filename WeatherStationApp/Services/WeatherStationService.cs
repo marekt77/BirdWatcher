@@ -8,7 +8,7 @@ using WeatherStationApp.Services.Interface;
 
 namespace WeatherStationApp.Services
 {
-    public interface WeatherStationService : IWeatherStationService
+    public sealed class WeatherStationService : IWeatherStationService
     {
         private Uri _uri = new Uri("http://" + "192.168.1.20" + "/api/suntrack");
 
