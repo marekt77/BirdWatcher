@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 using WeatherStationApp.Models;
 using WeatherStationApp.Services.Interface;
 
@@ -12,23 +8,29 @@ namespace WeatherStationApp.Services
     {
         private Uri _uri = new Uri("http://" + "192.168.1.20" + "/api/suntrack");
 
-        public async Task<SunTrack> GetSunTrackInfo()
+        public async Task<RootModel<SunTrack>> GetSunTrackInfo()
         {
             HttpClient _client = new HttpClient();
-            SunTrack sunTrack = new SunTrack();
+            RootModel<SunTrack> sunTrack = new RootModel<SunTrack>();
 
+            HttpResponseMessage httpResponse = new HttpResponseMessage();
+            
             try
             {
-                var response = await _client.GetAsync(_uri);
+                httpResponse = await _client.GetAsync(_uri);
 
-                HttpResponseMessage httpResponse = new HttpResponseMessage();
-
+                if (httpResponse.IsSuccessStatusCode)
+                {
+                    string rawResult = await httpResponse.Content.ReadAsStringAsync();
+                    
+                    sunTrack = JsonConvert.DeserializeObject<RootModel<SunTrack>>(rawResult);
+                }
 
             }
             catch (Exception ex)
             {
                 _client.Dispose();
-                throw new Exception("ERROR! Cannot retrive Movie Data");
+                throw new Exception("ERROR! Cannot retrive Sun Track Data");
             }
 
             return sunTrack;

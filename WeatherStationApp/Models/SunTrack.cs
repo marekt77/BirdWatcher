@@ -1,6 +1,6 @@
 ﻿namespace WeatherStationApp.Models
 {
-    public class SunTrack : RootModel<SunTrack>
+    public class SunTrack
     {
         public int id { get; set; }
         public double temperature { get; set; }

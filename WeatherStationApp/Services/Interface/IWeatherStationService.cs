@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using WeatherStationApp.Models;
 
 namespace WeatherStationApp.Services.Interface
 {
     public interface IWeatherStationService
     {
+        Task<RootModel<SunTrack>> GetSunTrackInfo();
     }
 }
