@@ -2,7 +2,24 @@
 <?xaml-comp compile="true" ?>
 <ResourceDictionary 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:WeatherStationApp.Resources">
+    
+    <FontImage x:Key="Temp"
+               FontFamily="FontAwesome"
+               Size="22"
+               Color="{StaticResource Primary}"
+               Glyph="{x:Static local:IconFont.ThermometerHalf}"/>
+    <FontImage x:Key="SunTrack"
+               FontFamily="FontAwesome"
+               Size="22"
+               Color="{StaticResource Primary}"
+               Glyph="{x:Static local:IconFont.Sun}"/>
+    <FontImage x:Key="Settings"
+               FontFamily="FontAwesome"
+               Size="22"
+               Color="{StaticResource Primary}"
+               Glyph="{x:Static local:IconFont.Cog}"/>
 
     <Style TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />

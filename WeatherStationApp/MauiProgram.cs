@@ -21,6 +21,7 @@ namespace WeatherStationApp
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("fa_solid.ttf", "FontAwesome");
                 });
 
 
@@ -37,12 +38,14 @@ namespace WeatherStationApp
         public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder mauiAppBuilder)
         {
             mauiAppBuilder.Services.AddTransient<SunTrackVM>();
+            mauiAppBuilder.Services.AddTransient<SettingsVM>();
             return mauiAppBuilder;
         }
 
         public static MauiAppBuilder RegisterViews(this MauiAppBuilder mauiAppBuilder)
         {
             mauiAppBuilder.Services.AddTransient<SunTrackPage>();
+            mauiAppBuilder.Services.AddTransient<SettingsPage>();
 
             return mauiAppBuilder;
         }
