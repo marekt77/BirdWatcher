@@ -49,7 +49,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiFont Remove="Resources\Fonts\fa_solid.ttf" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Resources\Fonts\fa_solid.ttf" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <BundleResource Include="Resources\Fonts\fa_solid.ttf" />
 	</ItemGroup>
 
 	<ItemGroup>
