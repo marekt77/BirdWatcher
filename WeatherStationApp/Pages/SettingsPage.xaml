@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherStationApp.Pages.SettingsPage"
+             Title="SettingsPage">
+
+    <VerticalStackLayout 
+        Margin="10,0,0,0">
+        
+        <VerticalStackLayout 
+            RadioButtonGroup.GroupName="Temp" 
+            RadioButtonGroup.SelectedValue="{Binding TempSelection}">
+            <Label 
+                Text="Show Temperature in:" 
+                Margin="10,0,0,10" />
+            <RadioButton 
+                Content="Celsius" 
+                Value="C" 
+                Margin="15,0,0,0" />
+            <RadioButton 
+                Content="Fahrenheit" 
+                Value="F"
+                Margin="15,0,0,0"/>
+        </VerticalStackLayout>
+        
+        <Label Text="Database Server:" Margin="10,15,0,0" />
+        <Entry 
+            x:Name="DbServer"
+            Text="{Binding ServerAddress}"
+            Placeholder="Enter DB Server's IP"
+            Margin="15,10,0,0" 
+            WidthRequest="200" 
+            HorizontalOptions="Start"/>
+        <Button
+            x:Name="btnCheckConnection"
+            Text="Check Connection"
+            Command="{Binding CheckConnectionCommand}"
+            HorizontalOptions="Start"
+            Margin="15,10,0,0"/>
+        <Button
+            x:Name="btnSave"
+            Text="Save" 
+            IsEnabled="{Binding SaveEnabled}"
+            Command="{Binding SaveSettingsCommand}"
+            HorizontalOptions="Center"
+            Margin="0,20,0,0" />
+
+    </VerticalStackLayout>
+</ContentPage>

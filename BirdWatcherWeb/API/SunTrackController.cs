@@ -46,6 +46,31 @@ namespace BirdWatcherWeb.API
             return Ok(pagedResponse); 
         }
 
+        [Route("latest")]
+        [HttpGet]
+        public async Task<IActionResult> GetLatest([FromQuery] PaginationFilter filter)
+        {
+            var route = Request.Path.Value;
+            var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
+
+            var pagedData = await _context.SunTrack
+                .OrderByDescending(x => x.Timestamp)
+                .Skip((validFilter.PageNumber - 1) * filter.PageSize)
+                .Take(validFilter.PageSize)
+                .ToListAsync();
+
+            var totalRecords = await _context.SunTrack.CountAsync();
+
+            var pagedResponse = PaginationHelper.CreatePagedReponse<SunTrack>(
+                pagedData,
+                validFilter,
+                totalRecords,
+                _uriService,
+                route);
+
+            return Ok(pagedResponse);
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<SunTrack>> GetSunTrack(long id)
         {
