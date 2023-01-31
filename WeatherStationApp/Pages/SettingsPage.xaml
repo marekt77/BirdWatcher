@@ -4,21 +4,29 @@
              x:Class="WeatherStationApp.Pages.SettingsPage"
              Title="SettingsPage">
 
-    <VerticalStackLayout Margin="10,0,0,0">
-        <Label 
-            Text="Show Temperature in:" 
-            Margin="10,0,0,10" />
-        <RadioButton Content="Celsius"
-                     GroupName="temp" 
-                     Margin="15,0,0,0" />
-        <RadioButton Content="Fahrenheit"
-                     GroupName="temp" 
-                     Margin="15,0,0,0"/>
-
+    <VerticalStackLayout 
+        Margin="10,0,0,0">
+        
+        <VerticalStackLayout 
+            RadioButtonGroup.GroupName="Temp" 
+            RadioButtonGroup.SelectedValue="{Binding TempSelection}">
+            <Label 
+                Text="Show Temperature in:" 
+                Margin="10,0,0,10" />
+            <RadioButton 
+                Content="Celsius" 
+                Value="C" 
+                Margin="15,0,0,0" />
+            <RadioButton 
+                Content="Fahrenheit" 
+                Value="F"
+                Margin="15,0,0,0"/>
+        </VerticalStackLayout>
+        
         <Label Text="Database Server:" Margin="10,15,0,0" />
         <Entry 
             x:Name="DbServer"
-            Text="{Binding ServerAddress, Mode=TwoWay}"
+            Text="{Binding ServerAddress}"
             Placeholder="Enter DB Server's IP"
             Margin="15,10,0,0" 
             WidthRequest="200" 
@@ -31,7 +39,9 @@
             Margin="15,10,0,0"/>
         <Button
             x:Name="btnSave"
-            Text="Save"
+            Text="Save" 
+            IsEnabled="{Binding SaveEnabled}"
+            Command="{Binding SaveSettingsCommand}"
             HorizontalOptions="Center"
             Margin="0,20,0,0" />
 

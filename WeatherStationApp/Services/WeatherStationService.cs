@@ -6,7 +6,14 @@ namespace WeatherStationApp.Services
 {
     public sealed class WeatherStationService : IWeatherStationService
     {
-        private Uri _uri = new Uri("http://" + "192.168.1.20" + "/api/suntrack");
+        private Uri _baseUri;
+        private readonly ISettingsService _settingService;
+
+        public WeatherStationService(ISettingsService settingsService)
+        {
+            _settingService = settingsService;
+            _baseUri = new Uri("http://" + _settingService.ServerIP);
+        }
 
         public async Task<RootModel<SunTrack>> GetSunTrackInfo()
         {
@@ -17,7 +24,7 @@ namespace WeatherStationApp.Services
             
             try
             {
-                httpResponse = await _client.GetAsync(_uri);
+                httpResponse = await _client.GetAsync(_baseUri + "api/suntrack");
 
                 if (httpResponse.IsSuccessStatusCode)
                 {
@@ -34,6 +41,38 @@ namespace WeatherStationApp.Services
             }
 
             return sunTrack;
+        }
+
+        public async Task<Heartbeat> GetHeartbeat(string testIP)
+        {
+            HttpClient _client = new HttpClient();
+
+            HttpResponseMessage httpResponse = new HttpResponseMessage();
+
+            Heartbeat heartBeat = new Heartbeat();
+
+            if (!string.IsNullOrEmpty(testIP))
+            {
+                try
+                {
+                    httpResponse = await _client.GetAsync("http://" + testIP + "/api/heartbeat");
+
+                    if (httpResponse.IsSuccessStatusCode)
+                    {
+                        string rawResult = await httpResponse.Content.ReadAsStringAsync();
+
+                        heartBeat = JsonConvert.DeserializeObject<List<Heartbeat>>(rawResult).FirstOrDefault();
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    _client.Dispose();
+                    throw new Exception("ERROR! Cannot retrive heartbeat");
+                }
+            }
+
+            return heartBeat;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Windows.Input;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using System.Windows.Input;
+using WeatherStationApp.Messages;
 using WeatherStationApp.Services.Interface;
 
 namespace WeatherStationApp.ViewModels
@@ -6,10 +8,14 @@ namespace WeatherStationApp.ViewModels
     public class SettingsVM : BaseVM
     {
         private readonly ISettingsService _settingService;
+        private readonly IWeatherStationService _weatherStationService;
 
-        public SettingsVM(ISettingsService settingsService) 
-        { 
+        public SettingsVM(
+            ISettingsService settingsService, 
+            IWeatherStationService weatherStationService)
+        {
             _settingService = settingsService;
+            _weatherStationService = weatherStationService;
             CheckConnectionCommand = new Command(CheckConnection);
             SaveSettingsCommand = new Command(SaveSettings);
             LoadValues();
@@ -22,21 +28,32 @@ namespace WeatherStationApp.ViewModels
             get => _serverAddress;
             set
             {
-                if(!string.IsNullOrWhiteSpace(value))
-                {
-                    _settingService.ServerIP = value;
-                    OnPropertyChanged();
-                }
+                _serverAddress = value;
+                OnPropertyChanged();
+                SaveEnabled = false;
             }
         }
 
         private bool _useImperial;
-        public bool UseImperial
+
+        private object _tempSelection;
+        public object TempSelection
         {
-            get => _useImperial;
+            get => _tempSelection;
             set
             {
-                _settingService.UseImperial = value;
+                _tempSelection = value;
+                OnPropertyChanged(nameof(TempSelection));
+            }
+        }
+
+        private object _saveEnabled;
+        public object SaveEnabled
+        {
+            get => _saveEnabled;
+            set
+            {
+                _saveEnabled = value;
                 OnPropertyChanged();
             }
         }
@@ -54,18 +71,80 @@ namespace WeatherStationApp.ViewModels
 
         private void LoadValues()
         {
-            _serverAddress = _settingService.ServerIP;
+            ServerAddress = _settingService.ServerIP;
             _useImperial = _settingService.UseImperial;
+
+            if(ServerAddress == "0.0.0.0")
+            {
+                SaveEnabled = false;
+            }
+            else
+            {
+                SaveEnabled = true;
+            }
+
+            if(_useImperial)
+            {
+                TempSelection = "F";
+            }
+            else
+            {
+                TempSelection = "C";
+            }
         }
 
-        private void CheckConnection()
+        private async void CheckConnection()
         {
+            if(!string.IsNullOrEmpty(ServerAddress) || ServerAddress != "0.0.0.0")
+            {
+                try
+                {
+                    var result = await _weatherStationService.GetHeartbeat(ServerAddress);
 
+                    if (result != null)
+                    {
+                        WeakReferenceMessenger.Default.Send(new ConnectionCheckMessage
+                        {
+                            ServerIPAddress = ServerAddress,
+                            IsSuccessful = true
+                        });
+                        SaveEnabled = true;
+                    }
+                    else
+                    {
+                        WeakReferenceMessenger.Default.Send(new ConnectionCheckMessage
+                        {
+                            ServerIPAddress = ServerAddress,
+                            IsSuccessful = false
+                        });
+                        SaveEnabled = false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    WeakReferenceMessenger.Default.Send(new ConnectionCheckMessage
+                    {
+                        ServerIPAddress = ServerAddress,
+                        IsSuccessful = false
+                    });
+                }
+            }
         }
 
         private void SaveSettings()
         {
+            if((string)TempSelection == "C")
+            {
+                _settingService.UseImperial = false;
+            }
+            else
+            {
+                _settingService.UseImperial = true;
+            }
+            
+            _settingService.ServerIP = ServerAddress;
 
+            WeakReferenceMessenger.Default.Send(new SettingsSavedMessage());
         }
     }
 }
