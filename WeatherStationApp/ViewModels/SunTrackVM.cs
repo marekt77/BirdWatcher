@@ -1,4 +1,6 @@
-﻿using WeatherStationApp.Services.Interface;
+﻿using System.Collections.ObjectModel;
+using WeatherStationApp.Models;
+using WeatherStationApp.Services.Interface;
 
 namespace WeatherStationApp.ViewModels
 {
@@ -13,11 +15,29 @@ namespace WeatherStationApp.ViewModels
             GetWeatherData();
         }
 
+        #region Variables
+
+        private ObservableCollection<SunTrack> _sunTrack;
+        public ObservableCollection<SunTrack> SunTrack
+        {
+            get => _sunTrack;
+            set
+            {
+                _sunTrack = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+        //public ObservableCollection<TodoItem> Items { get; set; } = new();
+
         private async void GetWeatherData()
         {
-            var blah = await _weatherStationService.GetSunTrackInfo();
+            var data = await _weatherStationService.GetSunTrackInfo();
 
-            string x = "Marek";
+            SunTrack = new ObservableCollection<SunTrack>(data.data);
+
         }
     }
 }
