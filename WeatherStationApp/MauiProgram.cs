@@ -8,7 +8,6 @@ namespace WeatherStationApp
 {
     public static class MauiProgram
     {
-
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
@@ -31,6 +30,7 @@ namespace WeatherStationApp
         public static MauiAppBuilder RegisterAppServices(this MauiAppBuilder mauiAppBuilder)
         {
             mauiAppBuilder.Services.AddSingleton<IWeatherStationService, WeatherStationService>();
+            mauiAppBuilder.Services.AddSingleton<ISettingsService, SettingsService>();
 
             return mauiAppBuilder;
         }

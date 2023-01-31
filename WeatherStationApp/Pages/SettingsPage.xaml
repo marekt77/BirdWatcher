@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WeatherStationApp.Pages.SettingsPage"
              Title="SettingsPage">
+
     <VerticalStackLayout Margin="10,0,0,0">
         <Label 
             Text="Show Temperature in:" 
@@ -17,14 +18,17 @@
         <Label Text="Database Server:" Margin="10,15,0,0" />
         <Entry 
             x:Name="DbServer"
+            Text="{Binding ServerAddress, Mode=TwoWay}"
             Placeholder="Enter DB Server's IP"
-            Margin="15,10,0,0" WidthRequest="200" HorizontalOptions="Start"/>
+            Margin="15,10,0,0" 
+            WidthRequest="200" 
+            HorizontalOptions="Start"/>
         <Button
             x:Name="btnCheckConnection"
             Text="Check Connection"
+            Command="{Binding CheckConnectionCommand}"
             HorizontalOptions="Start"
             Margin="15,10,0,0"/>
-
         <Button
             x:Name="btnSave"
             Text="Save"
