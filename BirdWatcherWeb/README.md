@@ -79,7 +79,8 @@ Create a file called: secretConfig.json, place the following inside:  Replace ho
 {
     "ConnectionStrings": {
     "BirdWatcherDB": "host=<IP of Postgre Server>;database=BirdWatcher;user id=dbbirdwatcher;password=<Password>;"
-    }
+    },
+    "BirdWatcherIP": "<IP of Birdwatcher Device>"
 }
 ```
 
