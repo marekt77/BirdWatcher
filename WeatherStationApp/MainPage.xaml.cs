@@ -1,31 +1,33 @@
-﻿using WeatherStationApp.Pages;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using WeatherStationApp.Messages;
+using WeatherStationApp.ViewModels;
 
 namespace WeatherStationApp
 {
-    public partial class MainPage : ContentPage
+    public partial class MainPage : 
+        ContentPage, 
+        IRecipient<ErrorMessage>
     {
-        int count = 0;
+        private readonly MainPageVM _mainPageVM;
 
-        public MainPage()
+        public MainPage(MainPageVM mainPageVM)
         {
+            BindingContext = mainPageVM;
+            _mainPageVM = mainPageVM;
             InitializeComponent();
+
+            WeakReferenceMessenger.Default.Register<ErrorMessage>(this);
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
-            count++;
-
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            _mainPageVM.LoadData();
         }
 
-        private async void SunTrackBtn_Clicked(object sender, EventArgs e)
+        public void Receive(ErrorMessage message)
         {
-            await Shell.Current.GoToAsync(nameof(SunTrackPage));
+            DisplayAlert("Error!", message.Error, "OK");
         }
+
     }
 }

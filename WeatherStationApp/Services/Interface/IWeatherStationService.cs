@@ -6,5 +6,6 @@ namespace WeatherStationApp.Services.Interface
     {
         Task<RootModel<SunTrack>> GetSunTrackInfo();
         Task<Heartbeat> GetHeartbeat(string testIP);
+        Task<TemperatureModel> GetTempReading();
     }
 }

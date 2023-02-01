@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:WeatherStationApp.Models"
              x:Class="WeatherStationApp.Pages.SunTrackPage"
-             Title="SunTrackPage">
+             Title="Sun Track">
     <VerticalStackLayout Margin="10,0,0,0">
         <CollectionView
             VerticalOptions="Fill"

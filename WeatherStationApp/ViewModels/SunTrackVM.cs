@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using System.Collections.ObjectModel;
+using WeatherStationApp.Messages;
 using WeatherStationApp.Models;
 using WeatherStationApp.Services.Interface;
 
@@ -30,14 +32,20 @@ namespace WeatherStationApp.ViewModels
 
         #endregion
 
-        //public ObservableCollection<TodoItem> Items { get; set; } = new();
-
-        private async void GetWeatherData()
+        public async void GetWeatherData()
         {
-            var data = await _weatherStationService.GetSunTrackInfo();
-
-            SunTrack = new ObservableCollection<SunTrack>(data.data);
-
+            try
+            {
+                var data = await _weatherStationService.GetSunTrackInfo();
+                SunTrack = new ObservableCollection<SunTrack>(data.data);
+            }
+            catch (Exception ex)
+            {
+                WeakReferenceMessenger.Default.Send(new ErrorMessage 
+                { 
+                    Error = "Cannot get Sun Tracking data.  Check connection and try again"
+                });
+            }
         }
     }
 }

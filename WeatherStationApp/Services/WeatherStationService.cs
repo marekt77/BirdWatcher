@@ -74,5 +74,33 @@ namespace WeatherStationApp.Services
 
             return heartBeat;
         }
+
+        public async Task<TemperatureModel> GetTempReading()
+        {
+            HttpClient _client = new HttpClient();
+            TemperatureModel temp = new TemperatureModel();
+
+            HttpResponseMessage httpResponse = new HttpResponseMessage();
+
+            try
+            {
+                httpResponse = await _client.GetAsync(_baseUri + "api/weather/temperature");
+
+                if (httpResponse.IsSuccessStatusCode)
+                {
+                    string rawResult = await httpResponse.Content.ReadAsStringAsync();
+
+                    temp = JsonConvert.DeserializeObject<TemperatureModel>(rawResult);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _client.Dispose();
+                throw new Exception("ERROR! Cannot retrive Temperature Data");
+            }
+
+            return temp;
+        }
     }
 }

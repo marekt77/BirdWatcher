@@ -9,6 +9,7 @@ using Android.OS;
 
 namespace BirdWatcherMobileApp.Droid
 {
+    [Application(UsesCleartextTraffic = true)]
     [Activity(Label = "Bird Watcher", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {

@@ -39,6 +39,7 @@ namespace WeatherStationApp
         {
             mauiAppBuilder.Services.AddTransient<SunTrackVM>();
             mauiAppBuilder.Services.AddTransient<SettingsVM>();
+            mauiAppBuilder.Services.AddTransient<MainPageVM>();
             return mauiAppBuilder;
         }
 
@@ -46,6 +47,7 @@ namespace WeatherStationApp
         {
             mauiAppBuilder.Services.AddTransient<SunTrackPage>();
             mauiAppBuilder.Services.AddTransient<SettingsPage>();
+            mauiAppBuilder.Services.AddTransient<MainPage>();
 
             return mauiAppBuilder;
         }
