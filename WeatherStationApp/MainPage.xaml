@@ -2,35 +2,38 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WeatherStationApp.MainPage"
-             Title="Temperature">
+             Title="Temperature" 
+             Shell.NavBarIsVisible="False">
 
-    <ScrollView>
+    <Grid>
+        <Image
+            Source="{Binding Background}"
+            Aspect="AspectFill"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"/>
+
         <VerticalStackLayout
             Spacing="10"
-            Padding="30,0"
-            VerticalOptions="Center">
-
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="100"
-                HorizontalOptions="Center" />
+            Padding="50"
+            VerticalOptions="Start">
             <Label
                 Text="{Binding Temperature}"
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="90"
+                TextColor="White"
                 HorizontalOptions="Center" />
             <Label
-                Text="{Binding Time}"
-                FontSize="75"
+                Text="{Binding Date}"
+                FontSize="35"
+                TextColor="White"
                 HorizontalOptions="Center"/>
             <Label
-                Text="{Binding Date}"
-                FontSize="55"
+                Text="{Binding Time}"
+                FontSize="65"
+                TextColor="White"
                 HorizontalOptions="Center"/>
-
-
+            
         </VerticalStackLayout>
-    </ScrollView>
+    </Grid>
 
 </ContentPage>

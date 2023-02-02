@@ -13,8 +13,6 @@ namespace WeatherStationApp.ViewModels
         public SunTrackVM(IWeatherStationService weatherStationService)
         {
             _weatherStationService = weatherStationService;
-
-            GetWeatherData();
         }
 
         #region Variables

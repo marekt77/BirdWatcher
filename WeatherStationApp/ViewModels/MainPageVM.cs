@@ -24,8 +24,6 @@ namespace WeatherStationApp.ViewModels
 
             viewRefresh.Tick += ViewRefresh_Tick;
             viewRefresh.Interval = new TimeSpan(0, 0, 1);
-
-            LoadData();
         }
 
         private void ViewRefresh_Tick(object sender, EventArgs e)
@@ -68,6 +66,17 @@ namespace WeatherStationApp.ViewModels
             }
         }
 
+        private string _background;
+        public string Background
+        {
+            get => _background;
+            set
+            {
+                _background = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         public async void LoadData()
@@ -97,6 +106,15 @@ namespace WeatherStationApp.ViewModels
             Date = DateTime.Now.ToString("ddd, MMM dd");
             Time = DateTime.Now.ToString("t");
             viewRefresh.Start();
+
+            if(DateTime.Now.Hour > 7 && DateTime.Now.Hour < 20)
+            {
+                Background = "sunshine2_bg.jpg";
+            }
+            else
+            {
+                Background = "milkyway_bg.jpg";
+            }
         }
     }
 }

@@ -53,7 +53,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Pages\sunshine2_bg.jpg" />
 	  <None Remove="Resources\Fonts\fa_solid.ttf" />
+	  <None Remove="Resources\Images\milkyway_bg.jpg" />
+	  <None Remove="Resources\Images\sunshine_bg.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>

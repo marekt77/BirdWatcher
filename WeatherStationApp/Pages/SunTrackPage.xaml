@@ -4,7 +4,9 @@
              xmlns:models="clr-namespace:WeatherStationApp.Models"
              x:Class="WeatherStationApp.Pages.SunTrackPage"
              Title="Sun Track">
+    
     <VerticalStackLayout Margin="10,0,0,0">
+        <ScrollView>
         <CollectionView
             VerticalOptions="Fill"
             SelectionMode="Single" 
@@ -18,5 +20,6 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        </ScrollView>
     </VerticalStackLayout>
 </ContentPage>
