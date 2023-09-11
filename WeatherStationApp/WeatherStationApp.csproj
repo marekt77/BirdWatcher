@@ -53,6 +53,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiImage Remove="Resources\Images\milkyway_bg.jpg" />
+	  <MauiImage Remove="Resources\Images\sunshine2_bg.jpg" />
+	  <MauiImage Remove="Resources\Images\sunshine_bg.jpg" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Pages\sunshine2_bg.jpg" />
 	  <None Remove="Resources\Fonts\fa_solid.ttf" />
 	  <None Remove="Resources\Images\milkyway_bg.jpg" />
@@ -61,11 +67,14 @@
 
 	<ItemGroup>
 	  <BundleResource Include="Resources\Fonts\fa_solid.ttf" />
+	  <BundleResource Include="Resources\Images\milkyway_bg.jpg" />
+	  <BundleResource Include="Resources\Images\sunshine2_bg.jpg" />
+	  <BundleResource Include="Resources\Images\sunshine_bg.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
-	  <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>
