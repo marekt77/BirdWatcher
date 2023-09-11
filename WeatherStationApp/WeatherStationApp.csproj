@@ -61,8 +61,11 @@
 	<ItemGroup>
 	  <None Remove="Pages\sunshine2_bg.jpg" />
 	  <None Remove="Resources\Fonts\fa_solid.ttf" />
+	  <None Remove="Resources\Images\four_seasons.png" />
 	  <None Remove="Resources\Images\milkyway_bg.jpg" />
+	  <None Remove="Resources\Images\settings.png" />
 	  <None Remove="Resources\Images\sunshine_bg.jpg" />
+	  <None Remove="Resources\Images\weather.png" />
 	</ItemGroup>
 
 	<ItemGroup>

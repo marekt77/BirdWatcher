@@ -9,21 +9,18 @@
     Shell.FlyoutBehavior="Disabled">
 
     <TabBar>
-        <Tab Title="Current Temp" Icon="{StaticResource Temp}">
+        <Tab Title="Current Temp" Icon="weather.png">
             <ShellContent
-                Title="Current Temp"
                 ContentTemplate="{DataTemplate local:MainPage}"
                 Route="OnePage" />
         </Tab>
-        <Tab Title="Sun Track" Icon="{StaticResource SunTrack}">
+        <Tab Title="Sun Track" Icon="four_seasons.png">
             <ShellContent
-                Title="Sun Track"
                 ContentTemplate="{DataTemplate pages:SunTrackPage}"
                 Route="SunTrackPage"/>
         </Tab>
-        <Tab Title="Settings" Icon="{StaticResource Settings}">
+        <Tab Title="Settings" Icon="settings.png">
             <ShellContent
-                Title="Settings"
                 ContentTemplate="{DataTemplate pages:SettingsPage}"
                 Route="SettingsPage" />
         </Tab>
