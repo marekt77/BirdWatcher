@@ -24,7 +24,7 @@ namespace BirdWatcherWeb.Helpers
                 ? uriService.GetPageUri(new PaginationFilter(validFilter.PageNumber + 1, validFilter.PageSize), route)
                 : null;
 
-            resresponsepose.PreviousPage =
+            response.PreviousPage =
                 validFilter.PageNumber - 1 >= 1 && validFilter.PageNumber <= roundedTotalPages
                 ? uriService.GetPageUri(new PaginationFilter(validFilter.PageNumber - 1, validFilter.PageSize), route)
                 : null;
