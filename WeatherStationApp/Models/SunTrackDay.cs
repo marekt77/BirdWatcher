@@ -2,7 +2,7 @@
 {
     public class SunTrackDay : List<SunTrackItem>
     {
-        public string Date { get; private set; }
+        public string Date { get; private set; } = string.Empty;
 
         public SunTrackDay(string date, List<SunTrackItem> events) : base(events) 
         { 

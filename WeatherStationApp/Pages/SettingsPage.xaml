@@ -6,7 +6,7 @@
 
     <VerticalStackLayout 
         Margin="10,0,0,0">
-        
+
         <VerticalStackLayout 
             RadioButtonGroup.GroupName="Temp" 
             RadioButtonGroup.SelectedValue="{Binding TempSelection}">
@@ -22,7 +22,7 @@
                 Value="F"
                 Margin="15,0,0,0"/>
         </VerticalStackLayout>
-        
+
         <Label Text="Database Server:" Margin="10,15,0,0" />
         <Entry 
             x:Name="DbServer"

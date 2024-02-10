@@ -2,6 +2,6 @@
 {
     public class ErrorMessage
     {
-        public string Error { get; set; }
+        public string Error { get; set; } = string.Empty;
     }
 }

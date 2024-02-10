@@ -2,9 +2,9 @@
 {
     public class Heartbeat
     {
-        public string applicationName { get; set; }
+        public string applicationName { get; set; } = string.Empty;
         public DateTime requestDateTime { get; set; }
-        public string welcomeMessage { get; set; }
-        public string appVersion { get; set; }
+        public string welcomeMessage { get; set; } = string.Empty;
+        public string appVersion { get; set; } = string.Empty;
     }
 }
