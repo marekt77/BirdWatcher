@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:WeatherStationApp.Models"
+             x:Class="WeatherStationApp.Pages.SunTrackPage"
+             Title="Sun Track">
+    <ScrollView
+        Margin="10,0,0,0">
+        <CollectionView
+            VerticalOptions="Fill"
+            SelectionMode="Single" 
+            ItemsSource="{Binding SunTrack}"
+            IsGrouped="True">
+            <CollectionView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <StackLayout
+                        BackgroundColor="ForestGreen"
+                        MinimumWidthRequest="1000" 
+                        HorizontalOptions="FillAndExpand">
+                        <Label 
+                            Text="{Binding Date}" 
+                            FontSize="25"
+                            FontAttributes="Bold" 
+                            TextColor="White" 
+                            VerticalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.GroupHeaderTemplate>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:SunTrackItem">
+                    <Grid Padding="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label 
+                            Text="{Binding Temperature}" 
+                            Grid.Column="0"
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="Center"
+                            FontSize="23" 
+                            FontAttributes="Bold" />
+                        <VerticalStackLayout Padding="10" Grid.Column="1" VerticalOptions="CenterAndExpand">
+                            <Label Text="{Binding Type}" />
+                            <Label Text="{Binding Time}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ScrollView>
+</ContentPage>
